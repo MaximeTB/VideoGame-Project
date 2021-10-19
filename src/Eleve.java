@@ -34,4 +34,19 @@ public class Eleve {
         fatigue=0;
         invest=0;
     }
+
+    public void silliker(Liste liste){
+        liste.setArgent(liste.getArgent()+20);
+    }
+
+    public void etudie(){
+        etude+=10;
+        etude=etude>100 ? 100 : etude;
+    }
+
+    public void soiree(Liste liste){
+        fatigue+=10;
+        liste.setPopularite(liste.getPopularite()+10);
+    }
+
 }

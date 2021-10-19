@@ -63,6 +63,15 @@ public class Liste {
         System.out.println(BDTerre.getArgent());
         System.out.println(BDTerre.getName());
         System.out.println(BDTerre.getPopularite());
+
+        Eleve e=new Eleve("poi");
+        for(int i=0;i<12;i++){
+            e.etudie();
+            System.out.println(e.getEtude());
+        }
+
+        e.silliker(BDTerre);
+        System.out.println(BDTerre.getArgent());
     }
 
 }
