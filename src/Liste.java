@@ -28,7 +28,41 @@ public class Liste {
         return liste;
     }
 
+    public void setArgent(Integer argent) {
+        this.argent = argent;
+    }
+
+    public void setAdmin(Integer admin) {
+        this.admin = admin;
+    }
+
+    public void setPopularite(Integer popularite) {
+        this.popularite = popularite;
+    }
+
+
+    public void addEleve(Eleve e){
+        liste.add(e);
+    }
+
     public Liste(){}
 
+    public Liste(String nameList, String namePrez){
+        name=nameList;
+        liste=new ArrayList<Eleve>();
+        liste.add(new Eleve(namePrez));
+        argent=0;
+        admin=50;
+        popularite=0;
+    }
+
+    public static void main(String[] args){
+        Liste BDTerre=new Liste(args[0],args[1]);
+        System.out.println(BDTerre.getAdmin());
+        System.out.println(BDTerre.getListe().get(0).getName());
+        System.out.println(BDTerre.getArgent());
+        System.out.println(BDTerre.getName());
+        System.out.println(BDTerre.getPopularite());
+    }
 
 }

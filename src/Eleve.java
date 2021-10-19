@@ -27,4 +27,11 @@ public class Eleve {
     public Eleve(){
 
     }
+
+    public  Eleve(String name){
+        this.name=name;
+        etude=0;
+        fatigue=0;
+        invest=0;
+    }
 }
