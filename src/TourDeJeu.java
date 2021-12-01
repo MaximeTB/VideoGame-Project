@@ -16,7 +16,7 @@ public class TourDeJeu {
                 e.silliker(liste);//e.action();   //action choisie
             }
             if(choix.equals("etudie")){
-                e.etudie();
+                e.studying();
             }
         }
     }
