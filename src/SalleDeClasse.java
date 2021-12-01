@@ -1,2 +1,3 @@
-public class SalleDeClasse {
+public class SalleDeClasse extends Lieu{
+
 }
