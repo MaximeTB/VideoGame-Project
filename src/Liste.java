@@ -5,9 +5,22 @@ public class Liste {
     private ArrayList<Eleve> liste=null;
     private Integer argent;
     private Integer popularite;
-    private  Integer admin;
+    private Integer admin;
     private Integer PV;   //points de victoires, utiles en fin de partie
 
+
+    public Liste(String nameList, String namePrez){
+        name=nameList;
+        liste=new ArrayList<Eleve>();
+        liste.add(new Eleve(namePrez));
+        argent=0;
+        admin=50;
+        popularite=0;
+    }
+
+
+
+    //Les Getters
 
     public Integer getAdmin() {
         return admin;
@@ -29,6 +42,14 @@ public class Liste {
         return liste;
     }
 
+    public Integer getPV() {
+        return PV;
+    }
+
+    //Fin Getters
+
+    //Les Setters
+
     public void setArgent(Integer argent) {
         this.argent = argent;
     }
@@ -41,20 +62,39 @@ public class Liste {
         this.popularite = popularite;
     }
 
+    public Liste(Integer PV) {
+        this.PV = PV;
+    }
+
+    //Fin Setters
+
 
     public void addEleve(Eleve e){
         liste.add(e);
     }
 
 
-    public Liste(String nameList, String namePrez){
-        name=nameList;
-        liste=new ArrayList<Eleve>();
-        liste.add(new Eleve(namePrez));
-        argent=0;
-        admin=50;
-        popularite=0;
+
+    public void ApplyEffect(Effect effet){
+        String stat= effet.getStat();
+        int value = effet.getValue();
+
+        if(stat=="AGT"){
+            this.setArgent(this.getArgent()+value);
+        }
+        else if(stat=="ADM"){
+            this.setAdmin(this.getAdmin()+value);
+        }
+        else if (stat=="PPT"){
+            this.setPopularite(this.getPopularite()+value);
+        }
+        else if (stat=="PVT"){
+            this.setArgent(this.getArgent()+value);
+        }
+
     }
+
+
 
     public static void main(String[] args){
         Liste BDTerre=new Liste(args[0],args[1]);
