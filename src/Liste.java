@@ -6,6 +6,7 @@ public class Liste {
     private Integer argent;
     private Integer popularite;
     private  Integer admin;
+    private Integer PV;   //points de victoires, utiles en fin de partie
 
 
     public Integer getAdmin() {
@@ -45,7 +46,6 @@ public class Liste {
         liste.add(e);
     }
 
-    public Liste(){}
 
     public Liste(String nameList, String namePrez){
         name=nameList;
