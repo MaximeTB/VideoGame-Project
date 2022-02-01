@@ -77,30 +77,35 @@ public class Eleve implements Comparable {
     public void silliker(Liste liste){
         liste.setArgent(liste.getArgent()+20);
     }
-
     public void studying(){
         studies+=10;
         studies=studies>100 ? 100 : studies;
     }
-
     public void soiree(Liste liste){
         tired+=10;
         liste.setPopularite(liste.getPopularite()+10);
     }
+    //les 3 méthodes précédentes sont surement à suprimer -> seront a définir en tant que lieu et récupéré avec applyZoneEffect
+
+
+
+
+
+    public void applyZoneEffect(Lieu L){
+        //à défnir quand les lieux seront fait. récupère le modificiateur a appliquer à l'élève dans ce lieu a la fin du tour
+    }
+
+
+
 
     @Override
     public String toString() {
         return "name=" + name +
                 ", studies=" + studies +
                 ", cost=" + cost +
-                ", skillsList=" + skillsList ;
+                ", skillsList=" + skillsList +"\n" ;
     }
 
-    /*@Override
-    public int compareTo(Eleve comp){
-        int compareCost = ((Eleve)comp).getCost();
-        return this.cost-compareCost;
-    }*/
 
     @Override
     public int compareTo(Object o) {
