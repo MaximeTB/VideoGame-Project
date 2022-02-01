@@ -9,7 +9,7 @@ public class Eleve implements Comparable {
     private ArrayList<Skills> skillsList=new ArrayList<>(3);
 
 
-
+//Getter
     public Integer getStudies() {
         return studies;
     }
@@ -25,7 +25,8 @@ public class Eleve implements Comparable {
     public ArrayList<Skills> getSkillsList(){
         return skillsList;
     }
-
+//
+//Setter
     public void setName(String name) {
         this.name = name;
     }
@@ -38,7 +39,7 @@ public class Eleve implements Comparable {
     public void setCost(Integer cost) {
         this.cost = cost;
     }
-
+//
 
 
     public Eleve(){
@@ -74,8 +75,8 @@ public class Eleve implements Comparable {
         this.skillsList.add(new Skills(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
-    public void silliker(Liste liste){
-        liste.setArgent(liste.getArgent()+20);
+    public void silliker(Player Player){
+        Player.setArgent(Player.getArgent()+20);
     }
 
     public void studying(){
@@ -83,9 +84,9 @@ public class Eleve implements Comparable {
         studies=studies>100 ? 100 : studies;
     }
 
-    public void soiree(Liste liste){
+    public void soiree(Player Player){
         tired+=10;
-        liste.setPopularite(liste.getPopularite()+10);
+        Player.setPopularite(Player.getPopularite()+10);
     }
 
     @Override

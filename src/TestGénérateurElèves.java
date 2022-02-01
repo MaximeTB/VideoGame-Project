@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Main {
+public class TestGénérateurElèves{
     static ArrayList<Eleve> Test= new ArrayList();
     public static void main(String[] args) {
         for (int i = 0 ; i < 20; i++) {

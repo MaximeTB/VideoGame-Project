@@ -35,10 +35,7 @@ public class PoolOfEvent {
         }
     }
 
-    public static void main (String[] args){
-        PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
-
-
-
-    }
+    //public static void main (String[] args){
+    //    PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
+    //}
 }

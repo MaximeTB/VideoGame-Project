@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
-public class Liste {
+public class Player {
     private String name;
-    private ArrayList<Eleve> liste=null;
+    private ArrayList<Eleve> Player=null;
     private Integer argent;
     private Integer popularite;
     private Integer admin;
     private Integer PV;   //points de victoires, utiles en fin de partie
 
 
-    public Liste(String nameList, String namePrez){
+    public Player(String nameList, String namePrez){
         name=nameList;
-        liste=new ArrayList<Eleve>();
-        liste.add(new Eleve(namePrez));
+        Player=new ArrayList<Eleve>();
+        Player.add(new Eleve(namePrez));
         argent=0;
         admin=50;
         popularite=0;
@@ -38,8 +38,8 @@ public class Liste {
         return name;
     }
 
-    public ArrayList<Eleve> getListe() {
-        return liste;
+    public ArrayList<Eleve> getPlayer() {
+        return Player;
     }
 
     public Integer getPV() {
@@ -62,7 +62,7 @@ public class Liste {
         this.popularite = popularite;
     }
 
-    public Liste(Integer PV) {
+    public Player(Integer PV) {
         this.PV = PV;
     }
 
@@ -70,7 +70,7 @@ public class Liste {
 
 
     public void addEleve(Eleve e){
-        liste.add(e);
+        Player.add(e);
     }
 
 
@@ -97,9 +97,9 @@ public class Liste {
 
 
     public static void main(String[] args){
-        Liste BDTerre=new Liste(args[0],args[1]);
+        Player BDTerre=new Player(args[0],args[1]);
         System.out.println(BDTerre.getAdmin());
-        System.out.println(BDTerre.getListe().get(0).getName());
+        System.out.println(BDTerre.getPlayer().get(0).getName());
         System.out.println(BDTerre.getArgent());
         System.out.println(BDTerre.getName());
         System.out.println(BDTerre.getPopularite());
