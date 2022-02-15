@@ -79,11 +79,11 @@ public class Liste {
         popularite=0;
         cohesion=100;
         poles.add(new Pole("Bureau","gris"));
-        poles.add(new Pole("Pole soirée","gris"));
-        poles.add(new Pole("Pole animation","gris"));
-        poles.add(new Pole("Pole communication","gris"));
+        poles.add(new Pole("Pole soirée","noir"));
+        poles.add(new Pole("Pole animation","rouge","bleu"));
+        poles.add(new Pole("Pole communication","vert"));
         poles.add(new Pole("Pole partenariat","gris"));
-        poles.add(new Pole("Pole bouffe","gris"));
+        poles.add(new Pole("Pole bouffe","orange"));
         poles.get(0).addMember(President);
     }
 
