@@ -46,10 +46,14 @@ public class Pole {
     }
 
     public static void main(String[] args){
-        Pole bouffe = new Pole("Pole Bouffe","orange");
+        Pole bouffe = new Pole("Pole Bouffe","Jaune","Bleu");
 
         for(Integer i=0; i<10; i++ ){
             bouffe.addMember(new Eleve());
+
+            for(Skills skill : bouffe.getMember().get(i).getSkillsList()) {
+                System.out.println(skill.getColor());
+            }
         }
 
         System.out.println(bouffe.getLevel());
