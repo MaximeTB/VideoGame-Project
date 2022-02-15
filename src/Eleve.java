@@ -67,14 +67,13 @@ public class Eleve implements Comparable {
     public  Eleve(String name){
         this();
         this.name=name;
-
     }
 
     public void AddRandomSkill(){
         this.skillsList.add(new Skills(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
-    public void silliker(Liste liste){
+    public void silliker(Player liste){
         liste.setArgent(liste.getArgent()+20);
     }
 

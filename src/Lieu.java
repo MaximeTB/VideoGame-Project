@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Lieu {
     private String name;
+    private String type;        //J pour les lieux du jour et N ceux de la nuit
     private ArrayList<Eleve> ElevePresents;
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
     private String effect;
