@@ -5,14 +5,8 @@ import java.util.Comparator;
 public class Main {
     static ArrayList<Eleve> Test= new ArrayList();
     public static void main(String[] args) {
-        for (int i = 0 ; i < 20; i++) {
-            Eleve test = new Eleve();
-            Test.add(test);
-            }
-        Collections.sort(Test);
-        for(Eleve T : Test){
-            System.out.println(T);
-        }
+        Game game = new Game();
+        game.Tour();
     }
 
 

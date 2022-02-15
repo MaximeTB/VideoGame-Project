@@ -5,15 +5,15 @@ public class TourDeJeu {
     private static int tour;
     private ArrayList<Eleve> dispo;
 
-    public TourDeJeu(Liste liste){
+    public TourDeJeu(Player Player){
         tour++;
-        dispo= liste.getListe();
+        dispo= Player.getListeEleve();
         Scanner sc=new Scanner(System.in);
         for (Eleve e : dispo){
             System.out.println("Que doit faire "+e.getName()+"(silliker ou etudie");
             String choix=sc.next();// choix de l'action
             if(choix.equals("silliker")){
-                e.silliker(liste);//e.action();   //action choisie
+                e.silliker(Player);//e.action();   //action choisie
             }
             if(choix.equals("etudie")){
                 e.studying();
@@ -22,7 +22,7 @@ public class TourDeJeu {
     }
 
     public static void main(String[] args){
-        Liste bde=new Liste("bde","machin");
+        Player bde=new Player("bde","machin");
         System.out.println(bde.getArgent());
         for(int i=0;i<3;i++){
             TourDeJeu tour=new TourDeJeu(bde);
