@@ -81,6 +81,10 @@ public class Player {
     public void setPV(Integer PV) {
         this.PV = PV;
     }
+
+    public void setCohesion(Integer cohesion){
+        this.cohesion = cohesion;
+    }
     //Fin Setters
 
     public void addEleve(Eleve e){

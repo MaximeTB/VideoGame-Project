@@ -7,7 +7,13 @@ public class Lieu {
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
     private String effect;
     private Boolean available=true;
-
+    private int EOP; //effect on pop
+    private int EOM; //effect on money
+    private int EOT; //effect on tired
+    private int EOS; //effect on studies
+    private int EOA; //effect on admin
+    private int EOC; //effect on cohesion
+    private int EOPV; //effect on PV
 
     public Lieu(String name, Boolean available){
         this.name = name;
@@ -67,7 +73,21 @@ public class Lieu {
         }
     }
 
+    public void changeStat(Player list){
+        int Nb=ElevePresents.size();
+        if (Nb!=0){
+            list.setArgent(list.getArgent()+this.EOM*Nb);
+            list.setPopularite(list.getPopularite()+this.EOP*Nb);
+            list.setAdmin(list.getAdmin()+this.EOA*Nb);
+            list.setPV(list.getPV()+this.EOPV*Nb);
+            list.setCohesion(list.getCohesion()+this.EOC*Nb);
 
+            for(Eleve E:ElevePresents){
+                E.setStudies(E.getStudies()+this.EOS);
+                E.setTired(E.getTired()+this.EOT);
+            }
+        }
+    }
 
 }
 
