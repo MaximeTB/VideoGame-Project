@@ -94,7 +94,7 @@ public class Eleve implements Comparable {
         return "name=" + name +
                 ", studies=" + studies +
                 ", cost=" + cost +
-                ", skillsList=" + skillsList ;
+                ", skillsList=" + skillsList +"\n" ;
     }
 
     /*@Override
