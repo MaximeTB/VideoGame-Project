@@ -7,10 +7,12 @@ public class Pole {
     private int level=1;
     private String color1, color2;
 
+
     public Pole(String name, String color1) {
         this.name=name;
         this.color1=color1;
         color2="Null";
+
     }
 
     public Pole(String name, String color1, String color2){
@@ -45,22 +47,33 @@ public class Pole {
         level+=1+bonus;
     }
 
+
+
+
     public static void main(String[] args){
-        Pole bouffe = new Pole("Pole Bouffe","Jaune","Bleu");
+        Bureau bureau = new Bureau("Bureau","Jaune");
 
         for(Integer i=0; i<10; i++ ){
-            bouffe.addMember(new Eleve());
+            bureau.addMember(new Eleve());
 
-            for(Skills skill : bouffe.getMember().get(i).getSkillsList()) {
+            for(Skills skill : bureau.getMember().get(i).getSkillsList()) {
                 System.out.println(skill.getColor());
             }
         }
 
-        System.out.println(bouffe.getLevel());
+        bureau.giveRole("Président",bureau.getMember().get(0));
+        bureau.giveRole("Trésorier",bureau.getMember().get(1));
+        bureau.giveRole("Secrétaire",bureau.getMember().get(2));
 
-        bouffe.meeting();
+        System.out.println(bureau.getLevel());
 
-        System.out.println(bouffe.getLevel());
+        bureau.meeting();
+
+        System.out.println(bureau.getLevel());
+
+        System.out.println(bureau.getPrez());
+        System.out.println(bureau.getTrez());
+        System.out.println(bureau.getSecr());
     }
 
 
