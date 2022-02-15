@@ -10,7 +10,7 @@ public class Liste {
     private Integer admin;
     private Integer cohesion;
 //    private Integer PV;   //points de victoires, utiles en fin de partie
-    private ArrayList<Pole> poles;
+    private ArrayList<Pole> poles= new ArrayList<>();
 
 
     public Integer getAdmin() {
