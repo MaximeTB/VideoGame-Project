@@ -30,6 +30,12 @@ public class Game {
             }
         }
 
+        //initialisation temporaire des lieux
+        Lieu Amphi = new Lieu("Amphi", true, "D");
+        Lieu Admin = new Lieu("Bureau de l'administration",false,"D",1);
+        Lieu Soire = new Lieu("Soirée", true, "N");
+        Lieu Repos = new Lieu("Repos", true, "N");
+        Lieu Assoce = new Lieu("activité associative", true, "D",3);
 
     }
 

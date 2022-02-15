@@ -15,14 +15,14 @@ public class Lieu {
     private int EOC; //effect on cohesion
     private int EOPV; //effect on PV
 
-    public Lieu(String name, Boolean available){
+    public Lieu(String name, Boolean available, String type){
         this.name = name;
         this.available = available;
         this.capMax = 100;
     }
 
-    public Lieu(String name, Boolean available, int capMax){
-        this(name, available);
+    public Lieu(String name, Boolean available, String type, int capMax){
+        this(name, available, type);
         this.capMax=capMax;
     }
 
@@ -47,6 +47,36 @@ public class Lieu {
 
     public int getCapMax() {
         return capMax;
+    }
+
+    //Setters
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setCapMax(int capMax) {
+        this.capMax = capMax;
+    }
+    public void setEOP(int EOP) {
+        this.EOP = EOP;
+    }
+    public void setEOM(int EOM) {
+        this.EOM = EOM;
+    }
+    public void setEOT(int EOT) {
+        this.EOT = EOT;
+    }
+    public void setEOS(int EOS) {
+        this.EOS = EOS;
+    }
+    public void setEOA(int EOA) {
+        this.EOA = EOA;
+    }
+    public void setEOC(int EOC) {
+        this.EOC = EOC;
+    }
+    public void setEOPV(int EOPV) {
+        this.EOPV = EOPV;
     }
 
 
