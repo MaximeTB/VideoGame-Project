@@ -63,11 +63,12 @@ public class Lieu {
         if(available){
             if(this.ElevePresents.size()<capMax){
                 this.ElevePresents.add(e);
+                e.setLocation(this);
+                System.out.println(e.getName() + " placé dans " + this.name + " (0/" + (capMax-ElevePresents.size()) + ")");
             }
             else{
                 System.out.println("Cet endroit est déja plein !");
             }
-
         }else{
             System.out.println("Placement impossible pour le moment");
         }
@@ -88,6 +89,8 @@ public class Lieu {
             }
         }
     }
+
+
 
 }
 

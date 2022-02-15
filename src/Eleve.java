@@ -7,6 +7,7 @@ public class Eleve implements Comparable {
     private Integer tired;
     private Integer cost;
     private ArrayList<Skills> skillsList=new ArrayList<>(3);
+    private Lieu location;
 
 
 
@@ -25,6 +26,9 @@ public class Eleve implements Comparable {
     public ArrayList<Skills> getSkillsList(){
         return skillsList;
     }
+    public Lieu getLocation() {
+        return location;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -38,8 +42,9 @@ public class Eleve implements Comparable {
     public void setCost(Integer cost) {
         this.cost = cost;
     }
-
-
+    public void setLocation(Lieu location) {
+        this.location = location;
+    }
 
     public Eleve(){
         name = "Pierre";
