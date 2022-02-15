@@ -107,6 +107,7 @@ public class Game {
             for(k=0;k<NonAffectedList.size();k++){
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
             }
+            System.out.println(NonAffectedList.size() + "Annuler");
             Entrée=clavier.nextInt();
 
             EleveSelected=NonAffectedList.get(Entrée);
