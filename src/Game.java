@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
@@ -10,7 +12,6 @@ public class Game {
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.Phase="J";
         this.NbTour=0;
-
 
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
@@ -33,11 +34,50 @@ public class Game {
     }
 
     public void Tour(){
-        System.out.println("Début du Tours : \nArgent :"+this.getPlayer().getArgent().toString()
+        boolean FinTour= false,SortieMenu=false;
+        Scanner clavier = new Scanner(System.in);
+        int Entrée;
+        System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()
                 + "\nPopularité :"+this.getPlayer().getPopularite().toString()
                 +"\nCohésion :"+this.getPlayer().getCohesion().toString()
                 +"\nPV :"+this.getPlayer().getPV().toString());
+        System.out.println("Début du Tours :");
+        while(!FinTour){
+            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
+            Entrée=clavier.nextInt();
+            if(Entrée==1){
+                while(!SortieMenu){
+                    System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    Entrée=clavier.nextInt();
+                    if(Entrée==3){
+                        SortieMenu=true;
+                    }
+                }
+            }else if (Entrée==2){
+                while(!SortieMenu){
+                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    Entrée=clavier.nextInt();
+                    if(Entrée==3){
+                        SortieMenu=true;
+                    }
+                }
+            }else if(Entrée==3){
+                while(!SortieMenu){
+                    System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    Entrée=clavier.nextInt();
+                    if(Entrée==3){
+                        SortieMenu=true;
+                    }
+                }
+            } else if(Entrée==4){
+                FinTour=true;
+            }
+            SortieMenu=false;
+
+        }
+        clavier.close();
+        System.out.println("Fin du tour");
     }
 
 
@@ -50,7 +90,7 @@ public class Game {
             this.Phase="J";
         }
     }
-
+//Getter
     public int getNbTour() {
         return NbTour;
     }
@@ -74,5 +114,15 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
+//
+
+    public boolean FinTour(String entrée){
+        if(entrée.equals("fin")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 
