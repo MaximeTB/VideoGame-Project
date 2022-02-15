@@ -9,7 +9,7 @@ public class Liste {
     private Integer popularite;
     private Integer admin;
     private Integer cohesion;
-    private Integer PV;   //points de victoires, utiles en fin de partie
+//    private Integer PV;   //points de victoires, utiles en fin de partie
     private ArrayList<Pole> poles;
 
 
@@ -78,7 +78,12 @@ public class Liste {
         admin=50;
         popularite=0;
         cohesion=100;
-        poles.add(new Pole("Bureau"));
+        poles.add(new Pole("Bureau","gris"));
+        poles.add(new Pole("Pole soirée","gris"));
+        poles.add(new Pole("Pole animation","gris"));
+        poles.add(new Pole("Pole communication","gris"));
+        poles.add(new Pole("Pole partenariat","gris"));
+        poles.add(new Pole("Pole bouffe","gris"));
         poles.get(0).addMember(President);
     }
 
