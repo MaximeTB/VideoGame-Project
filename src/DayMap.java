@@ -7,8 +7,8 @@ public class DayMap {
 
 
     public DayMap(){
-        zones.add(new Lieu("Amphi", true));
-        zones.add(new Lieu("Salle de TP", false));
+        zones.add(new Lieu("Amphi", true, "D"));
+        zones.add(new Lieu("Salle de TP", false, "D"));
 
     }
 
