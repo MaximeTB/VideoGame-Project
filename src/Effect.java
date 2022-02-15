@@ -15,4 +15,11 @@ public class Effect { //l'objet "Effet"
     public int getValue() {
         return Value;
     }
+
+    @Override
+    public String toString() {
+        return "{Stat='" + Stat + '\'' +
+                ", Value=" + Value +
+                '}';
+    }
 }

@@ -17,4 +17,30 @@ public class Evenement{
     public void addEffect(Effect effet){
         this.Effects.add(effet);
     }
+
+
+    public String getName() {
+        return Name;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public ArrayList<Effect> getEffects() {
+        return Effects;
+    }
+
+    public String getPeriode() {
+        return Periode;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n {Name='" + Name + '\'' +
+                ", niveau=" + niveau +
+                ", Effects=" + Effects +
+                ", Periode='" + Periode + '\'' +
+                "}";
+    }
 }

@@ -7,7 +7,7 @@ public class TourDeJeu {
 
     public TourDeJeu(Player Player){
         tour++;
-        dispo= Player.getPlayer();
+        dispo= Player.getListeEleve();
         Scanner sc=new Scanner(System.in);
         for (Eleve e : dispo){
             System.out.println("Que doit faire "+e.getName()+"(silliker ou etudie");

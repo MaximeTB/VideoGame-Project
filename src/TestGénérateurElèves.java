@@ -15,7 +15,5 @@ public class TestGénérateurElèves{
         for(Eleve T : Test){
             System.out.println(T);
         }
-
     }
-
 }
