@@ -1,0 +1,4 @@
+Nom;Niveau;Periode;NbEffects;Stat1;Value1;Stat2;Value2
+Prof Absent;1;J;1;PA;1;;
+Implication Vie Etudiante;1;J;2;Admin;1;Students;1
+Flunky;1;N;0;;;;
