@@ -33,17 +33,17 @@ public class Game {
 
         //initialisation temporaire des lieux
         //jour
-        Lieu Assoce = new Lieu("activité associative", true, "D",3);
+        Lieu Assoce = new Lieu("activité associative", true, "J",3);
         ListLieux.add(Assoce);
-        Lieu Rue = new Lieu("La Rue", true, "D");
+        Lieu Rue = new Lieu("La Rue", true, "J");
         ListLieux.add(Rue);Rue.setEOP(2);
-        Lieu Amphi = new Lieu("Amphi", true, "D");
+        Lieu Amphi = new Lieu("Amphi", true, "J");
         ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
-        Lieu TP = new Lieu("Salle de TP", false, "D");
+        Lieu TP = new Lieu("Salle de TP", false, "J");
         ListLieux.add(TP);TP.setEOS(1);
-        Lieu Admin = new Lieu("Bureau de l'administration",true,"D",1);
+        Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
         ListLieux.add(Admin);Admin.setEOA(1);
-        Lieu GrassMat = new Lieu("Grasse matiné", true, "D");
+        Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
         ListLieux.add(GrassMat);GrassMat.setEOT(-1);
         //nuit
         Lieu Soire = new Lieu("Soirée", true, "N");
@@ -62,8 +62,8 @@ public class Game {
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
-        ArrayList<Eleve> DayNonAffectedList = new ArrayList<Eleve>();
-        ArrayList<Eleve> NightNonAffectedList = new ArrayList<Eleve>();
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
         int Entrée;
         System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()
@@ -109,14 +109,12 @@ public class Game {
 
         }
 
-        if(this.getNbTour()%6==2)
 
-        DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
-                this.MenuJour(DayNonAffectedList,clavier);
+                this.MenuJour(DayNonAffectedList,clavier,"J");
                 //while(!SortieMenu){
                     //System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     //Entrée=clavier.nextInt();
@@ -125,13 +123,14 @@ public class Game {
                     //}
                 //}
             }else if (Entrée==2){
-                while(!SortieMenu){
-                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+              //  while(!SortieMenu){
+                    this.MenuJour(NightNonAffectedList,clavier,"N");
+                   /* System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==3){
                         SortieMenu=true;
-                    }
-                }
+                    }*/
+              //  }
             }else if(Entrée==3){
                 while(!SortieMenu){
                     System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
@@ -158,7 +157,7 @@ public class Game {
 
 //Gestion des Menu
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier){
+    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){
         boolean SortieMenu=false;
         int Entrée;
         Eleve EleveSelected;
@@ -170,23 +169,33 @@ public class Game {
             }
             System.out.println(NonAffectedList.size()+1 + ".Annuler");
             Entrée=clavier.nextInt();
-        if(Entrée<=NonAffectedList.size()){
+
+        if(Entrée==NonAffectedList.size()+1){
+            SortieMenu = true;
+        }
+
+        if (!SortieMenu && NonAffectedList.size()!=0) {
             EleveSelected=NonAffectedList.get(Entrée-1);
-            NonAffectedList.remove(Entrée-1);
-        } else {
-            SortieMenu = true;
-        }
 
-        if (!SortieMenu) {
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
-
+            int i=1;
+            int diff=0;
             for(k = 0; k < this.ListLieux.size(); ++k) {
-                System.out.println(k + 1 + "." + ((Lieu)this.ListLieux.get(k)).toString());
+                if(ListLieux.get(k).getType().equals(moment)){
+                    System.out.println(i + "." + ListLieux.get(k));
+                    diff=i-k;
+                    i++;
+                }
             }
-        }
-
-        if (Entrée == 3) {
-            SortieMenu = true;
+            Entrée=clavier.nextInt();
+            if(Entrée<=i-1){
+                int err = ListLieux.get(Entrée-diff).placeStudent(EleveSelected);
+                if(err==0){
+                    NonAffectedList.remove(EleveSelected);
+                }
+            } else {
+                SortieMenu = true;
+            }
         }
     }
 
