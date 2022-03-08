@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,13 +6,15 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
         this.player = new Player("BDMichelle","Michelle");
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
-
+        this.ListLieux = new ArrayList();
+        this.InitLieux();
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
 
@@ -37,6 +40,16 @@ public class Game {
         Lieu Assoce = new Lieu("activité associative", true, "D",3);
 
     }
+
+    public void InitLieux() {
+        this.getListLieux().add(new Lieu("Amphi", true, "J"));
+        this.getListLieux().add(new Lieu("Bureau de l'administration", false, "J", 1));
+        this.getListLieux().add(new Lieu("Soirée", true, "N"));
+        this.getListLieux().add(new Lieu("Repos", true, "N"));
+        this.getListLieux().add(new Lieu("activité associative", true, "J", 3));
+    }
+
+
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
@@ -96,31 +109,41 @@ public class Game {
         }
 
 //Gestion des Menu
+public void MenuJour(ArrayList<Eleve> NonAffectedList, Scanner clavier) {
+    boolean SortieMenu = false;
+    Eleve EleveSelected;
+    while(!SortieMenu) {
+        System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier){
-        boolean SortieMenu=false;
-        int Entrée;
-        Eleve EleveSelected;
         int k;
-        while(!SortieMenu){
-            System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
-            for(k=0;k<NonAffectedList.size();k++){
-                System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
-            }
-            System.out.println(NonAffectedList.size() + "Annuler");
-            Entrée=clavier.nextInt();
+        for(k = 0; k < NonAffectedList.size(); ++k) {
+            System.out.println(k + 1 + "." + ((Eleve)NonAffectedList.get(k)).toString());
+        }
 
-            EleveSelected=NonAffectedList.get(Entrée);
+        System.out.println(NonAffectedList.size()+1 + "Annuler");
+        int Entrée = clavier.nextInt();
+        if (Entrée <= NonAffectedList.size()) {
+            EleveSelected = (Eleve)NonAffectedList.get(Entrée);
             NonAffectedList.remove(Entrée);
+        } else {
+            SortieMenu = true;
+        }
 
+        if (!SortieMenu) {
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
 
-            if(Entrée==3){
-                SortieMenu=true;
+            for(k = 0; k < this.ListLieux.size(); ++k) {
+                System.out.println(k + 1 + "." + ((Lieu)this.ListLieux.get(k)).toString());
             }
         }
 
+        if (Entrée == 3) {
+            SortieMenu = true;
+        }
     }
+
+}
+
 
 
 
@@ -147,7 +170,9 @@ public class Game {
         return NightPool;
     }
 
-
+    public ArrayList<Lieu> getListLieux() {
+        return ListLieux;
+    }
 
     public Player getPlayer() {
         return player;
