@@ -5,11 +5,15 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private QGconsole QG;
     private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
+        QG = new QGconsole();
         this.player = new Player("BDMichelle","Michelle");
+        //test console on fout de l'argent tour 1
+        player.setArgent(100);
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
         this.ListLieux = new ArrayList<Lieu>();
@@ -134,9 +138,26 @@ public class Game {
             }else if(Entrée==3){
                 while(!SortieMenu){
                     System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
-                    if(Entrée==3){
+                    if(Entrée==4){
                         SortieMenu=true;
+                    }else if(Entrée == 3){ // inventaire
+                        while(true) {
+                            QG.inventaire();
+                            Entrée = clavier.nextInt();
+                            if (Entrée == 1) break;
+                        }
+                    }else if(Entrée == 2){ //shop
+                        while(true) {
+                            QG.shop();
+                            System.out.println("Argent disponible : " + player.getArgent());
+                            Entrée = clavier.nextInt();
+                            QG.shopAction(Entrée, player);
+                            if (Entrée == 7) break;
+                        }
+                    }else if (Entrée == 1){ // liste
+                        QG.liste();
                     }
                 }
             } else if(Entrée==4){
