@@ -1,4 +1,3 @@
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,15 +5,13 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
-    private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
         this.player = new Player("BDMichelle","Michelle");
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
-        this.ListLieux = new ArrayList();
-        this.InitLieux();
+
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
 
@@ -33,23 +30,35 @@ public class Game {
         }
 
         //initialisation temporaire des lieux
-        Lieu Amphi = new Lieu("Amphi", true, "D");
-        Lieu Admin = new Lieu("Bureau de l'administration",false,"D",1);
-        Lieu Soire = new Lieu("Soirée", true, "N");
-        Lieu Repos = new Lieu("Repos", true, "N");
+        //jour
         Lieu Assoce = new Lieu("activité associative", true, "D",3);
+        Lieu Rue = new Lieu("La Rue", true, "D");
+        Rue.setEOP(2);
+        Lieu Amphi = new Lieu("Amphi", true, "D");
+        Amphi.setEOS(2);Amphi.setIsAMPH(1);
+        Lieu TP = new Lieu("Salle de TP", false, "D");
+        TP.setEOS(1);
+        Lieu Admin = new Lieu("Bureau de l'administration",true,"D",1);
+        Admin.setEOA(1);
+        Lieu GrassMat = new Lieu("Grasse matiné", true, "D");
+        GrassMat.setEOT(-1);
+        //nuit
+        Lieu Soire = new Lieu("Soirée", true, "N");
+        Soire.setEOT(1);Soire.setEOP(5);
+        Lieu Argent1 = new Lieu("petit boulot", true, "N");
+        Argent1.setEOM(10);Argent1.setEOT(1);
+        Lieu Argent2 = new Lieu("petit boulot moins légal", false, "N");
+        Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
+        Lieu Argent3 = new Lieu("vente de cookies", false, "N");
+        Argent3.setEOM(25);Argent3.setEOT(1);
+        Lieu Revision = new Lieu("Centre doc", true, "N");
+        Revision.setEOS(1);Revision.setEOT(-1);
+        Lieu Repos = new Lieu("Repos", true, "N");
+        Repos.setEOT(-1);
+
+
 
     }
-
-    public void InitLieux() {
-        this.getListLieux().add(new Lieu("Amphi", true, "J"));
-        this.getListLieux().add(new Lieu("Bureau de l'administration", false, "J", 1));
-        this.getListLieux().add(new Lieu("Soirée", true, "N"));
-        this.getListLieux().add(new Lieu("Repos", true, "N"));
-        this.getListLieux().add(new Lieu("activité associative", true, "J", 3));
-    }
-
-
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
@@ -109,21 +118,21 @@ public class Game {
         }
 
 //Gestion des Menu
-public void MenuJour(ArrayList<Eleve> NonAffectedList, Scanner clavier) {
-    boolean SortieMenu = false;
-    Eleve EleveSelected;
-    while(!SortieMenu) {
-        System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");
 
+    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier){
+        boolean SortieMenu=false;
+        int Entrée;
+        Eleve EleveSelected;
         int k;
-        for(k = 0; k < NonAffectedList.size(); ++k) {
-            System.out.println(k + 1 + "." + ((Eleve)NonAffectedList.get(k)).toString());
-        }
+        while(!SortieMenu){
+            System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+            for(k=0;k<NonAffectedList.size();k++){
+                System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
+            }
+            System.out.println(NonAffectedList.size() + "Annuler");
+            Entrée=clavier.nextInt();
 
-        System.out.println(NonAffectedList.size()+1 + "Annuler");
-        int Entrée = clavier.nextInt();
-        if (Entrée <= NonAffectedList.size()) {
-            EleveSelected = (Eleve)NonAffectedList.get(Entrée);
+            EleveSelected=NonAffectedList.get(Entrée);
             NonAffectedList.remove(Entrée);
         } else {
             SortieMenu = true;
