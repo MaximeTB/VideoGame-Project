@@ -7,6 +7,7 @@ public class Player {
     private ArrayList<Pole> poles= new ArrayList<>();
     private Integer argent ,popularite,admin,PV,cohesion ;  //PV :points de victoires, utiles en fin de partie
 
+    public Player(){} //test pour QG
 
     public Player(String nameList, String namePrez){
         Eleve President = new Eleve(namePrez);
@@ -142,5 +143,21 @@ public class Player {
                 ", admin=" + admin +
                 ", PV=" + PV +
                 '}';
+    }
+
+    public void generateList(int upperBound){
+        int temp2 = 1;
+        for (int i = 0 ; i < upperBound; i++) {
+            Eleve test = new Eleve();
+            //System.out.println("Studies = " + test.getStudies()); //ok
+            //System.out.println("Loyalty = " + test.getLoyalty()); //ok
+            int temp = 0;
+            System.out.println("Etudiant n°" + temp2 + " : " + test.getName());
+            for (Skills s : test.getSkillsList()){
+                System.out.println("Skill n°" + temp + " = " + s.getName());
+                temp++;
+            }
+            temp2++;
+        }
     }
 }

@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 public class QG extends Scene implements EventHandler<ActionEvent> {
     int width;
     int height;
-    Liste list;
+    Player listeJoueurs;
 
     private StaticThing background;
     private StaticThing money;
@@ -18,7 +18,7 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
 
     public QG(Group parent, int width, int height){
         super(parent, width, height);
-        list = new Liste(); // mal geré (revoir méthodo de Liste.java)
+        listeJoueurs = new Player(); // mal geré (revoir méthodo de Liste.java)
 
         background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
         buttonList = new Button();
@@ -50,7 +50,7 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         if (actionEvent.getSource() == buttonList) {
-            list.generateList(20);
+            listeJoueurs.generateList(20);
         }else if (actionEvent.getSource() == buttonShop){
             // image du magasin
         }
