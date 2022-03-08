@@ -5,12 +5,14 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
         this.player = new Player("BDMichelle","Michelle");
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
+        this.ListLieux = new ArrayList<Lieu>();
 
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
@@ -70,11 +72,11 @@ public class Game {
                 + "\nPopularité :"+this.getPlayer().getPopularite().toString()
                 +"\nCohésion :"+this.getPlayer().getCohesion().toString()
                 +"\nPV :"+this.getPlayer().getPV().toString());
-        System.out.println("Début du Tour :");
+        System.out.println("Début du Tours :");
 
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
-            System.out.println("Quel Menu veux-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
+            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
                 this.MenuJour(DayNonAffectedList,clavier);
@@ -87,7 +89,7 @@ public class Game {
                 //}
             }else if (Entrée==2){
                 while(!SortieMenu){
-                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veux-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==3){
                         SortieMenu=true;
@@ -95,16 +97,10 @@ public class Game {
                 }
             }else if(Entrée==3){
                 while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3.Revenir au Menu Principal");
+                    System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==3){
                         SortieMenu=true;
-                    }else if(Entrée == 2){
-
-                    }else if (Entrée == 1){
-                        Player liste = new Player();
-                        liste.generateList(5);
-
                     }
                 }
             } else if(Entrée==4){
@@ -137,18 +133,28 @@ public class Game {
             }
             System.out.println(NonAffectedList.size() + "Annuler");
             Entrée=clavier.nextInt();
+        if(Entrée<=NonAffectedList.size()){
+            EleveSelected=NonAffectedList.get(Entrée-1);
+            NonAffectedList.remove(Entrée-1);
+        } else {
+            SortieMenu = true;
+        }
 
-            EleveSelected=NonAffectedList.get(Entrée);
-            NonAffectedList.remove(Entrée);
+        if (!SortieMenu) {
+            System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
 
-            System.out.println("Dans quel lieu veux-tu l'envoyer ?\n");
-
-            if(Entrée==3){
-                SortieMenu=true;
+            for(k = 0; k < this.ListLieux.size(); ++k) {
+                System.out.println(k + 1 + "." + ((Lieu)this.ListLieux.get(k)).toString());
             }
         }
 
+        if (Entrée == 3) {
+            SortieMenu = true;
+        }
     }
+
+}
+
 
 
 
@@ -175,7 +181,9 @@ public class Game {
         return NightPool;
     }
 
-
+    public ArrayList<Lieu> getListLieux() {
+        return ListLieux;
+    }
 
     public Player getPlayer() {
         return player;
