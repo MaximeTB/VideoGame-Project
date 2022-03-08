@@ -72,6 +72,28 @@ public class Game {
                 +"\nPV :"+this.getPlayer().getPV().toString());
         System.out.println("Début du Tours :");
 
+        if(this.getNbTour()%2==0){
+            for(Eleve e : player.getListeEleve()){
+                e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
+            }
+        }
+
+        if(this.getNbTour()%3==0) {
+
+        }
+
+        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
+            System.out.println("voulez vous recruter ? 1.oui 2.non");
+            Entrée = clavier.nextInt();
+            if (Entrée == 1) {
+                player.recrute(player.getPopularite() / 8 - player.getListeEleve().size());
+            }
+        }
+
+        if(this.getNbTour()%6==0){
+            System.out.println("C'est le week-end");
+        }
+
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
