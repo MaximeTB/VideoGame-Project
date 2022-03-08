@@ -1,35 +1,44 @@
 import javafx.application.Application;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import java.util.Date;
+
+// TO DO : base de prénoms pour la liste d'élèves.
+
+    public class MainDisp extends Application {
+
+        @Override
+        public void start(Stage primaryStage) throws Exception{
+
+            primaryStage.setTitle("ENSEA");
+            Group root = new Group();
+            QG scene = new QG(root, 600, 400);
 
 
-public class MainDisp extends Application{
-    public void start(Stage primaryStage) {
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
-        primaryStage.setTitle("Demo");
-        Group root = new Group();
+        }
 
-        Map theScene = new Map(root,0);//Création de la Game scene
 
-        theScene.getTest().setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                System.out.println(theScene.getEtat());
-                int e = theScene.getEtat()+1;
-                e%=3;
-                theScene.setEtat(e);
-            }
-        });
-
-        primaryStage.setScene(theScene);
-        primaryStage.show();
-
-    }
+        public static void main(String[] args) {
+            launch(args);
+        }
+    /*
     public static void main(String[] args) {
-        launch(args);
-    }
+        for (int i = 0 ; i < 20; i++) {
+            Eleve test = new Eleve();
 
-}
+        }
+
+    }
+     */
+    }
