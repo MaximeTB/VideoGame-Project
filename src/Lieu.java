@@ -117,7 +117,9 @@ public class Lieu {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 

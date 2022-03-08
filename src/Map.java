@@ -1,4 +1,4 @@
-import javafx.animation.AnimationTimer;
+/*import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -39,7 +39,7 @@ public class Map extends Scene{
                 parent.getChildren().add(qg.getImg());
                 parent.getChildren().add(test);
                 break;*/
-        }
+     /*   }
 
 
     }
@@ -60,3 +60,4 @@ public class Map extends Scene{
         this.etat = etat;
     }
 }
+*/

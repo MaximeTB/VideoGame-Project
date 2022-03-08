@@ -78,20 +78,6 @@ public class Eleve implements Comparable {
         this.skillsList.add(new Skills(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
-    public void silliker(Player liste){
-        liste.setArgent(liste.getArgent()+20);
-    }
-
-    public void studying(){
-        studies+=10;
-        studies=studies>100 ? 100 : studies;
-    }
-
-    public void soiree(Player Player){
-        tired+=10;
-        Player.setPopularite(Player.getPopularite()+10);
-    }
-
     @Override
     public String toString() {
         return "name=" + name +
