@@ -5,12 +5,14 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
         this.player = new Player("BDMichelle","Michelle");
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
+        this.ListLieux = new ArrayList<Lieu>();
 
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
@@ -131,9 +133,9 @@ public class Game {
             }
             System.out.println(NonAffectedList.size() + "Annuler");
             Entrée=clavier.nextInt();
-
-            EleveSelected=NonAffectedList.get(Entrée);
-            NonAffectedList.remove(Entrée);
+        if(Entrée<=NonAffectedList.size()){
+            EleveSelected=NonAffectedList.get(Entrée-1);
+            NonAffectedList.remove(Entrée-1);
         } else {
             SortieMenu = true;
         }
