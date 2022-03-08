@@ -90,9 +90,26 @@ public class Game {
             }
         }
 
-        if(this.getNbTour()%6==0){
+        if(this.getNbTour()%7==6){
             System.out.println("C'est le week-end");
+            ListLieux.get(0).ChangeState();
+            ListLieux.get(1).ChangeState();
+            ListLieux.get(2).ChangeState();
+            ListLieux.get(3).ChangeState();
+            ListLieux.get(4).ChangeState();
+
         }
+        if(this.getNbTour()%7==0 && this.getNbTour()!=0){
+            System.out.println("C'est le week-end");
+            ListLieux.get(0).ChangeState();
+            ListLieux.get(1).ChangeState();
+            ListLieux.get(2).ChangeState();
+            ListLieux.get(3).ChangeState();
+            ListLieux.get(4).ChangeState();
+
+        }
+
+        if(this.getNbTour()%6==2)
 
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
