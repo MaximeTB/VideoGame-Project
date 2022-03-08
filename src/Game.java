@@ -72,6 +72,45 @@ public class Game {
                 +"\nPV :"+this.getPlayer().getPV().toString());
         System.out.println("Début du Tours :");
 
+        if(this.getNbTour()%2==0){
+            for(Eleve e : player.getListeEleve()){
+                e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
+            }
+        }
+
+        if(this.getNbTour()%3==0) {
+
+        }
+
+        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
+            System.out.println("voulez vous recruter ? 1.oui 2.non");
+            Entrée = clavier.nextInt();
+            if (Entrée == 1) {
+                player.recrute(player.getPopularite() / 8 - player.getListeEleve().size());
+            }
+        }
+
+        if(this.getNbTour()%7==6){
+            System.out.println("C'est le week-end");
+            ListLieux.get(0).ChangeState();
+            ListLieux.get(1).ChangeState();
+            ListLieux.get(2).ChangeState();
+            ListLieux.get(3).ChangeState();
+            ListLieux.get(4).ChangeState();
+
+        }
+        if(this.getNbTour()%7==0 && this.getNbTour()!=0){
+            System.out.println("C'est le week-end");
+            ListLieux.get(0).ChangeState();
+            ListLieux.get(1).ChangeState();
+            ListLieux.get(2).ChangeState();
+            ListLieux.get(3).ChangeState();
+            ListLieux.get(4).ChangeState();
+
+        }
+
+        if(this.getNbTour()%6==2)
+
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
