@@ -3,6 +3,8 @@ public class Skills {
     String color;
     int indexName;
     String name;
+    int niveau;
+    int Exp;
 
     public Skills(int indexC, int indexN){
         this.indexColor = indexC;
@@ -27,13 +29,10 @@ public class Skills {
         switch(color){
             case 0 : //gris
                 switch(index){
-                    case 0 :
-                        this.name = "- No skill -";
-                        break;
-                    case 1 :
-                        break;
-                    case 2 :
-                        break;
+                    case 1 -> this.name = "Rich";
+                    case 2 -> this.name = "Carte Métro";
+                    case 3 -> this.name = "Réseaux";
+                    case 4 -> this.name = "Breton";
                 }
                 break;
             case 1 : //bleu
@@ -85,6 +84,14 @@ public class Skills {
 
     // fait correspondre l'effet au skill
     public void getEffect(){
+    }
 
+    @Override
+    public String toString() {
+        return  name  ;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

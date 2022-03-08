@@ -1,17 +1,20 @@
-public class Main {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
 
+public class Main {
+    static ArrayList<Eleve> Test= new ArrayList();
     public static void main(String[] args) {
-        for (int i = 0 ; i < 20; i++) {
-            Eleve test = new Eleve();
-            //System.out.println("Studies = " + test.getStudies()); //ok
-            //System.out.println("Loyalty = " + test.getLoyalty()); //ok
-            int temp = 0;
-            for (Skills s : test.getSkillsList()){
-                System.out.println("Skill n°" + temp + " = " + s.getName());
-                temp++;
-            }
+        Scanner clavier =new Scanner(System.in);
+        Game game = new Game();
+        int k;
+        for(k=1;k<=1;k++){
+            game.Tour(clavier);
 
         }
-
+        System.out.println("Fin de la partie");
     }
+
+
 }
