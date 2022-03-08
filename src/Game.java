@@ -30,11 +30,33 @@ public class Game {
         }
 
         //initialisation temporaire des lieux
-        Lieu Amphi = new Lieu("Amphi", true, "D");
-        Lieu Admin = new Lieu("Bureau de l'administration",false,"D",1);
-        Lieu Soire = new Lieu("Soirée", true, "N");
-        Lieu Repos = new Lieu("Repos", true, "N");
+        //jour
         Lieu Assoce = new Lieu("activité associative", true, "D",3);
+        Lieu Rue = new Lieu("La Rue", true, "D");
+        Rue.setEOP(2);
+        Lieu Amphi = new Lieu("Amphi", true, "D");
+        Amphi.setEOS(2);Amphi.setIsAMPH(1);
+        Lieu TP = new Lieu("Salle de TP", false, "D");
+        TP.setEOS(1);
+        Lieu Admin = new Lieu("Bureau de l'administration",true,"D",1);
+        Admin.setEOA(1);
+        Lieu GrassMat = new Lieu("Grasse matiné", true, "D");
+        GrassMat.setEOT(-1);
+        //nuit
+        Lieu Soire = new Lieu("Soirée", true, "N");
+        Soire.setEOT(1);Soire.setEOP(5);
+        Lieu Argent1 = new Lieu("petit boulot", true, "N");
+        Argent1.setEOM(10);Argent1.setEOT(1);
+        Lieu Argent2 = new Lieu("petit boulot moins légal", false, "N");
+        Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
+        Lieu Argent3 = new Lieu("vente de cookies", false, "N");
+        Argent3.setEOM(25);Argent3.setEOT(1);
+        Lieu Revision = new Lieu("Centre doc", true, "N");
+        Revision.setEOS(1);Revision.setEOT(-1);
+        Lieu Repos = new Lieu("Repos", true, "N");
+        Repos.setEOT(-1);
+
+
 
     }
 
