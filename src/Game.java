@@ -48,11 +48,11 @@ public class Game {
                 + "\nPopularité :"+this.getPlayer().getPopularite().toString()
                 +"\nCohésion :"+this.getPlayer().getCohesion().toString()
                 +"\nPV :"+this.getPlayer().getPV().toString());
-        System.out.println("Début du Tours :");
+        System.out.println("Début du Tour :");
 
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
-            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
+            System.out.println("Quel Menu veux-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
                 this.MenuJour(DayNonAffectedList,clavier);
@@ -65,7 +65,7 @@ public class Game {
                 //}
             }else if (Entrée==2){
                 while(!SortieMenu){
-                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veux-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==3){
                         SortieMenu=true;
@@ -73,10 +73,16 @@ public class Game {
                 }
             }else if(Entrée==3){
                 while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==3){
                         SortieMenu=true;
+                    }else if(Entrée == 2){
+
+                    }else if (Entrée == 1){
+                        Player liste = new Player();
+                        liste.generateList(5);
+
                     }
                 }
             } else if(Entrée==4){
@@ -113,7 +119,7 @@ public class Game {
             EleveSelected=NonAffectedList.get(Entrée);
             NonAffectedList.remove(Entrée);
 
-            System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
+            System.out.println("Dans quel lieu veux-tu l'envoyer ?\n");
 
             if(Entrée==3){
                 SortieMenu=true;
