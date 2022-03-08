@@ -5,12 +5,14 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
         this.player = new Player("BDMichelle","Michelle");
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
+        this.ListLieux = new ArrayList<Lieu>();
 
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
@@ -30,12 +32,32 @@ public class Game {
         }
 
         //initialisation temporaire des lieux
-        Lieu Amphi = new Lieu("Amphi", true, "D");
-        Lieu Admin = new Lieu("Bureau de l'administration",false,"D",1);
-        Lieu Soire = new Lieu("Soirée", true, "N");
-        Lieu Repos = new Lieu("Repos", true, "N");
+        //jour
         Lieu Assoce = new Lieu("activité associative", true, "D",3);
-
+        ListLieux.add(Assoce);
+        Lieu Rue = new Lieu("La Rue", true, "D");
+        ListLieux.add(Rue);Rue.setEOP(2);
+        Lieu Amphi = new Lieu("Amphi", true, "D");
+        ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
+        Lieu TP = new Lieu("Salle de TP", false, "D");
+        ListLieux.add(TP);TP.setEOS(1);
+        Lieu Admin = new Lieu("Bureau de l'administration",true,"D",1);
+        ListLieux.add(Admin);Admin.setEOA(1);
+        Lieu GrassMat = new Lieu("Grasse matiné", true, "D");
+        ListLieux.add(GrassMat);GrassMat.setEOT(-1);
+        //nuit
+        Lieu Soire = new Lieu("Soirée", true, "N");
+        ListLieux.add(Soire);Soire.setEOT(1);Soire.setEOP(5);
+        Lieu Argent1 = new Lieu("petit boulot", true, "N");
+        ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
+        Lieu Argent2 = new Lieu("petit boulot moins légal", false, "N");
+        ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
+        Lieu Argent3 = new Lieu("vente de cookies", false, "N");
+        ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
+        Lieu Revision = new Lieu("Centre doc", true, "N");
+        ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
+        Lieu Repos = new Lieu("Repos", true, "N");
+        ListLieux.add(Repos);Repos.setEOT(-1);
     }
 
     public void Tour(Scanner clavier){
@@ -107,20 +129,30 @@ public class Game {
             for(k=0;k<NonAffectedList.size();k++){
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
             }
-            System.out.println(NonAffectedList.size() + "Annuler");
+            System.out.println(NonAffectedList.size()+1 + ".Annuler");
             Entrée=clavier.nextInt();
+        if(Entrée<=NonAffectedList.size()){
+            EleveSelected=NonAffectedList.get(Entrée-1);
+            NonAffectedList.remove(Entrée-1);
+        } else {
+            SortieMenu = true;
+        }
 
-            EleveSelected=NonAffectedList.get(Entrée);
-            NonAffectedList.remove(Entrée);
-
+        if (!SortieMenu) {
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
 
-            if(Entrée==3){
-                SortieMenu=true;
+            for(k = 0; k < this.ListLieux.size(); ++k) {
+                System.out.println(k + 1 + "." + ((Lieu)this.ListLieux.get(k)).toString());
             }
         }
 
+        if (Entrée == 3) {
+            SortieMenu = true;
+        }
     }
+
+}
+
 
 
 
@@ -147,7 +179,9 @@ public class Game {
         return NightPool;
     }
 
-
+    public ArrayList<Lieu> getListLieux() {
+        return ListLieux;
+    }
 
     public Player getPlayer() {
         return player;

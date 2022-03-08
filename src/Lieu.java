@@ -14,6 +14,7 @@ public class Lieu {
     private int EOA; //effect on admin
     private int EOC; //effect on cohesion
     private int EOPV; //effect on PV
+    private int isAMPH; //effet specifique a l'amphi
 
     public Lieu(String name, Boolean available, String type){
         this.name = name;
@@ -78,16 +79,12 @@ public class Lieu {
     public void setEOPV(int EOPV) {
         this.EOPV = EOPV;
     }
+    public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
 
 
     //Methodes
 
-    public void desactivate(){
-        this.available=false;
-    }
-    public void activate(){
-        this.available=true;
-    }
+    public void ChangeState(){this.available= !available;}
 
     public void placeStudent(Eleve e){
         if(available){
@@ -100,21 +97,21 @@ public class Lieu {
                 System.out.println("Cet endroit est déja plein !");
             }
         }else{
-            System.out.println("Placement impossible pour le moment");
+            System.out.println("Lieu indisponible pour le moment");
         }
     }
 
-    public void changeStat(Player list){
+    public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
-        if (Nb!=0){
+        if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
             list.setArgent(list.getArgent()+this.EOM*Nb);
             list.setPopularite(list.getPopularite()+this.EOP*Nb);
             list.setAdmin(list.getAdmin()+this.EOA*Nb);
             list.setPV(list.getPV()+this.EOPV*Nb);
             list.setCohesion(list.getCohesion()+this.EOC*Nb);
 
-            for(Eleve E:ElevePresents){
-                E.setStudies(E.getStudies()+this.EOS);
+            for(Eleve E:ElevePresents){    //bonus individuels des lieux sur les élèves
+                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
                 E.setTired(E.getTired()+this.EOT);
             }
         }
