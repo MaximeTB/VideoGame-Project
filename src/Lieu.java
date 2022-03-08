@@ -14,6 +14,7 @@ public class Lieu {
     private int EOA; //effect on admin
     private int EOC; //effect on cohesion
     private int EOPV; //effect on PV
+    private int isAMPH; //effet specifique a l'amphi
 
     public Lieu(String name, Boolean available, String type){
         this.name = name;
@@ -78,10 +79,12 @@ public class Lieu {
     public void setEOPV(int EOPV) {
         this.EOPV = EOPV;
     }
+    public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
 
 
     //Methodes
 
+    public void ChangeState(){}
     public void desactivate(){
         this.available=false;
     }
@@ -114,7 +117,7 @@ public class Lieu {
             list.setCohesion(list.getCohesion()+this.EOC*Nb);
 
             for(Eleve E:ElevePresents){
-                E.setStudies(E.getStudies()+this.EOS);
+                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2)));
                 E.setTired(E.getTired()+this.EOT);
             }
         }
