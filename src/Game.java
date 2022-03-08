@@ -82,7 +82,7 @@ public class Game {
 
         }
 
-        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
+        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<10) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
             Entrée = clavier.nextInt();
             if (Entrée == 1) {
@@ -90,7 +90,23 @@ public class Game {
             }
         }
 
-        if(this.getNbTour()%7==6){
+        if(player.getPopularite()>=10*player.getListeEleve().size() && player.getListeEleve().size()>10 && player.getListeEleve().size()<20) {
+            System.out.println("voulez vous recruter ? 1.oui 2.non");
+            Entrée = clavier.nextInt();
+            if (Entrée == 1) {
+                player.recrute(player.getPopularite() / 10 - player.getListeEleve().size());
+            }
+        }
+
+        if(player.getPopularite()>=16*player.getListeEleve().size() && player.getListeEleve().size()>20){
+            System.out.println("voulez vous recruter ? 1.oui 2.non");
+            Entrée = clavier.nextInt();
+            if (Entrée == 1) {
+                player.recrute(player.getPopularite() / 16 - player.getListeEleve().size());
+            }
+        }
+
+        if(this.getNbTour()%7==6 || this.getNbTour()%7==0 && this.getNbTour()!=0){
             System.out.println("C'est le week-end");
             ListLieux.get(0).ChangeState();
             ListLieux.get(1).ChangeState();
@@ -99,17 +115,6 @@ public class Game {
             ListLieux.get(4).ChangeState();
 
         }
-        if(this.getNbTour()%7==0 && this.getNbTour()!=0){
-            System.out.println("C'est le week-end");
-            ListLieux.get(0).ChangeState();
-            ListLieux.get(1).ChangeState();
-            ListLieux.get(2).ChangeState();
-            ListLieux.get(3).ChangeState();
-            ListLieux.get(4).ChangeState();
-
-        }
-
-        if(this.getNbTour()%6==2)
 
         DayNonAffectedList=this.getPlayer().getListeEleve();
         while(!FinTour){
