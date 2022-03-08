@@ -137,7 +137,6 @@ public class Game {
               //  }
             }else if(Entrée==3){
                 while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
                     System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
                     if(Entrée==4){
