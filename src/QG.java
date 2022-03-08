@@ -15,7 +15,6 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
     private Button buttonShop;
     private Button buttonExit;
 
-
     public QG(Group parent, int width, int height){
         super(parent, width, height);
         listeJoueurs = new Player(); // mal geré (revoir méthodo de Liste.java)
@@ -55,4 +54,14 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
             // image du magasin
         }
     }
+
+    void liste(){
+
+    }
+
+    void magasin(){
+        System.out.println("Que veux-tu acheter poto ?");
+        System.out.println("1. Cafetière 2. Cuisine 3. Jeux gonflables 4. Louer une salle 5. Feux d'artifice 6. Inviter une célebrité");
+    }
+
 }
