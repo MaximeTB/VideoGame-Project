@@ -156,7 +156,7 @@ public class Game {
                             if (Entrée == 7) break;
                         }
                     }else if (Entrée == 1){ // liste
-                        QG.liste();
+                        player.displayListEleve();
                     }
                 }
             } else if(Entrée==4){
@@ -167,6 +167,9 @@ public class Game {
         }
 
         this.NewTour();
+        for(Lieu L : ListLieux){
+            L.ApplyLieuEffect(player);
+        }
         System.out.println("Fin du Tour \n\n");
     }
 
@@ -177,7 +180,7 @@ public class Game {
 
 //Gestion des Menu
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){
+    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
         boolean SortieMenu=false;
         int Entrée;
         Eleve EleveSelected;
@@ -190,7 +193,7 @@ public class Game {
             System.out.println(NonAffectedList.size()+1 + ".Annuler");
             Entrée=clavier.nextInt();
 
-        if(Entrée==NonAffectedList.size()+1){
+        if(Entrée>=NonAffectedList.size()+1){
             SortieMenu = true;
         }
 
