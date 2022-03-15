@@ -114,6 +114,25 @@ public class Player {
     }
 
 
+
+    public static void main(String[] args){
+        Player BDTerre=new Player(args[0],args[1]);
+        System.out.println(BDTerre.getAdmin());
+        System.out.println(BDTerre.getListeEleve().get(0).getName());
+        System.out.println(BDTerre.getArgent());
+        System.out.println(BDTerre.getName());
+        System.out.println(BDTerre.getPopularite());
+
+        Eleve e=new Eleve("poi");
+        for(int i=0;i<12;i++){
+            e.studying();
+            System.out.println(e.getStudies());
+        }
+
+        e.silliker(BDTerre);
+        System.out.println(BDTerre.getArgent());
+    }
+
     @Override
     public String toString() {
         return "ListeEleve{" +

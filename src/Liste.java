@@ -95,7 +95,7 @@ public class Liste {
 
         Eleve e=new Eleve("poi");
         for(int i=0;i<12;i++){
-            //e.studying();
+            e.studying();
             System.out.println(e.getStudies());
         }
 
