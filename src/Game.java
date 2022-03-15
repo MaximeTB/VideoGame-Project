@@ -5,11 +5,15 @@ public class Game {
     private int NbTour;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
+    private QGconsole QG;
     private ArrayList<Lieu> ListLieux;
 
     public Game() {
         //Initialisation du Jeu
+        QG = new QGconsole();
         this.player = new Player("BDMichelle","Michelle");
+        //test console on fout de l'argent tour 1
+        player.setArgent(100);
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
         this.ListLieux = new ArrayList<Lieu>();
@@ -33,17 +37,17 @@ public class Game {
 
         //initialisation temporaire des lieux
         //jour
-        Lieu Assoce = new Lieu("activité associative", true, "D",3);
+        Lieu Assoce = new Lieu("activité associative", true, "J",3);
         ListLieux.add(Assoce);
-        Lieu Rue = new Lieu("La Rue", true, "D");
+        Lieu Rue = new Lieu("La Rue", true, "J");
         ListLieux.add(Rue);Rue.setEOP(2);
-        Lieu Amphi = new Lieu("Amphi", true, "D");
+        Lieu Amphi = new Lieu("Amphi", true, "J");
         ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
-        Lieu TP = new Lieu("Salle de TP", false, "D");
+        Lieu TP = new Lieu("Salle de TP", false, "J");
         ListLieux.add(TP);TP.setEOS(1);
-        Lieu Admin = new Lieu("Bureau de l'administration",true,"D",1);
+        Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
         ListLieux.add(Admin);Admin.setEOA(1);
-        Lieu GrassMat = new Lieu("Grasse matiné", true, "D");
+        Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
         ListLieux.add(GrassMat);GrassMat.setEOT(-1);
         //nuit
         Lieu Soire = new Lieu("Soirée", true, "N");
@@ -76,38 +80,31 @@ public class Game {
             for(Eleve e : player.getListeEleve()){
                 e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
             }
-        }
+        }//perte de niveau d'étude tout les 2 tours
 
         if(this.getNbTour()%3==0) {
+            System.out.println("event");
+        }//gestion des events
 
-        }
-
-        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<10) {
+        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
             Entrée = clavier.nextInt();
             if (Entrée == 1) {
-                player.recrute(player.getPopularite() / 8 - player.getListeEleve().size());
+                this.getPlayer().recrute(3);
             }
-        }
+        }//recrutement
 
-        if(player.getPopularite()>=10*player.getListeEleve().size() && player.getListeEleve().size()>10 && player.getListeEleve().size()<20) {
-            System.out.println("voulez vous recruter ? 1.oui 2.non");
-            Entrée = clavier.nextInt();
-            if (Entrée == 1) {
-                player.recrute(player.getPopularite() / 10 - player.getListeEleve().size());
-            }
-        }
+        if(this.getNbTour()%7==6){
+            System.out.println("C'est le week-end, l'ENSEA est fermé");
+            ListLieux.get(0).ChangeState();
+            ListLieux.get(1).ChangeState();
+            ListLieux.get(2).ChangeState();
+            ListLieux.get(3).ChangeState();
+            ListLieux.get(4).ChangeState();
 
-        if(player.getPopularite()>=16*player.getListeEleve().size() && player.getListeEleve().size()>20){
-            System.out.println("voulez vous recruter ? 1.oui 2.non");
-            Entrée = clavier.nextInt();
-            if (Entrée == 1) {
-                player.recrute(player.getPopularite() / 16 - player.getListeEleve().size());
-            }
-        }
-
-        if(this.getNbTour()%7==6 || this.getNbTour()%7==0 && this.getNbTour()!=0){
-            System.out.println("C'est le week-end");
+        } //gestion du week-end : lieu de l'ensea désactivé
+        if(this.getNbTour()%7==0 && this.getNbTour()!=0){
+            System.out.println("Week-end terminé, retour en cour !");
             ListLieux.get(0).ChangeState();
             ListLieux.get(1).ChangeState();
             ListLieux.get(2).ChangeState();
@@ -116,54 +113,63 @@ public class Game {
 
         }
 
-        DayNonAffectedList=this.getPlayer().getListeEleve();
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
-                this.MenuJour(DayNonAffectedList,clavier);
-                //while(!SortieMenu){
-                    //System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
-                    //Entrée=clavier.nextInt();
-                    //if(Entrée==3){
-                        //SortieMenu=true;
-                    //}
-                //}
+                this.MenuJour(DayNonAffectedList,clavier,"J");
             }else if (Entrée==2){
-                while(!SortieMenu){
-                    System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
-                    Entrée=clavier.nextInt();
-                    if(Entrée==3){
-                        SortieMenu=true;
-                    }
-                }
+                this.MenuJour(NightNonAffectedList,clavier,"N");
             }else if(Entrée==3){
                 while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
-                    if(Entrée==3){
+                    if(Entrée==5){
                         SortieMenu=true;
+                    }
+                    else if(Entrée ==4){
+                        System.out.println("gérer les poles WIP");
+                    }else if(Entrée == 3){ // inventaire
+                        while(Entrée!=7) {
+                            QG.inventaire();
+                            Entrée = clavier.nextInt();
+                        }
+                    }else if(Entrée == 2){ //shop
+                        while(Entrée!=7) {
+                            QG.shop();
+                            System.out.println("Argent disponible : " + player.getArgent());
+                            Entrée = clavier.nextInt();
+                            QG.shopAction(Entrée, player);
+                        }
+                    }else if (Entrée == 1){ // liste
+                        player.displayListEleve();
                     }
                 }
             } else if(Entrée==4){
                 FinTour=true;
             }
             SortieMenu=false;
-
         }
 
         this.NewTour();
+
         System.out.println("Fin du Tour \n\n");
     }
 
 
     public void NewTour(){
         this.NbTour+=1;
+        for(Lieu L : ListLieux){
+            L.ApplyLieuEffect(player);
         }
+    }
 
 //Gestion des Menu
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier){
+    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
         boolean SortieMenu=false;
         int Entrée;
         Eleve EleveSelected;
@@ -175,23 +181,33 @@ public class Game {
             }
             System.out.println(NonAffectedList.size()+1 + ".Annuler");
             Entrée=clavier.nextInt();
-        if(Entrée<=NonAffectedList.size()){
+
+        if(Entrée>=NonAffectedList.size()+1){
+            SortieMenu = true;
+        }
+
+        if (!SortieMenu && NonAffectedList.size()!=0) {
             EleveSelected=NonAffectedList.get(Entrée-1);
-            NonAffectedList.remove(Entrée-1);
-        } else {
-            SortieMenu = true;
-        }
 
-        if (!SortieMenu) {
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
-
+            int i=1;
+            int diff=0;
             for(k = 0; k < this.ListLieux.size(); ++k) {
-                System.out.println(k + 1 + "." + ((Lieu)this.ListLieux.get(k)).toString());
+                if(ListLieux.get(k).getType().equals(moment)){
+                    System.out.println(i + "." + ListLieux.get(k));
+                    diff=i-k;
+                    i++;
+                }
             }
-        }
-
-        if (Entrée == 3) {
-            SortieMenu = true;
+            Entrée=clavier.nextInt();
+            if(Entrée<=i-1){
+                int err = ListLieux.get(Entrée-diff).placeStudent(EleveSelected);
+                if(err==0){
+                    NonAffectedList.remove(EleveSelected);
+                }
+            } else {
+                SortieMenu = true;
+            }
         }
     }
 

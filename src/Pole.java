@@ -6,6 +6,7 @@ public class Pole {
     private int XP=0;
     private int level=1;
     private String color1, color2;
+    private final int RequiredXp=10;
 
 
     public Pole(String name, String color1) {
@@ -32,11 +33,18 @@ public class Pole {
     public void addMember(Eleve e){
         Member.add(e);
     }
-    public void levelUp(){this.level++;}
+    public void removeMember(Eleve e){Member.remove(e);}
+    public void gainXP(int xp){
+        this.XP+=xp;
+        if(XP>=(this.level*2)*RequiredXp){
+            this.level++;
+        }
+    }
 
     public void meeting(){
         int bonus=0;
         for (Eleve eleve : Member){
+            bonus++;
             for (Skills skill : eleve.getSkillsList()){
                 if (skill.getColor().equals(color1) || skill.getColor().equals(color2)){
                     bonus++;
@@ -44,7 +52,7 @@ public class Pole {
 
             }
         }
-        level+=1+bonus;
+        this.gainXP(1+bonus);
     }
 
 
@@ -76,5 +84,10 @@ public class Pole {
         System.out.println(bureau.getSecr());
     }
 
-
+    public void displayPole(){
+        System.out.println(name+"\n"+level);
+        for(Eleve e : Member){
+            System.out.println(e.getName());
+        }
+    }
 }

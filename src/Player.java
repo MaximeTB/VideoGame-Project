@@ -37,6 +37,7 @@ public class Player {
             choice.add(e);
             System.out.println(e);
         }
+        System.out.println("Choisissez un élève");
         String answer = scan.nextLine();
         Integer intAnswer = Integer.parseInt(answer);
         if(intAnswer<nb){
@@ -82,7 +83,6 @@ public class Player {
     public void setPV(Integer PV) {
         this.PV = PV;
     }
-
     public void setCohesion(Integer cohesion){
         this.cohesion = cohesion;
     }
@@ -124,6 +124,18 @@ public class Player {
                 ", admin=" + admin +
                 ", PV=" + PV +
                 '}';
+    }
+
+    public void displayListEleve(){
+        for(Eleve e : ListeEleve){
+            System.out.println(e);
+        }
+    }
+    public void displayPole(){
+        for(Pole p : poles){
+            p.displayPole();
+            //System.out.println(" ");
+        }
     }
 
     public void generateList(int upperBound){
