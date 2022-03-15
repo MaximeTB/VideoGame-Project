@@ -37,6 +37,7 @@ public class Player {
             choice.add(e);
             System.out.println(e);
         }
+        System.out.println("Choisissez un élève");
         String answer = scan.nextLine();
         Integer intAnswer = Integer.parseInt(answer);
         if(intAnswer<nb){

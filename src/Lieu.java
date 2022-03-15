@@ -91,7 +91,7 @@ public class Lieu {
         if(available){
             if(this.ElevePresents.size()<capMax){
                 this.ElevePresents.add(e);
-                e.setLocation(this);
+                e.setLocation(this, this.type);
                 System.out.println(e.getName() + " placé dans " + this.name + " ("+ElevePresents.size()+"/" + capMax + ")");
             }
             else{

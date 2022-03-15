@@ -66,8 +66,6 @@ public class Game {
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
-        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
-        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
         int Entrée;
         System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()
@@ -80,31 +78,31 @@ public class Game {
             for(Eleve e : player.getListeEleve()){
                 e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
             }
-        }
+        }//perte de niveau d'étude tout les 2 tours
 
         if(this.getNbTour()%3==0) {
-
-        }
+            System.out.println("event");
+        }//gestion des events
 
         if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
             Entrée = clavier.nextInt();
             if (Entrée == 1) {
-                player.recrute(player.getPopularite() / 8 - player.getListeEleve().size());
+                this.getPlayer().recrute(3);
             }
-        }
+        }//recrutement
 
         if(this.getNbTour()%7==6){
-            System.out.println("C'est le week-end");
+            System.out.println("C'est le week-end, l'ENSEA est fermé");
             ListLieux.get(0).ChangeState();
             ListLieux.get(1).ChangeState();
             ListLieux.get(2).ChangeState();
             ListLieux.get(3).ChangeState();
             ListLieux.get(4).ChangeState();
 
-        }
+        } //gestion du week-end : lieu de l'ensea désactivé
         if(this.getNbTour()%7==0 && this.getNbTour()!=0){
-            System.out.println("C'est le week-end");
+            System.out.println("Week-end terminé, retour en cour !");
             ListLieux.get(0).ChangeState();
             ListLieux.get(1).ChangeState();
             ListLieux.get(2).ChangeState();
@@ -113,47 +111,36 @@ public class Game {
 
         }
 
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
 
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
                 this.MenuJour(DayNonAffectedList,clavier,"J");
-                //while(!SortieMenu){
-                    //System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
-                    //Entrée=clavier.nextInt();
-                    //if(Entrée==3){
-                        //SortieMenu=true;
-                    //}
-                //}
             }else if (Entrée==2){
-              //  while(!SortieMenu){
-                    this.MenuJour(NightNonAffectedList,clavier,"N");
-                   /* System.out.println("Si t'es vivant c'est qu't'es pas encore mort , que veut-tu faire ?\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
-                    Entrée=clavier.nextInt();
-                    if(Entrée==3){
-                        SortieMenu=true;
-                    }*/
-              //  }
+                this.MenuJour(NightNonAffectedList,clavier,"N");
             }else if(Entrée==3){
                 while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4.Revenir au Menu Principal");
+                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
                     Entrée=clavier.nextInt();
-                    if(Entrée==4){
+                    if(Entrée==5){
                         SortieMenu=true;
+                    }
+                    else if(Entrée ==4){
+                        System.out.println("gérer les poles WIP");
                     }else if(Entrée == 3){ // inventaire
-                        while(true) {
+                        while(Entrée!=7) {
                             QG.inventaire();
                             Entrée = clavier.nextInt();
-                            if (Entrée == 1) break;
                         }
                     }else if(Entrée == 2){ //shop
-                        while(true) {
+                        while(Entrée!=7) {
                             QG.shop();
                             System.out.println("Argent disponible : " + player.getArgent());
                             Entrée = clavier.nextInt();
                             QG.shopAction(Entrée, player);
-                            if (Entrée == 7) break;
                         }
                     }else if (Entrée == 1){ // liste
                         player.displayListEleve();
@@ -163,20 +150,20 @@ public class Game {
                 FinTour=true;
             }
             SortieMenu=false;
-
         }
 
         this.NewTour();
-        for(Lieu L : ListLieux){
-            L.ApplyLieuEffect(player);
-        }
+
         System.out.println("Fin du Tour \n\n");
     }
 
 
     public void NewTour(){
         this.NbTour+=1;
+        for(Lieu L : ListLieux){
+            L.ApplyLieuEffect(player);
         }
+    }
 
 //Gestion des Menu
 
