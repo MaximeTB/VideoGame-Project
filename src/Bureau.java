@@ -3,7 +3,7 @@ public class Bureau extends Pole{
 
 
     public Bureau(String name, String color1){
-        super(name, color1);
+        super(name, color1,true);
     }
 
     public void giveRole(String role, Eleve eleve){

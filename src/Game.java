@@ -118,38 +118,14 @@ public class Game {
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
-                this.MenuJour(DayNonAffectedList,clavier,"J");
+                this.Menu(DayNonAffectedList,clavier,"J");
             }else if (Entrée==2){
-                this.MenuJour(NightNonAffectedList,clavier,"N");
+                this.Menu(NightNonAffectedList,clavier,"N");
             }else if(Entrée==3){
-                while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
-                    Entrée=clavier.nextInt();
-                    if(Entrée==5){
-                        SortieMenu=true;
-                    }
-                    else if(Entrée ==4){
-                        System.out.println("gérer les poles WIP");
-                    }else if(Entrée == 3){ // inventaire
-                        while(Entrée!=7) {
-                            QG.inventaire();
-                            Entrée = clavier.nextInt();
-                        }
-                    }else if(Entrée == 2){ //shop
-                        while(Entrée!=7) {
-                            QG.shop();
-                            System.out.println("Argent disponible : " + player.getArgent());
-                            Entrée = clavier.nextInt();
-                            QG.shopAction(Entrée, player);
-                        }
-                    }else if (Entrée == 1){ // liste
-                        player.displayListEleve();
-                    }
-                }
+                this.MenuGQ(clavier);
             } else if(Entrée==4){
                 FinTour=true;
             }
-            SortieMenu=false;
         }
 
         this.NewTour();
@@ -167,7 +143,7 @@ public class Game {
 
 //Gestion des Menu
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
+    public void Menu(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
         boolean SortieMenu=false;
         int Entrée;
         Eleve EleveSelected;
@@ -188,20 +164,21 @@ public class Game {
             EleveSelected=NonAffectedList.get(Entrée-1);
 
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
-            int i=1;
-            int diff=0;
-            for(k = 0; k < this.ListLieux.size(); ++k) {
-                if(ListLieux.get(k).getType().equals(moment)){
-                    System.out.println(i + "." + ListLieux.get(k));
-                    diff=i-k;
+            int i=0;
+            ArrayList<Lieu> LieuDisp=new ArrayList<>();
+            for(Lieu L : ListLieux) {
+                if(L.getType().equals(moment)){
+                    System.out.println(i+1 + "." + L.getname());
+                    LieuDisp.add(L);
                     i++;
                 }
             }
             Entrée=clavier.nextInt();
-            if(Entrée<=i-1){
-                int err = ListLieux.get(Entrée-diff).placeStudent(EleveSelected);
+            if(Entrée<=LieuDisp.size()){
+                int err = LieuDisp.get(Entrée-1).placeStudent(EleveSelected);
                 if(err==0){
                     NonAffectedList.remove(EleveSelected);
+                    SortieMenu = true;
                 }
             } else {
                 SortieMenu = true;
@@ -209,13 +186,73 @@ public class Game {
         }
     }
 
-}
+}//menu pour le jour et la nuit
 
+    public void MenuGQ(Scanner clavier){
+        boolean SortieMenu=false;
+        int Entrée;
+        while(!SortieMenu){
+            System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
+            Entrée=clavier.nextInt();
+            if(Entrée==5){
+                SortieMenu=true;
+            }
+            else if(Entrée ==4){
+                this.MenuPole(clavier);
+            }else if(Entrée == 3){ // inventaire
+                while(Entrée!=7) {
+                    QG.inventaire();
+                    Entrée = clavier.nextInt();
+                }
+            }else if(Entrée == 2){ //shop
+                while(Entrée!=7) {
+                    QG.shop();
+                    System.out.println("Argent disponible : " + player.getArgent());
+                    Entrée = clavier.nextInt();
+                    QG.shopAction(Entrée, player);
+                }
+            }else if (Entrée == 1){ // liste
+                player.displayListEleve();
+            }
+        }
+    }//menu pour le QG
 
+    public void MenuPole(Scanner clavier){
+        boolean SortieMenu=false;
+        int Entrée;
 
-
-
-
+        while(!SortieMenu) {
+            int i=0;
+            System.out.println("1.Voir les poles");
+            System.out.println("2.Créer un pole");
+            System.out.println("3.Gérer les poles");
+            Entrée = clavier.nextInt();
+            if (Entrée==1){
+                this.getPlayer().displayPole();
+            }//affichage pole
+            else if(Entrée==2){
+                System.out.println("Choisissez le pole à créer :");
+                ArrayList<Pole> ToCreat=new ArrayList<>();
+                for(Pole P:this.getPlayer().getPoles()) {
+                    if (!P.isCreated()) {
+                        System.out.println(i+". "+P.getName());
+                        ToCreat.add(P);
+                        i++;
+                    }
+                }
+                Entrée=clavier.nextInt();
+                if(Entrée<=ToCreat.size()){
+                    ToCreat.get(Entrée-1).enable();
+                }
+            }//création de pole
+            else if (Entrée==3){
+                System.out.println("quel pole voulez vous modifier :");
+                this.getPlayer().displayPole();
+                Entrée = clavier.nextInt();
+                System.out.println();
+            }
+        }
+    }
 
 
 
