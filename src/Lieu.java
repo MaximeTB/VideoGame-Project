@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Lieu {
     private String name;
     private String type;        //J pour les lieux du jour et N ceux de la nuit
-    private ArrayList<Eleve> ElevePresents;
+    private ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
     private String effect;
     private Boolean available=true;
@@ -19,6 +19,7 @@ public class Lieu {
     public Lieu(String name, Boolean available, String type){
         this.name = name;
         this.available = available;
+        this.type = type;
         this.capMax = 100;
     }
 
@@ -33,7 +34,9 @@ public class Lieu {
     public String getname() {
         return name;
     }
-
+    public String getType() {
+        return type;
+    }
     public ArrayList<String> getNameElevePresents() {
         ArrayList<String> EleveDansLieu = new ArrayList<String>();
         for (Eleve i : ElevePresents){
@@ -41,11 +44,9 @@ public class Lieu {
         }
         return EleveDansLieu;
     }
-
     public ArrayList<Eleve> getElevePresents() {
         return ElevePresents;
     }
-
     public int getCapMax() {
         return capMax;
     }
@@ -84,46 +85,45 @@ public class Lieu {
 
     //Methodes
 
-    public void ChangeState(){}
-    public void desactivate(){
-        this.available=false;
-    }
-    public void activate(){
-        this.available=true;
-    }
+    public void ChangeState(){this.available= !available;}
 
-    public void placeStudent(Eleve e){
+    public int placeStudent(Eleve e){
         if(available){
             if(this.ElevePresents.size()<capMax){
                 this.ElevePresents.add(e);
-                e.setLocation(this);
-                System.out.println(e.getName() + " placé dans " + this.name + " (0/" + (capMax-ElevePresents.size()) + ")");
+                e.setLocation(this, this.type);
+                System.out.println(e.getName() + " placé dans " + this.name + " ("+ElevePresents.size()+"/" + capMax + ")");
             }
             else{
                 System.out.println("Cet endroit est déja plein !");
+                return -1;
             }
         }else{
-            System.out.println("Placement impossible pour le moment");
+            System.out.println("Lieu indisponible pour le moment");
+            return -2;
         }
+        return 0;
     }
 
-    public void changeStat(Player list){
+    public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
-        if (Nb!=0){
+        if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
             list.setArgent(list.getArgent()+this.EOM*Nb);
             list.setPopularite(list.getPopularite()+this.EOP*Nb);
             list.setAdmin(list.getAdmin()+this.EOA*Nb);
             list.setPV(list.getPV()+this.EOPV*Nb);
             list.setCohesion(list.getCohesion()+this.EOC*Nb);
 
-            for(Eleve E:ElevePresents){
-                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2)));
+            for(Eleve E:ElevePresents){    //bonus individuels des lieux sur les élèves
+                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
                 E.setTired(E.getTired()+this.EOT);
             }
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 

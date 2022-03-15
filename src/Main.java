@@ -31,7 +31,7 @@ public class Main extends Application {
         Scanner clavier =new Scanner(System.in);
         Game game = new Game();
         int k;
-        for(k=1;k<=1;k++){
+        for(k=1;k<=10;k++){
             game.Tour(clavier);
 
         }
