@@ -5,16 +5,15 @@ public class Lieu {
     private String type;        //J pour les lieux du jour et N ceux de la nuit
     private ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
-    private String effect;
     private Boolean available=true;
-    private int EOP; //effect on pop
-    private int EOM; //effect on money
-    private int EOT; //effect on tired
-    private int EOS; //effect on studies
-    private int EOA; //effect on admin
-    private int EOC; //effect on cohesion
-    private int EOPV; //effect on PV
-    private int isAMPH; //effet specifique a l'amphi
+    private int EOP=0; //effect on pop
+    private int EOM=0; //effect on money
+    private int EOT=0; //effect on tired
+    private int EOS=0; //effect on studies
+    private int EOA=0; //effect on admin
+    private int EOC=0; //effect on cohesion
+    private int EOPV=0; //effect on PV
+    private int isAMPH=0; //effet specifique a l'amphi
 
     public Lieu(String name, Boolean available, String type){
         this.name = name;
@@ -123,7 +122,18 @@ public class Lieu {
 
     @Override
     public String toString() {
-        return name;
+        return "\nNom: " +name+"\n"
+                + "Type: " + this.type +"\n"
+                +"Disponible: "+this.available+"\n"
+                +"Amphi: " + this.isAMPH+"\n"
+                +"Capacité Maximum :" + this.capMax+"\n"
+                +"Effet sur la population: "+this.EOP+"\n"
+                +"Effet sur l'argent: "+this.EOM+"\n"
+                +"Effet sur la fatigue: " +this.EOT+"\n"
+                +"Effet sur les Etudes: "+ this.EOS+"\n"
+                +"Effet sur l'Administration: "+ this.EOA+"\n"
+                +"Effet sur la Cohésion: "+ this.EOC+"\n"
+                +"Effet sur les Points de Victoire: "+this.EOPV+"\n";
     }
 }
 
