@@ -24,12 +24,18 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception{
 
         primaryStage.setTitle("ENSEA");
-        Group root = new Group();
-        QG scene = new QG(root, 600, 400);
+        Group rootQG = new Group();
+        Group rootShop = new Group();
+        QG qg = new QG(rootQG, 600, 400);
+        Shop shop = new Shop(rootShop, 600, 400);
 
 
-        primaryStage.setScene(scene);
+        primaryStage.setScene(qg);
+        qg.getButtonShop().setOnAction((e -> primaryStage.setScene(shop)));
+
+
         primaryStage.show();
+
 
     }
 
