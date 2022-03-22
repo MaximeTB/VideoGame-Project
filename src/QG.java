@@ -19,7 +19,7 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
         super(parent, width, height);
         listeJoueurs = new Player(); // mal geré (revoir méthodo de Liste.java)
 
-        background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
+        background = new StaticThing(0,353,0,345, 0, "out/production/VideoGame-Project/mapQg.png");
         buttonList = new Button();
         buttonList.setLayoutX(360);
         buttonList.setLayoutY(0);

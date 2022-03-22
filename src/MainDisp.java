@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
             primaryStage.setTitle("ENSEA");
             Group root = new Group();
-            QG scene = new QG(root, 600, 400);
+            Map scene = new Map(root, 0);
 
 
             primaryStage.setScene(scene);
