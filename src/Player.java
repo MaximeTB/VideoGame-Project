@@ -35,7 +35,7 @@ public class Player {
         for(int i=0;i<nb;i++){
             Eleve e = new Eleve();
             choice.add(e);
-            System.out.println(e);
+            System.out.println(i+1+". "+e);
         }
         System.out.println("Choisissez un élève");
         String answer = scan.nextLine();
@@ -71,6 +71,15 @@ public class Player {
     }
     public ArrayList<Pole> getPoles() {
         return poles;
+    }
+    public ArrayList<Pole> getPolesDisp(){
+        ArrayList<Pole> PoleDisp = new ArrayList<>();
+        for(Pole P : poles){
+            if(P.isCreated()){
+                PoleDisp.add(P);
+            }
+        }
+        return PoleDisp;
     }
     //Fin Getters
 
@@ -156,11 +165,18 @@ public class Player {
     }
     public void displayPole(){
         for(Pole p : poles){
-            p.displayPole();
-            //System.out.println(" ");
+            if(p.isCreated()){
+                p.displayPole();
+            }
         }
     }
-
+    public void displayPoleName(){
+        for(Pole p : poles){
+            if(p.isCreated()){
+                System.out.println(p.getName());
+            }
+        }
+    }
     public void generateList(int upperBound){
         int temp2 = 1;
         for (int i = 0 ; i < upperBound; i++) {

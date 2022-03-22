@@ -54,6 +54,11 @@ public class PoolOfLocation {
         }
     }
 
+
+    public ArrayList<Lieu> getLocationList() {
+        return LocationList;
+    }
+
     @Override
     public String toString() {
         return "PoolOfEvent{" +

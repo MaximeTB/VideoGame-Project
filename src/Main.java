@@ -8,8 +8,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Main extends Application {
 
+
+//extend application pour le javafx
+/*
+ATTENTION !!
+
+pour ceux qui font du javafx faite attention quand vous changez le main a ce qu'on puisse toujours
+compiler le reste sans problème svp
+*/
+
+public class Main {
+/*
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -21,12 +31,12 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-    }
+    }*/
 
-    static ArrayList<Eleve> Test= new ArrayList();
+    //static ArrayList<Eleve> Test= new ArrayList();
 
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
 
         Scanner clavier =new Scanner(System.in);
         Game game = new Game();
