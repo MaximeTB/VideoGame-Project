@@ -72,6 +72,15 @@ public class Player {
     public ArrayList<Pole> getPoles() {
         return poles;
     }
+    public ArrayList<Pole> getPolesDisp(){
+        ArrayList<Pole> PoleDisp = new ArrayList<>();
+        for(Pole P : poles){
+            if(P.isCreated()){
+                PoleDisp.add(P);
+            }
+        }
+        return PoleDisp;
+    }
     //Fin Getters
 
 //Les Setters

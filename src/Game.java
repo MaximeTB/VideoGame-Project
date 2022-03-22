@@ -14,6 +14,7 @@ public class Game {
         this.player = new Player("BDMichelle","Michelle");
         //test console on fout de l'argent tour 1
         player.setArgent(100);
+        player.setPopularite(30);
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
         this.ListLieux = new ArrayList<Lieu>();
@@ -115,7 +116,7 @@ public class Game {
         ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
 
         while(!FinTour){
-            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
+            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
                 this.Menu(DayNonAffectedList,clavier,"J");
@@ -149,9 +150,9 @@ public class Game {
         int k;
         while(!SortieMenu){
             if (moment.equals("J")) {
-                System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+                System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
             }else if(moment.equals("N")){
-                System.out.println("C'est la nuit lol\n");
+                System.out.println("C'est la nuit lol");
             }
             for(k=0;k<NonAffectedList.size();k++){
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
@@ -195,7 +196,7 @@ public class Game {
         boolean SortieMenu=false;
         int Entrée;
         while(!SortieMenu){
-            System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
+            System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1. Liste\n2. Magasin\n3. Inventaire\n4. gestion des pôles\n5.Revenir au Menu Principal");
             Entrée=clavier.nextInt();
             if(Entrée==5){
                 SortieMenu=true;
@@ -226,10 +227,7 @@ public class Game {
 
         while(!SortieMenu) {
             int i=1;
-            System.out.println("1. Voir les poles");
-            System.out.println("2. Créer un pole");
-            System.out.println("3. Gérer les poles");
-            System.out.println("4. Annuler");
+            System.out.println("1. Voir les poles\n2. Créer un pole\n3. Gérer les poles\n4. Annuler");
             Entrée = clavier.nextInt();
             if (Entrée==1){
                 this.getPlayer().displayPole();
@@ -249,23 +247,8 @@ public class Game {
                     ToCreat.get(Entrée-1).enable();
                 }
             }//création de pole
-            else if (Entrée==3){
-                System.out.println("quel pole voulez vous modifier :");
-                //this.getPlayer().displayPoleName();
-                //Entrée = clavier.nextInt();
-                ArrayList<Pole> ToEdit=new ArrayList<>();
-                for(Pole P:this.getPlayer().getPoles()) {
-                    if (P.isCreated()) {
-                        System.out.println(i+". "+P.getName());
-                        ToEdit.add(P);
-                        i++;
-                    }
-                }
-                Entrée=clavier.nextInt();
-                if(Entrée<=ToEdit.size()){
-                    this.editPole(ToEdit.get(Entrée-1), clavier);
-                }
-                System.out.println();
+            else if (Entrée==3) {
+                editPole(clavier);
             }
             else{
                 SortieMenu=true;
@@ -273,9 +256,34 @@ public class Game {
         }
     }
 
-    public void editPole(Pole P, Scanner clavier){
+    public void editPole(Scanner clavier){
+        int Entrée;
+        int i =1;
+        ArrayList<Eleve> EleveSansPole=new ArrayList<>();
+        Eleve ToPlace;
+        System.out.println("1. Placer un élève\n2. Changer un élève de pole\n3. Quitter");
+        Entrée=clavier.nextInt();
+        if(Entrée==1){
+            for(Eleve e : this.getPlayer().getListeEleve()){
+                if(e.getPole()==null){
+                    System.out.println(i+". "+e);
+                    EleveSansPole.add(e);
+                }
+            }
+            Entrée=clavier.nextInt();
+            ToPlace=EleveSansPole.get(Entrée-1);
+            System.out.println("Ou voulez vous le placer ?");
+            //this.getPlayer().displayPoleName();
+            i=1;
+            for(Pole P : this.getPlayer().getPolesDisp()){
+                System.out.println(i+". "+P.getName());
+                i++;
+            }
+            Entrée=clavier.nextInt();
+            this.getPlayer().getPolesDisp().get(Entrée-1).addMember(ToPlace);
+            System.out.println(ToPlace.getName()+" a été placé dans "+this.getPlayer().getPolesDisp().get(Entrée-1).getName());
+        }
 
-        System.out.println("j ai modifie le pole "+ P.getName());
     }
 
 
