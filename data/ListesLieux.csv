@@ -1,12 +1,13 @@
-Activit√© Associative;true;J;3
-La Rue;true;J;
-Amphi;true;J;
-Salle de TP;false;J;
-Bureau de l'administration;true;J;1
-GrassMatDuBranlos;true;J;
-Soir√©e;true;N;
-Petit boulot;true;N;
-Petit boulot moins l√©gal;false;N;
-Vente de cookies;false;N;
-Centre doc;true;N;
-Repos;true;N;
+Lieu;Disponible;Type;isAmphi;EOP;EOM;EOT;EOS;EOA;EOC;EOPV;CapacitÇ Max
+Activite Associative;true;J;0;0;0;0;0;0;0;0;3
+La Rue;true;J;0;2;0;0;0;0;0;0;
+Amphi;true;J;1;0;0;0;2;0;0;0;
+Salle de TP;false;J;0;0;0;0;1;0;0;0;
+Bureau de l'administration;true;J;0;0;0;0;0;1;0;0;1
+GrassMatDuBranlos;true;J;0;0;0;-1;0;0;0;0;
+Soiree;true;N;0;5;0;1;0;0;0;0;
+Petit boulot;true;N;0;0;10;1;0;0;0;0;
+Petit boulot moins lÇgal;false;N;0;0;50;1;0;-1;0;0;
+Vente de cookies;false;N;0;0;25;1;0;0;0;0;
+Centre doc;true;N;0;0;0;-1;1;0;0;0;
+Repos;true;N;0;0;0;-1;0;0;0;0;
