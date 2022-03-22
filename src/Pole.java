@@ -94,7 +94,7 @@ public class Pole {
     }
 
     public void displayPole(){
-        System.out.println(name+"\n"+level);
+        System.out.println(name+" (niveau "+level+")");
         for(Eleve e : Member){
             System.out.println(e.getName());
         }

@@ -133,7 +133,6 @@ public class Game {
         System.out.println("Fin du Tour \n\n");
     }
 
-
     public void NewTour(){
         this.NbTour+=1;
         for(Lieu L : ListLieux){
@@ -222,10 +221,11 @@ public class Game {
         int Entrée;
 
         while(!SortieMenu) {
-            int i=0;
-            System.out.println("1.Voir les poles");
-            System.out.println("2.Créer un pole");
-            System.out.println("3.Gérer les poles");
+            int i=1;
+            System.out.println("1. Voir les poles");
+            System.out.println("2. Créer un pole");
+            System.out.println("3. Gérer les poles");
+            System.out.println("4. Annuler");
             Entrée = clavier.nextInt();
             if (Entrée==1){
                 this.getPlayer().displayPole();
@@ -247,11 +247,31 @@ public class Game {
             }//création de pole
             else if (Entrée==3){
                 System.out.println("quel pole voulez vous modifier :");
-                this.getPlayer().displayPole();
-                Entrée = clavier.nextInt();
+                //this.getPlayer().displayPoleName();
+                //Entrée = clavier.nextInt();
+                ArrayList<Pole> ToEdit=new ArrayList<>();
+                for(Pole P:this.getPlayer().getPoles()) {
+                    if (P.isCreated()) {
+                        System.out.println(i+". "+P.getName());
+                        ToEdit.add(P);
+                        i++;
+                    }
+                }
+                Entrée=clavier.nextInt();
+                if(Entrée<=ToEdit.size()){
+                    this.editPole(ToEdit.get(Entrée-1), clavier);
+                }
                 System.out.println();
             }
+            else{
+                SortieMenu=true;
+            }
         }
+    }
+
+    public void editPole(Pole P, Scanner clavier){
+
+        System.out.println("j ai modifie le pole "+ P.getName());
     }
 
 
@@ -261,23 +281,18 @@ public class Game {
     public int getNbTour() {
         return NbTour;
     }
-
     public PoolOfEvent getPool() {
         return pool;
     }
-
     public PoolOfEvent getDayPool() {
         return DayPool;
     }
-
     public PoolOfEvent getNightPool() {
         return NightPool;
     }
-
     public ArrayList<Lieu> getListLieux() {
         return ListLieux;
     }
-
     public Player getPlayer() {
         return player;
     }
