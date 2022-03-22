@@ -37,31 +37,31 @@ public class Game {
 
         //initialisation temporaire des lieux
         //jour
-        Lieu Assoce = new Lieu("activité associative", true, "J",3);
-        ListLieux.add(Assoce);
-        Lieu Rue = new Lieu("La Rue", true, "J");
-        ListLieux.add(Rue);Rue.setEOP(2);
-        Lieu Amphi = new Lieu("Amphi", true, "J");
-        ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
-        Lieu TP = new Lieu("Salle de TP", false, "J");
-        ListLieux.add(TP);TP.setEOS(1);
-        Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
-        ListLieux.add(Admin);Admin.setEOA(1);
-        Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
-        ListLieux.add(GrassMat);GrassMat.setEOT(-1);
+        //Lieu Assoce = new Lieu("activité associative", true, "J",3);
+        //ListLieux.add(Assoce);
+        //Lieu Rue = new Lieu("La Rue", true, "J");
+        //ListLieux.add(Rue);Rue.setEOP(2);
+        //Lieu Amphi = new Lieu("Amphi", true, "J");
+        //ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
+        //Lieu TP = new Lieu("Salle de TP", false, "J");
+        //ListLieux.add(TP);TP.setEOS(1);
+        //Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
+        //ListLieux.add(Admin);Admin.setEOA(1);
+        //Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
+        //ListLieux.add(GrassMat);GrassMat.setEOT(-1);
         //nuit
-        Lieu Soire = new Lieu("Soirée", true, "N");
-        ListLieux.add(Soire);Soire.setEOT(1);Soire.setEOP(5);
-        Lieu Argent1 = new Lieu("petit boulot", true, "N");
-        ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
-        Lieu Argent2 = new Lieu("petit boulot moins légal", false, "N");
-        ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
-        Lieu Argent3 = new Lieu("vente de cookies", false, "N");
-        ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
-        Lieu Revision = new Lieu("Centre doc", true, "N");
-        ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
-        Lieu Repos = new Lieu("Repos", true, "N");
-        ListLieux.add(Repos);Repos.setEOT(-1);
+        //Lieu Soiree = new Lieu("Soirée", true, "N");
+        //ListLieux.add(Soiree);Soiree.setEOT(1);Soiree.setEOP(5);
+        //Lieu Argent1 = new Lieu("Petit boulot", true, "N");
+        //ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
+        //Lieu Argent2 = new Lieu("Petit boulot moins légal", false, "N");
+        //ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
+        //Lieu Argent3 = new Lieu("Vente de cookies", false, "N");
+        //ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
+        //Lieu Revision = new Lieu("Centre doc", true, "N");
+        //ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
+        //Lieu Repos = new Lieu("Repos", true, "N");
+        //ListLieux.add(Repos);Repos.setEOT(-1);
     }
 
     public void Tour(Scanner clavier){
@@ -148,7 +148,11 @@ public class Game {
         Eleve EleveSelected;
         int k;
         while(!SortieMenu){
-            System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+            if (moment.equals("J")) {
+                System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+            }else if(moment.equals("N")){
+                System.out.println("C'est la nuit lol\n");
+            }
             for(k=0;k<NonAffectedList.size();k++){
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
             }
