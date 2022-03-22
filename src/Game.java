@@ -37,31 +37,31 @@ public class Game {
 
         //initialisation temporaire des lieux
         //jour
-        Lieu Assoce = new Lieu("activité associative", true, "J",3);
-        ListLieux.add(Assoce);
-        Lieu Rue = new Lieu("La Rue", true, "J");
-        ListLieux.add(Rue);Rue.setEOP(2);
-        Lieu Amphi = new Lieu("Amphi", true, "J");
-        ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
-        Lieu TP = new Lieu("Salle de TP", false, "J");
-        ListLieux.add(TP);TP.setEOS(1);
-        Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
-        ListLieux.add(Admin);Admin.setEOA(1);
-        Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
-        ListLieux.add(GrassMat);GrassMat.setEOT(-1);
+        //Lieu Assoce = new Lieu("activité associative", true, "J",3);
+        //ListLieux.add(Assoce);
+        //Lieu Rue = new Lieu("La Rue", true, "J");
+        //ListLieux.add(Rue);Rue.setEOP(2);
+        //Lieu Amphi = new Lieu("Amphi", true, "J");
+        //ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
+        //Lieu TP = new Lieu("Salle de TP", false, "J");
+        //ListLieux.add(TP);TP.setEOS(1);
+        //Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
+        //ListLieux.add(Admin);Admin.setEOA(1);
+        //Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
+        //ListLieux.add(GrassMat);GrassMat.setEOT(-1);
         //nuit
-        Lieu Soire = new Lieu("Soirée", true, "N");
-        ListLieux.add(Soire);Soire.setEOT(1);Soire.setEOP(5);
-        Lieu Argent1 = new Lieu("petit boulot", true, "N");
-        ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
-        Lieu Argent2 = new Lieu("petit boulot moins légal", false, "N");
-        ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
-        Lieu Argent3 = new Lieu("vente de cookies", false, "N");
-        ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
-        Lieu Revision = new Lieu("Centre doc", true, "N");
-        ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
-        Lieu Repos = new Lieu("Repos", true, "N");
-        ListLieux.add(Repos);Repos.setEOT(-1);
+        //Lieu Soiree = new Lieu("Soirée", true, "N");
+        //ListLieux.add(Soiree);Soiree.setEOT(1);Soiree.setEOP(5);
+        //Lieu Argent1 = new Lieu("Petit boulot", true, "N");
+        //ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
+        //Lieu Argent2 = new Lieu("Petit boulot moins légal", false, "N");
+        //ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
+        //Lieu Argent3 = new Lieu("Vente de cookies", false, "N");
+        //ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
+        //Lieu Revision = new Lieu("Centre doc", true, "N");
+        //ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
+        //Lieu Repos = new Lieu("Repos", true, "N");
+        //ListLieux.add(Repos);Repos.setEOT(-1);
     }
 
     public void Tour(Scanner clavier){
@@ -120,38 +120,14 @@ public class Game {
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour 2.Nuit 3.QG 4.Fin du Tour");
             Entrée=clavier.nextInt();
             if(Entrée==1){
-                this.MenuJour(DayNonAffectedList,clavier,"J");
+                this.Menu(DayNonAffectedList,clavier,"J");
             }else if (Entrée==2){
-                this.MenuJour(NightNonAffectedList,clavier,"N");
+                this.Menu(NightNonAffectedList,clavier,"N");
             }else if(Entrée==3){
-                while(!SortieMenu){
-                    System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
-                    Entrée=clavier.nextInt();
-                    if(Entrée==5){
-                        SortieMenu=true;
-                    }
-                    else if(Entrée ==4){
-                        System.out.println("gérer les poles WIP");
-                    }else if(Entrée == 3){ // inventaire
-                        while(Entrée!=7) {
-                            QG.inventaire();
-                            Entrée = clavier.nextInt();
-                        }
-                    }else if(Entrée == 2){ //shop
-                        while(Entrée!=7) {
-                            QG.shop();
-                            System.out.println("Argent disponible : " + player.getArgent());
-                            Entrée = clavier.nextInt();
-                            QG.shopAction(Entrée, player);
-                        }
-                    }else if (Entrée == 1){ // liste
-                        player.displayListEleve();
-                    }
-                }
+                this.MenuGQ(clavier);
             } else if(Entrée==4){
                 FinTour=true;
             }
-            SortieMenu=false;
         }
 
         this.NewTour();
@@ -169,13 +145,17 @@ public class Game {
 
 //Gestion des Menu
 
-    public void MenuJour(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
+    public void Menu(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
         boolean SortieMenu=false;
         int Entrée;
         Eleve EleveSelected;
         int k;
         while(!SortieMenu){
-            System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+            if (moment.equals("J")) {
+                System.out.println("Une journée sans gueule de bois est une journée à rentabiliser , choisis un Elève :\n");//\n1.Option 1  2.Option 2  3.Revenir au Menu Principal");
+            }else if(moment.equals("N")){
+                System.out.println("C'est la nuit lol\n");
+            }
             for(k=0;k<NonAffectedList.size();k++){
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
             }
@@ -190,20 +170,21 @@ public class Game {
             EleveSelected=NonAffectedList.get(Entrée-1);
 
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
-            int i=1;
-            int diff=0;
-            for(k = 0; k < this.ListLieux.size(); ++k) {
-                if(ListLieux.get(k).getType().equals(moment)){
-                    System.out.println(i + "." + ListLieux.get(k));
-                    diff=i-k;
+            int i=0;
+            ArrayList<Lieu> LieuDisp=new ArrayList<>();
+            for(Lieu L : ListLieux) {
+                if(L.getType().equals(moment)){
+                    System.out.println(i+1 + "." + L.getname());
+                    LieuDisp.add(L);
                     i++;
                 }
             }
             Entrée=clavier.nextInt();
-            if(Entrée<=i-1){
-                int err = ListLieux.get(Entrée-diff).placeStudent(EleveSelected);
+            if(Entrée<=LieuDisp.size()){
+                int err = LieuDisp.get(Entrée-1).placeStudent(EleveSelected);
                 if(err==0){
                     NonAffectedList.remove(EleveSelected);
+                    SortieMenu = true;
                 }
             } else {
                 SortieMenu = true;
@@ -211,13 +192,73 @@ public class Game {
         }
     }
 
-}
+}//menu pour le jour et la nuit
 
+    public void MenuGQ(Scanner clavier){
+        boolean SortieMenu=false;
+        int Entrée;
+        while(!SortieMenu){
+            System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1.Liste 2.Magasin  3. Inventaire 4. gestion des pôles 5.Revenir au Menu Principal");
+            Entrée=clavier.nextInt();
+            if(Entrée==5){
+                SortieMenu=true;
+            }
+            else if(Entrée ==4){
+                this.MenuPole(clavier);
+            }else if(Entrée == 3){ // inventaire
+                while(Entrée!=7) {
+                    QG.inventaire();
+                    Entrée = clavier.nextInt();
+                }
+            }else if(Entrée == 2){ //shop
+                while(Entrée!=7) {
+                    QG.shop();
+                    System.out.println("Argent disponible : " + player.getArgent());
+                    Entrée = clavier.nextInt();
+                    QG.shopAction(Entrée, player);
+                }
+            }else if (Entrée == 1){ // liste
+                player.displayListEleve();
+            }
+        }
+    }//menu pour le QG
 
+    public void MenuPole(Scanner clavier){
+        boolean SortieMenu=false;
+        int Entrée;
 
-
-
-
+        while(!SortieMenu) {
+            int i=0;
+            System.out.println("1.Voir les poles");
+            System.out.println("2.Créer un pole");
+            System.out.println("3.Gérer les poles");
+            Entrée = clavier.nextInt();
+            if (Entrée==1){
+                this.getPlayer().displayPole();
+            }//affichage pole
+            else if(Entrée==2){
+                System.out.println("Choisissez le pole à créer :");
+                ArrayList<Pole> ToCreat=new ArrayList<>();
+                for(Pole P:this.getPlayer().getPoles()) {
+                    if (!P.isCreated()) {
+                        System.out.println(i+". "+P.getName());
+                        ToCreat.add(P);
+                        i++;
+                    }
+                }
+                Entrée=clavier.nextInt();
+                if(Entrée<=ToCreat.size()){
+                    ToCreat.get(Entrée-1).enable();
+                }
+            }//création de pole
+            else if (Entrée==3){
+                System.out.println("quel pole voulez vous modifier :");
+                this.getPlayer().displayPole();
+                Entrée = clavier.nextInt();
+                System.out.println();
+            }
+        }
+    }
 
 
 

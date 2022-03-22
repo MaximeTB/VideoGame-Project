@@ -20,12 +20,12 @@ public class Player {
         cohesion=10;
         popularite=0;
         PV=0;
-        poles.add(new Pole("Bureau","gris"));
-        poles.add(new Pole("Pole soirée","noir"));
-        poles.add(new Pole("Pole animation","rouge","bleu"));
-        poles.add(new Pole("Pole communication","vert"));
-        poles.add(new Pole("Pole partenariat","gris"));
-        poles.add(new Pole("Pole bouffe","orange"));
+        poles.add(new Pole("Bureau","gris",true));
+        poles.add(new Pole("Pole soirée","noir",false));
+        poles.add(new Pole("Pole animation","rouge","bleu",false));
+        poles.add(new Pole("Pole communication","vert",false));
+        poles.add(new Pole("Pole partenariat","gris", false));
+        poles.add(new Pole("Pole bouffe","orange",false));
         poles.get(0).addMember(President);
     }
 
@@ -39,38 +39,42 @@ public class Player {
         }
         System.out.println("Choisissez un élève");
         String answer = scan.nextLine();
-        Integer intAnswer = Integer.parseInt(answer);
+        Integer intAnswer = Integer.parseInt(answer)-1;
         if(intAnswer<nb){
             this.addEleve(choice.get(intAnswer));
+            this.setCohesion(this.getCohesion()-choice.get(intAnswer).getCost());
             System.out.println("vous avez recruté :" + choice.get(intAnswer));
         }
     }
 
-    //Les Getters
-        public Integer getAdmin () {
+//Les Getters
+    public Integer getAdmin () {
         return admin;
     }
-        public Integer getArgent () {
+    public Integer getArgent () {
         return argent;
     }
-        public Integer getPopularite () {
+    public Integer getPopularite () {
         return popularite;
     }
-        public String getName () {
+    public String getName () {
         return name;
     }
-        public ArrayList<Eleve> getListeEleve () {
+    public ArrayList<Eleve> getListeEleve () {
         return ListeEleve;
     }
-        public Integer getPV () {
+    public Integer getPV () {
         return PV;
     }
-        public Integer getCohesion () {
+    public Integer getCohesion () {
         return cohesion;
+    }
+    public ArrayList<Pole> getPoles() {
+        return poles;
     }
     //Fin Getters
 
-    //Les Setters
+//Les Setters
     public void setArgent(Integer argent) {
         this.argent = argent;
     }
