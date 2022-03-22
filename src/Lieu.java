@@ -49,7 +49,12 @@ public class Lieu {
     public int getCapMax() {
         return capMax;
     }
-
+    public int getEOM() {
+        return EOM;
+    }
+    public int getEOS() {
+        return EOS;
+    }
     //Setters
 
     public void setName(String name) {
@@ -80,9 +85,11 @@ public class Lieu {
         this.EOPV = EOPV;
     }
     public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
 
-
-    //Methodes
+//Methodes
 
     public void ChangeState(){this.available= !available;}
 

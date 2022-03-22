@@ -19,7 +19,7 @@ public class PoolOfEvent {
             while(s!=null){
                 s=s.replaceAll("\"","");
                 String fields[]=s.split(";");
-                this.eventList.add(new Evenement(fields[0],Integer.parseInt(fields[1]),fields[2]));
+                //this.eventList.add(new Evenement(fields[0],Integer.parseInt(fields[1]),fields[2]));
 
                 int nbEffet = Integer.parseInt(fields[3]);
                 for (int i=0;i<nbEffet;i++)

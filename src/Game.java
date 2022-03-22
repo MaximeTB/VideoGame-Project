@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Game {
     private int NbTour;
+    private final int MaxTour=45;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
     private QGconsole QG;
@@ -52,16 +53,18 @@ public class Game {
                 +"\nPV :"+this.getPlayer().getPV().toString());
         System.out.println("Début du Tours :");
 
-        if(this.getNbTour()%2==0){
+        //effet de début de tours
+        if(getNbTour()>MaxTour){
+           DébutSemaineListe();
+        }//début de semaine de liste
+        if(getNbTour()%2==0 || getNbTour()<MaxTour){
             for(Eleve e : player.getListeEleve()){
                 e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
             }
         }//perte de niveau d'étude tout les 2 tours
-
-        if(this.getNbTour()%3==0) {
+        if(getNbTour()%3==0) {
             System.out.println("event");
         }//gestion des events
-
         if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
             Entrée = clavier.nextInt();
@@ -88,7 +91,9 @@ public class Game {
             ListLieux.get(4).ChangeState();
 
         }
+        //fin effet de début de tours
 
+        //initialisation des listes d'élèves dont l'action n'a pas été choisie
         ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
         ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
 
@@ -263,6 +268,33 @@ public class Game {
 
     }
 
+    //Partie semaine de liste
+
+    public void DébutSemaineListe(){
+        //1 : le Cs
+        int NbRatrapage=0;
+        int NbBonEleves=0;
+        for (Eleve e : getPlayer().getListeEleve()){
+            if(e.getStudies()<10){
+                NbRatrapage++;
+            }
+            else if(e.getStudies()>15){
+                NbBonEleves++;
+            }
+        }
+        this.getPlayer().setAdmin(getPlayer().getAdmin()-NbRatrapage%2+NbBonEleves%2);
+        if(getPlayer().getAdmin()<0){
+            System.out.println("Dans la mesure ou trop d'élève n'ont pas leur année, l'administration a jugé que vous ne devriez peut être pas devenir BDE...");
+            //défaite
+        }
+        //2 : fin des études, désactivation des lieux
+        for(Lieu L : getListLieux()){
+            if(L.getEOM()!=0 || L.getEOS()!=0){
+                L.setAvailable(false);
+            }
+        }
+
+    }//lance la semaine de liste
 
 
 
