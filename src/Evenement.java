@@ -15,7 +15,7 @@ public abstract class Evenement{
     protected int EOPV=0; //effect on PV
 
 
-
+//constructeur
     public Evenement(String Name,int niveau,String Type){
         this.Name=Name;
         this.niveau=niveau;
@@ -41,28 +41,7 @@ public abstract class Evenement{
         return Type;
     }
 
-   /* public void ApplyEvent(Game game){
-        if(this.getType().equals("G")){
-            //ajouter tout les EO stats de la liste ainsi que les lieux
-            //modifier ou arreter l'effet après X tours
-            //ajouter la gestion des condition ( a faire en dernier. au pires ces event sont pas nombreux donc on les enlèvera juste)
-            //
-        }
-        else{
-            Lieu event = new Lieu(this.Name, true, this.getType());
-            event.setEOP(this.EOP);
-            event.setEOP(this.EOM);
-            event.setEOP(this.EOT);
-            event.setEOP(this.EOS);
-            event.setEOP(this.EOA);
-            event.setEOP(this.EOC);
-            event.setEOP(this.EOPV);
-
-            //modifier les EO en fonction des mot-clé des élèves présents
-            //désactiver le lieu après X tours
-            game.getListLieux().add(event);
-        }
-    }*/
+//abstract methode
     public abstract void  applyEvent(Game game);
 
 

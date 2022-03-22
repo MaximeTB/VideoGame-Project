@@ -55,7 +55,7 @@ public class Game {
 
         //effet de début de tours
         if(getNbTour()>MaxTour){
-           DébutSemaineListe();
+           DebutSemaineListe();
         }//début de semaine de liste
         if(getNbTour()%2==0 || getNbTour()<MaxTour){
             for(Eleve e : player.getListeEleve()){
@@ -270,7 +270,7 @@ public class Game {
 
     //Partie semaine de liste
 
-    public void DébutSemaineListe(){
+    public void DebutSemaineListe(){
         //1 : le Cs
         int NbRatrapage=0;
         int NbBonEleves=0;
