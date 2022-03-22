@@ -38,6 +38,7 @@ public class Pole {
 
     public void addMember(Eleve e){
         Member.add(e);
+        e.setPole(this);
     }
     public void removeMember(Eleve e){Member.remove(e);}
     public void gainXP(int xp){
@@ -94,7 +95,7 @@ public class Pole {
     }
 
     public void displayPole(){
-        System.out.println(name+"\n"+level);
+        System.out.println(name+" (niveau "+level+")");
         for(Eleve e : Member){
             System.out.println(e.getName());
         }

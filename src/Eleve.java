@@ -8,6 +8,7 @@ public class Eleve implements Comparable {
     private Integer cost;
     private ArrayList<Skills> skillsList=new ArrayList<>(3);
     private Lieu locationJ,locationN;
+    private Pole pole;
 
 
 
@@ -32,6 +33,9 @@ public class Eleve implements Comparable {
     public Lieu getLocationN() {
         return locationN;
     }
+    public Pole getPole() {
+        return pole;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -50,6 +54,7 @@ public class Eleve implements Comparable {
             this.locationJ = location;
         }else{this.locationN=location;}
     }
+    public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des élèves, pas cette méthode.
 
     public Eleve(){
         name = "Pierre";
