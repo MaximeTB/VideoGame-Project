@@ -1,4 +1,4 @@
-Lieu;Disponible;Type;isAmphi;EOP;EOM;EOT;EOS;EOA;EOC;EOPV;Capacit‚ Max
+Lieu;Disponible;Type;isAmphi;EOP;EOM;EOT;EOS;EOA;EOC;EOPV;Capacite Max
 Activite Associative;true;J;0;0;0;0;0;0;0;0;3
 La Rue;true;J;0;2;0;0;0;0;0;0;
 Amphi;true;J;1;0;0;0;2;0;0;0;
@@ -7,7 +7,7 @@ Bureau de l'administration;true;J;0;0;0;0;0;1;0;0;1
 GrassMatDuBranlos;true;J;0;0;0;-1;0;0;0;0;
 Soiree;true;N;0;5;0;1;0;0;0;0;
 Petit boulot;true;N;0;0;10;1;0;0;0;0;
-Petit boulot moins l‚gal;false;N;0;0;50;1;0;-1;0;0;
+Petit boulot moins legal;false;N;0;0;50;1;0;-1;0;0;
 Vente de cookies;false;N;0;0;25;1;0;0;0;0;
 Centre doc;true;N;0;0;0;-1;1;0;0;0;
 Repos;true;N;0;0;0;-1;0;0;0;0;
