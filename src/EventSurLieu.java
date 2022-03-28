@@ -1,6 +1,6 @@
-public class Soiree extends Evenement{
+public class EventSurLieu extends Evenement{
 
-    public Soiree(String Name, int niveau) {
+    public EventSurLieu(String Name, int niveau) {
         super(Name, niveau, "N");
     }
 
