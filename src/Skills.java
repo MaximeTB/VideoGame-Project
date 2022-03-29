@@ -1,20 +1,17 @@
-public class Skills {
+public abstract class Skills {
     int indexColor;
     String color;
     int indexName;
     String name;
-    int niveau;
+    int niveau; //sera probablement pas utilisé, manque de temps
     int Exp;
 
     public Skills(int indexC, int indexN){
-        this.indexColor = indexC;
-        setColor(indexColor);
-        this.indexName = indexN;
-        setName(indexColor, indexName);
+        setRandomColor(indexC);
+        setRandomName(indexC, indexN);
     }
 
-
-    public void setColor(int index) {
+    public void setRandomColor(int index) {
         switch (index) {
             case 0 -> this.color = "Gris";
             case 1 -> this.color = "Bleu";
@@ -25,7 +22,7 @@ public class Skills {
         }
     }
 
-    public void setName(int color, int index){
+    public void setRandomName(int color, int index){
         switch(color){
             case 0 : //gris
                 switch(index){
@@ -78,20 +75,19 @@ public class Skills {
         }
     }
 
+    public String getColor() {
+        return color;
+    }
     public String getName(){
         return this.name;
     }
 
     // fait correspondre l'effet au skill
-    public void getEffect(){
-    }
+    abstract void ApplySkillEffect(Eleve E, Player list);
 
     @Override
     public String toString() {
         return  name  ;
     }
 
-    public String getColor() {
-        return color;
-    }
 }

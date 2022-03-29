@@ -85,7 +85,7 @@ public class Eleve implements Comparable {
     }
 
     public void AddRandomSkill(){
-        this.skillsList.add(new Skills(new Random().nextInt(5), 1+new Random().nextInt(3)));
+        this.skillsList.add(new SkillsSurLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
     public void silliker(Player liste){

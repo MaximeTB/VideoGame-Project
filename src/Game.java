@@ -56,6 +56,9 @@ public class Game {
 
         //effet de début de tours
 
+        for(Lieu L : ListLieux){
+            L.ReductionDuree();
+        }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
         if(getNbTour()>MaxTour){
            DebutSemaineListe();
         }//début de semaine de liste

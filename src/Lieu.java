@@ -6,11 +6,8 @@ public class Lieu {
     private String type;        //J pour les lieux du jour et N ceux de la nuit
     private ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
+    private int Duree;
     private Boolean available=true;
-
-    private String motCle="rien"; //mot cle qui applique un modificateur à ce lieu
-    private ArrayList<String> modifType; //donne la grandeure affecte (pop, argent, etude...)
-    private ArrayList<Integer> modifValue; //donne la valeur du bonus/malus confere par le mot cle correspondant
 
     private int EOP=0; //effect on pop
     private int EOM=0; //effect on money
@@ -26,6 +23,7 @@ public class Lieu {
         this.available = available;
         this.type = type;
         this.capMax = 100;
+        this.Duree = 100;
     }
 
     public Lieu(String name, Boolean available, String type, int capMax){
@@ -60,6 +58,21 @@ public class Lieu {
     }
     public int getEOS() {
         return EOS;
+    }
+    public int getEOP() {
+        return EOP;
+    }
+    public int getEOT() {
+        return EOT;
+    }
+    public int getEOA() {
+        return EOA;
+    }
+    public int getEOC() {
+        return EOC;
+    }
+    public int getEOPV() {
+        return EOPV;
     }
     //Setters
 
@@ -96,6 +109,15 @@ public class Lieu {
     }
 
 //Methodes
+    public void ReductionDuree(){
+        this.Duree--;
+        if(Duree<=0){
+            this.setAvailable(false);
+            Duree=0;
+        }
+
+
+    }
 
     public void ChangeState(){this.available= !available;}
 
@@ -119,26 +141,26 @@ public class Lieu {
 
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
+        //int NbSpe=0; //nombre d eleve ayant un modificateur sur ce lieu
         if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
 
             for(Eleve E:ElevePresents) {    //bonus individuels des lieux sur les élèves
-                for (int i = 0; i < E.getSkillsList().size(); i++){
+                /*for (int i = 0; i < E.getSkillsList().size(); i++){
                     if(E.getSkillsList().get(i).getName().equals(motCle)){
-
+                        NbSpe++;
                     }
+                }*/
+                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
+                E.setTired(E.getTired()+this.EOT);
+                list.setArgent(list.getArgent()+this.EOM);
+                list.setPopularite(list.getPopularite()+this.EOP);
+                list.setAdmin(list.getAdmin()+this.EOA);
+                list.setPV(list.getPV()+this.EOPV);
+                list.setCohesion(list.getCohesion()+this.EOC);
+                for(Skills S : E.getSkillsList()){
+                    S.ApplySkillEffect(E, list);
                 }
-                    E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
-                    E.setTired(E.getTired()+this.EOT);
             }
-
-
-            list.setArgent(list.getArgent()+this.EOM*Nb);
-            list.setPopularite(list.getPopularite()+this.EOP*Nb);
-            list.setAdmin(list.getAdmin()+this.EOA*Nb);
-            list.setPV(list.getPV()+this.EOPV*Nb);
-            list.setCohesion(list.getCohesion()+this.EOC*Nb);
-
-
         }
     }
 
