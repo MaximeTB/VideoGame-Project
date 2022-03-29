@@ -287,12 +287,13 @@ public class Game {
             System.out.println("Dans la mesure ou trop d'élève n'ont pas leur année, l'administration a jugé que vous ne devriez peut être pas devenir BDE...");
             //défaite
         }
-        //2 : fin des études, désactivation des lieux
+        //2 : fin des études, désactivation des lieux et créer les nouveau
         for(Lieu L : getListLieux()){
             if(L.getEOM()!=0 || L.getEOS()!=0){
                 L.setAvailable(false);
             }
         }
+        getListLieux().add(new Lieu("Faire des crêpes",true,"J", 5));
 
     }//lance la semaine de liste
 
