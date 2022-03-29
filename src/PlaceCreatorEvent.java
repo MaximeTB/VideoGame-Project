@@ -20,9 +20,14 @@ public class PlaceCreatorEvent extends Evenement {
 
     @Override
     public void applyEvent(Game game){
+        Lieu lieu;
         if (this.capMax==0){
-        game.getListLieux().add(new Lieu(this.getName(),true,this.getType()));
+            lieu=new Lieu(this.getName(),true,this.getType());
+        }else{
+            lieu = new Lieu(this.getName(),true,this.getType(),this.capMax);
         }
+        lieu.setEOP(this.EOP);lieu.setEOM(this.EOM);lieu.setEOT(this.EOT);lieu.setEOS(this.EOS);
+        lieu.setEOA(this.EOA);lieu.setEOC(this.EOC);lieu.setEOPV(this.EOPV);
+        game.getListLieux().add(lieu);
     }
-
 }
