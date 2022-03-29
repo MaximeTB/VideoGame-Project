@@ -1,5 +1,7 @@
 public class EventSurLieu extends Evenement{
+    private int Duree;
 
+    //type d'evenement qui modifie, créer ou désactive un lieu
     public EventSurLieu(String Name, int niveau) {
         super(Name, niveau, "N");
     }
@@ -17,4 +19,5 @@ public class EventSurLieu extends Evenement{
         event.setEOP(this.EOPV);
         game.getListLieux().add(event);
     }
+
 }

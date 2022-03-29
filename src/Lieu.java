@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Lieu {
@@ -6,6 +7,11 @@ public class Lieu {
     private ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
     private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
     private Boolean available=true;
+
+    private String motCle="rien"; //mot cle qui applique un modificateur à ce lieu
+    private ArrayList<String> modifType; //donne la grandeure affecte (pop, argent, etude...)
+    private ArrayList<Integer> modifValue; //donne la valeur du bonus/malus confere par le mot cle correspondant
+
     private int EOP=0; //effect on pop
     private int EOM=0; //effect on money
     private int EOT=0; //effect on tired
@@ -114,16 +120,25 @@ public class Lieu {
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
         if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
+
+            for(Eleve E:ElevePresents) {    //bonus individuels des lieux sur les élèves
+                for (int i = 0; i < E.getSkillsList().size(); i++){
+                    if(E.getSkillsList().get(i).getName().equals(motCle)){
+
+                    }
+                }
+                    E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
+                    E.setTired(E.getTired()+this.EOT);
+            }
+
+
             list.setArgent(list.getArgent()+this.EOM*Nb);
             list.setPopularite(list.getPopularite()+this.EOP*Nb);
             list.setAdmin(list.getAdmin()+this.EOA*Nb);
             list.setPV(list.getPV()+this.EOPV*Nb);
             list.setCohesion(list.getCohesion()+this.EOC*Nb);
 
-            for(Eleve E:ElevePresents){    //bonus individuels des lieux sur les élèves
-                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
-                E.setTired(E.getTired()+this.EOT);
-            }
+
         }
     }
 

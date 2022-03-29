@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Game {
     private int NbTour;
+    private int NbSemaine;
     private final int MaxTour=45;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
@@ -54,6 +55,7 @@ public class Game {
         System.out.println("Début du Tours :");
 
         //effet de début de tours
+
         if(getNbTour()>MaxTour){
            DebutSemaineListe();
         }//début de semaine de liste
@@ -89,6 +91,7 @@ public class Game {
             ListLieux.get(2).ChangeState();
             ListLieux.get(3).ChangeState();
             ListLieux.get(4).ChangeState();
+            NbSemaine++;
 
         }
         //fin effet de début de tours
