@@ -19,7 +19,6 @@ public class PoolOfLocation {
             while(s!=null) {
                 s.replaceAll("\"", "");
                 String fields[] = s.split(";");
-                //System.out.println(fields.length);
                 if (fields.length == 11) {
                     if (fields[1].equals("true")) {
                         this.LocationList.add(new Lieu(fields[0], true, fields[2]));

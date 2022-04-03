@@ -24,7 +24,7 @@ public class PoolOfEvent {
                 int nbEffet = Integer.parseInt(fields[3]);
                 for (int i=0;i<nbEffet;i++)
                 {
-                    this.eventList.get(eventList.size()-1).addEffect(new Effect(fields[4+i*2],Integer.parseInt(fields[5+i*2])));
+                    //this.eventList.get(eventList.size()-1).addEffect(new Effect(fields[4+i*2],Integer.parseInt(fields[5+i*2])));
                 }
                 this.NbEvent+=1;
                 s=buf.readLine();
