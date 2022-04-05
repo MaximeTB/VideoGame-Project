@@ -7,8 +7,8 @@ public class SkillsSurLieu extends Skills {
     ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
 
 
-    public SkillsSurLieu(int indexC, int indexN) {
-        super(indexC, indexN);
+    public SkillsSurLieu(String type,String color, String name) {
+        super(type,color,name);
     }
 
     public void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
