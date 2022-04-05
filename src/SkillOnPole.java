@@ -8,9 +8,4 @@ public class SkillOnPole extends Skills{
     void ApplySkillEffect(Eleve E, Player list) {
 
     }
-
-    @Override
-    void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
-
-    }
 }

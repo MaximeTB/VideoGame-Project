@@ -9,9 +9,4 @@ public class SkillOnRecruit extends Skills{
 
     }
 
-    @Override
-    void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
-
-    }
-
 }

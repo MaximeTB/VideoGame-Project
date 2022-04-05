@@ -162,7 +162,7 @@ public class Lieu {
                 list.setAdmin(list.getAdmin()+this.EOA);
                 list.setPV(list.getPV()+this.EOPV);
                 list.setCohesion(list.getCohesion()+this.EOC);
-                for(SkillsSurLieu S : E.getSkillsOnLieuList()){
+                for(SkillsOnLieu S : E.getSkillsOnLieuList()){
                     S.ApplySkillEffectOnLieu(E, list, this.getType());
                 }
             }

@@ -68,11 +68,11 @@ public class Eleve implements Comparable {
         return pole;
     }
     public boolean getSkipTurn(){return  skipTurn;}
-    public ArrayList<SkillsSurLieu> getSkillsOnLieuList(){
-        ArrayList<SkillsSurLieu> retour = new ArrayList<>();
+    public ArrayList<SkillsOnLieu> getSkillsOnLieuList(){
+        ArrayList<SkillsOnLieu> retour = new ArrayList<>();
         for(Skills S : skillsList){
-            if(S.getClass()==SkillsSurLieu.class){
-                retour.add((SkillsSurLieu) S);
+            if(S.getClass()==SkillsOnLieu.class){
+                retour.add((SkillsOnLieu) S);
             }
         }
         return retour;
@@ -123,7 +123,7 @@ public class Eleve implements Comparable {
 //fin setter
 
     public void AddRandomSkill(){
-        //this.skillsList.add(new SkillsSurLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
+        //this.skillsList.add(new SkillsOnLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
 
