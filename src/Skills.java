@@ -84,8 +84,7 @@ public abstract class Skills {
 
     // fait correspondre l'effet au skill
     abstract void ApplySkillEffect(Eleve E, Player list);
-
-    abstract void ApplySkillEffectOnLieu(Eleve E, Player list, String type);
+    
 
     @Override
     public String toString() {
