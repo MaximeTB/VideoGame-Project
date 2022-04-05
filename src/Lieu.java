@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Lieu {
     private String name;
@@ -17,6 +18,7 @@ public class Lieu {
     private int EOC=0; //effect on cohesion
     private int EOPV=0; //effect on PV
     private int isAMPH=0; //effet specifique a l'amphi
+    private boolean isSoiree=false; //effet specifique aux soiree, notament la gueule de bois
 
     public Lieu(String name, Boolean available, String type){
         this.name = name;
@@ -74,6 +76,9 @@ public class Lieu {
     public int getEOPV() {
         return EOPV;
     }
+    public boolean isSoiree() {
+        return isSoiree;
+    }
     //Setters
 
     public void setName(String name) {
@@ -104,6 +109,7 @@ public class Lieu {
         this.EOPV = EOPV;
     }
     public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
+    public void setIsSoiree(boolean isSoiree){this.isSoiree = isSoiree;}
     public void setAvailable(Boolean available) {
         this.available = available;
     }
@@ -141,15 +147,14 @@ public class Lieu {
 
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
-        //int NbSpe=0; //nombre d eleve ayant un modificateur sur ce lieu
         if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
-
-            for(Eleve E:ElevePresents) {    //bonus individuels des lieux sur les élèves
+            for(Eleve E:ElevePresents) {    //bonus des lieux sur les eleves presents
                 /*for (int i = 0; i < E.getSkillsList().size(); i++){
                     if(E.getSkillsList().get(i).getName().equals(motCle)){
                         NbSpe++;
                     }
                 }*/
+                this.Hangover();
                 E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
                 E.setTired(E.getTired()+this.EOT);
                 list.setArgent(list.getArgent()+this.EOM);
@@ -158,11 +163,27 @@ public class Lieu {
                 list.setPV(list.getPV()+this.EOPV);
                 list.setCohesion(list.getCohesion()+this.EOC);
                 for(Skills S : E.getSkillsList()){
-                    S.ApplySkillEffect(E, list);
+                    S.ApplySkillEffectOnLieu(E, list, this.getType());
                 }
             }
         }
     }
+
+    public void Hangover(){
+        if(this.isSoiree()){
+            Random R = new Random();
+            for(Eleve E : this.getElevePresents()){
+                for(Skills S : E.getSkillsList()){
+                    if(S.getName().equals("Foie d'acier")){
+                        return;
+                    }
+                }
+                if(R.nextInt(100)<10+10*E.getTired()){ //plus l'eleve est fatigue, plus la gueule de bois est probable
+                    E.setSkipTurn(true);
+                }
+            }
+        }
+    }//les eleves en soiree ont une chance de passer leur prochain tour
 
     @Override
     public String toString() {

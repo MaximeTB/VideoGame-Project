@@ -9,6 +9,7 @@ public class Eleve implements Comparable {
     private ArrayList<Skills> skillsList=new ArrayList<>(3);
     private Lieu locationJ,locationN;
     private Pole pole;
+    private Boolean skipTurn=false;
 
 
 //constreucteur
@@ -58,15 +59,15 @@ public class Eleve implements Comparable {
     public ArrayList<Skills> getSkillsList(){
         return skillsList;
     }
-    public Lieu getLocationJ() {
-        return locationJ;
-    }
-    public Lieu getLocationN() {
-        return locationN;
+    public Lieu getLocation(String type){
+        if(type.equals("J")) return locationJ;
+        else if(type.equals("N"))return locationN;
+        else return null;
     }
     public Pole getPole() {
         return pole;
     }
+    public boolean getSkipTurn(){return  skipTurn;}
 //fin getter
 
     //setter
@@ -88,6 +89,7 @@ public class Eleve implements Comparable {
         }else{this.locationN=location;}
     }
     public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des élèves, pas cette méthode.
+    public void setSkipTurn(boolean skip){this.skipTurn=skip;}
 
     public void Etude(int i){
         studies+=i;

@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class SkillsSurLieu extends Skills{
+public class SkillsSurLieu extends Skills {
     ArrayList<Lieu> LieuCible = new ArrayList<>(); //liste des lieux (event inclus)
     ArrayList<String> StatCible = new ArrayList<>();
     ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
@@ -12,35 +12,42 @@ public class SkillsSurLieu extends Skills{
     }
 
     @Override
-    void ApplySkillEffect(Eleve E, Player list) {
+    public void ApplySkillEffect(Eleve E, Player list) {
+    }
+
+    @Override
+    void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
         int i;
         for(i=0; i<LieuCible.size(); i++){
-            if(LieuCible.get(i).equals(E.getLocationJ())){
+            if(LieuCible.get(i).equals(E.getLocation(type))){
                 if(StatCible.get(i).equals("argent")){
-                    list.setArgent(list.getArgent()+ValueEffet.get(i)-E.getLocationJ().getEOM());
+                    list.gainArgent(ValueEffet.get(i)-E.getLocation(type).getEOM());
                 }
                 if(StatCible.get(i).equals("popularite")){
-                    list.setPopularite(list.getPopularite()+ValueEffet.get(i)-E.getLocationJ().getEOP());
+                    list.gainPopularite(ValueEffet.get(i)-E.getLocation(type).getEOP());
                 }
                 if(StatCible.get(i).equals("admin")){
-                    list.setAdmin(list.getAdmin()+ValueEffet.get(i)-E.getLocationJ().getEOA());
+                    list.gainAdmin(ValueEffet.get(i)-E.getLocation(type).getEOA());
                 }
                 if(StatCible.get(i).equals("cohesion")){
-                    list.setCohesion(list.getCohesion()+ValueEffet.get(i)-E.getLocationJ().getEOC());
+                    list.gainCohesion(ValueEffet.get(i)-E.getLocation(type).getEOC());
                 }
                 if(StatCible.get(i).equals("PV")){
-                    list.setPV(list.getPV()+ValueEffet.get(i)-E.getLocationJ().getEOPV());
+                    list.gainPV(ValueEffet.get(i)-E.getLocation(type).getEOPV());
                 }
                 if(StatCible.get(i).equals("etude")){
-                    E.setStudies(E.getStudies()+ValueEffet.get(i)-E.getLocationJ().getEOS());
+                    E.Etude(ValueEffet.get(i)-E.getLocation(type).getEOS());
                 }
                 if(StatCible.get(i).equals("fatigue")){
-                    E.setTired(E.getTired()+ValueEffet.get(i)-E.getLocationJ().getEOT());
+                    E.Fatigue(ValueEffet.get(i)-E.getLocation(type).getEOT());
                 }
                 if(StatCible.get(i).equals("cout")){
-                    E.setCost(E.getCost()+ValueEffet.get(i)-E.getLocationJ().getEOC());
+                    E.Cout(ValueEffet.get(i)-E.getLocation(type).getEOC());
                 }
             }
         }
     }
+
+
+
 }
