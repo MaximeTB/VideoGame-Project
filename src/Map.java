@@ -18,6 +18,7 @@ public class Map extends Scene{
     private StaticThing nuit;
     private StaticThing qg;
     private static int etat=0;
+    private int numeroList;
     private Button rue = new Button("rue");
     private Button asso = new Button("asso");
     private Button admin = new Button("admin");
@@ -28,19 +29,21 @@ public class Map extends Scene{
     private ArrayList<Eleve> listearr = new ArrayList<Eleve>();
     private ArrayList<Text> listText = new ArrayList<Text>();
     private ArrayList<Button> listButton = new ArrayList<Button>();
+    private ArrayList<Eleve> listeRue = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeAsso = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeAdmin = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeAmphi = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeTd = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeGrasseMat = new ArrayList<Eleve>();
 
 
 
 
-    public Map(Group parent, int etat){
+    public Map(Group parent, int etat, ArrayList<Eleve> listeEleve){
         super(parent,1000,770);
 
+        this.listedep=listeEleve;
         //ArrayList<String> lieux = new ArrayList<String>();
-
-        listedep.add(new Eleve("Pierre"));
-        listedep.add(new Eleve("Celia"));
-
-
 
         int i=0;
         for (Eleve eleve : listedep){
@@ -77,6 +80,7 @@ public class Map extends Scene{
                 public void handle(MouseEvent event) {
                     /* drag was detected, start drag-and-drop gesture*/
                     System.out.println("onDragDetected");
+                    System.out.println("Txt "+txt +"\n" + listText );
 
                     /* allow any transfer mode */
                     Dragboard db = txt.startDragAndDrop(TransferMode.ANY);
@@ -166,6 +170,37 @@ public class Map extends Scene{
                     Dragboard db = event.getDragboard();
                     boolean success = false;
                     if (db.hasString()) {
+
+                        switch (button.getText()) {
+                            case "rue":
+                                numeroList = 0;
+                                break;
+
+                            case "asso":
+                                numeroList = 1;
+                                break;
+
+                            case "admin":
+                                numeroList = 2;
+                                break;
+
+                            case "amphi":
+                                numeroList = 3;
+                                break;
+
+                            case "td":
+                                numeroList = 4;
+                                break;
+
+                            case "grasse mat":
+                                numeroList = 5;
+                                break;
+
+                            default: numeroList=10;
+                            break;
+
+                        }
+
                         //target.setText(db.getString());
                         success = true;
                     }
@@ -184,50 +219,145 @@ public class Map extends Scene{
                 public void handle(DragEvent event) {
                     /* the drag-and-drop gesture ended */
                     System.out.println("onDragDone");
-                    listearr.add(listedep.get(listText.indexOf(txt)));
+                    System.out.println(listText.indexOf(txt));
+
+                    System.out.println(numeroList);
+
+                    switch (numeroList){
+                        case 0 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeRue.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(350);
+                                    txt.setY(530 + 10 * listeRue.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                        numeroList=10;
+                        break;
+
+                        case 1 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeAsso.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(700);
+                                    txt.setY(230 + 10 * listeAsso.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                            numeroList=10;
+                            break;
+
+                        case 2 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeAdmin.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(150);
+                                    txt.setY(560 + 10 * listeAdmin.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                            numeroList=10;
+                            break;
+
+                        case 3 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeAmphi.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(580);
+                                    txt.setY(660 + 10 * listeAmphi.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                            numeroList=10;
+                            break;
+
+                        case 4 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeTd.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(730);
+                                    txt.setY(590 + 10 * listeTd.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                            numeroList=10;
+                            break;
+
+                        case 5 :
+                            if (listText.indexOf(txt)!=-1) {
+                                listeGrasseMat.add(listedep.get(listText.indexOf(txt)));
+
+                                if (event.getTransferMode() == TransferMode.MOVE) {
+                                    txt.setScaleX(0.5);
+                                    txt.setScaleY(0.5);
+                                    txt.setX(50);
+                                    txt.setY(80 + 10 * listeGrasseMat.size());
+                                    listedep.remove(listedep.get(listText.indexOf(txt)));
+                                    listText.remove(txt);
+
+                                }
+                            }
+                            numeroList=10;
+                            break;
+
+                        default:
+                            break;
+
+
+                    }
+
+                    System.out.println("txt" + listText);
+
+                    //listearr.add(listedep.get(listText.indexOf(txt)));
                     //listedep.remove(0);
 
-                    System.out.println(listearr);
+                    System.out.println("rue : "+listeRue);
+                    System.out.println("asso : "+listeAsso);
+                    System.out.println("admin : "+listeAdmin);
+                    System.out.println("amphi : "+listeAmphi);
+                    System.out.println("td : "+listeTd);
+                    System.out.println("gm : "+listeGrasseMat);
+
+
                     /* if the data was successfully moved, clear it */
-                    if (event.getTransferMode() == TransferMode.MOVE) {
+                    /*if (event.getTransferMode() == TransferMode.MOVE) {
                         txt.setScaleX(0.5);
                         txt.setScaleY(0.5);
                         txt.setY(520+10*listearr.size());
 
-                    }
+                    }*/
 
                     event.consume();
                 }
             });
         }
 
-
-/*            celia.setOnDragDone(new EventHandler <DragEvent>() {
-                public void handle(DragEvent event) {
-                    /* the drag-and-drop gesture ended */
- /*                   System.out.println("onDragDone");
-                    listearr.add("Celia");
-                    //listedep.remove(0);
-
-                    System.out.println(listearr);
-                    /* if the data was successfully moved, clear it */
- /*                   if (event.getTransferMode() == TransferMode.MOVE) {
-                        celia.setScaleX(0.5);
-                        celia.setScaleY(0.5);
-                        celia.setY(530);
-
-                    }
-
-                    event.consume();
-                }
-            });
-
-*/
-
-
- /*           root.getChildren().add(source);
-            root.getChildren().add(celia);
-*/
 
 
 

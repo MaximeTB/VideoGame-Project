@@ -20,7 +20,11 @@ import java.util.ArrayList;
 
             primaryStage.setTitle("ENSEA");
             Group root = new Group();
-            Map scene = new Map(root, 0);
+            ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
+            for(int i=0 ; i<15; i++){
+                listeEleve.add(new Eleve("Pierre"));
+            }
+            Map scene = new Map(root, 0, listeEleve);
 
 
 
