@@ -1,14 +1,13 @@
 public abstract class Skills {
-    int indexColor;
     String color;
-    int indexName;
     String name;
-    int niveau; //sera probablement pas utilisé, manque de temps
-    int Exp;
+    String type;
 
-    public Skills(int indexC, int indexN){
-        setRandomColor(indexC);
-        setRandomName(indexC, indexN);
+
+    public Skills(String type,String color, String name){
+       this.color=color;
+       this.name=name;
+       this.type=type;
     }
 
     public void setRandomColor(int index) {
@@ -22,7 +21,7 @@ public abstract class Skills {
         }
     }
 
-    public void setRandomName(int color, int index){
+    /*public void setRandomName(int color, int index){
         switch(color){
             case 0 : //gris
                 switch(index){
@@ -73,7 +72,8 @@ public abstract class Skills {
                 }
                 break;
         }
-    }
+    }*/
+
 
     public String getColor() {
         return color;
