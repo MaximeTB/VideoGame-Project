@@ -70,7 +70,7 @@ public class PoolOfLocation {
     public static void main (String[] args){
         PoolOfLocation pool = new PoolOfLocation("data/ListesLieux.csv");
         //System.out.println(pool.LocationList.get(0));
-        System.out.println(pool);
+        System.out.println(pool.getClass());
     }
 
 }

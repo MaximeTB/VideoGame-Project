@@ -1,14 +1,15 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class SkillsSurLieu extends Skills {
+public class SkillsOnLieu extends Skills {
     ArrayList<Lieu> LieuCible = new ArrayList<>(); //liste des lieux (event inclus)
     ArrayList<String> StatCible = new ArrayList<>();
     ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
 
 
-    public SkillsSurLieu(String type,String color, String name) {
+    public SkillsOnLieu(String type,String color, String name) {
         super(type,color,name);
+        this.type="SL";
     }
 
     @Override
@@ -47,7 +48,4 @@ public class SkillsSurLieu extends Skills {
             }
         }
     }
-
-
-
 }
