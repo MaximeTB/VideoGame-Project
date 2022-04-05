@@ -9,7 +9,7 @@ public class SkillsOnLieu extends Skills {
 
     public SkillsOnLieu(String type,String color, String name) {
         super(type,color,name);
-        this.type="SL";
+
     }
 
     public void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
