@@ -99,6 +99,23 @@ public class Player {
     public void setCohesion(Integer cohesion){
         this.cohesion = cohesion;
     }
+
+    public void gainArgent(int i){
+        argent+=i;
+    }
+    public void gainAdmin(int i){
+        admin+=i;
+    }
+    public void gainPopularite(int i){
+        popularite+=i;
+    }
+    public void gainPV(int i){
+        PV+=i;
+    }
+    public void gainCohesion(int i){
+        cohesion+=i;
+    }
+
     //Fin Setters
 
     public void addEleve(Eleve e){
