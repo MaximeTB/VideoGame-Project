@@ -11,12 +11,7 @@ public class SkillsSurLieu extends Skills {
         super(indexC, indexN);
     }
 
-    @Override
-    public void ApplySkillEffect(Eleve E, Player list) {
-    }
-
-    @Override
-    void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
+    public void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
         int i;
         for(i=0; i<LieuCible.size(); i++){
             if(LieuCible.get(i).equals(E.getLocation(type))){
@@ -49,5 +44,8 @@ public class SkillsSurLieu extends Skills {
     }
 
 
-
+    @Override
+    public void ApplySkillEffect(Eleve E, Player list) {
+        System.out.println("mauvaise fonction");
+    }
 }

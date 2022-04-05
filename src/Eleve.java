@@ -68,6 +68,15 @@ public class Eleve implements Comparable {
         return pole;
     }
     public boolean getSkipTurn(){return  skipTurn;}
+    public ArrayList<SkillsSurLieu> getSkillsOnLieuList(){
+        ArrayList<SkillsSurLieu> retour = new ArrayList<>();
+        for(Skills S : skillsList){
+            if(S.getClass()==SkillsSurLieu.class){
+                retour.add((SkillsSurLieu) S);
+            }
+        }
+        return retour;
+    }
 //fin getter
 
     //setter
