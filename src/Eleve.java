@@ -11,50 +11,7 @@ public class Eleve implements Comparable {
     private Pole pole;
 
 
-
-    public Integer getStudies() {
-        return studies;
-    }
-    public Integer getTired() {
-        return tired;
-    }
-    public Integer getCost() {
-        return cost;
-    }
-    public String getName() {
-        return name;
-    }
-    public ArrayList<Skills> getSkillsList(){
-        return skillsList;
-    }
-    public Lieu getLocationJ() {
-        return locationJ;
-    }
-    public Lieu getLocationN() {
-        return locationN;
-    }
-    public Pole getPole() {
-        return pole;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setStudies(Integer studies) {
-        this.studies = studies;
-    }
-    public void setTired(Integer tired) {
-        this.tired = tired;
-    }
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
-    public void setLocation(Lieu location, String moment) {
-        if(moment.equals("J")){
-            this.locationJ = location;
-        }else{this.locationN=location;}
-    }
-    public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des élèves, pas cette méthode.
+//constreucteur
 
     public Eleve(){
         name = "Pierre";
@@ -84,23 +41,82 @@ public class Eleve implements Comparable {
         this.name=name;
     }
 
+
+    //getter
+    public Integer getStudies() {
+        return studies;
+    }
+    public Integer getTired() {
+        return tired;
+    }
+    public Integer getCost() {
+        return cost;
+    }
+    public String getName() {
+        return name;
+    }
+    public ArrayList<Skills> getSkillsList(){
+        return skillsList;
+    }
+    public Lieu getLocationJ() {
+        return locationJ;
+    }
+    public Lieu getLocationN() {
+        return locationN;
+    }
+    public Pole getPole() {
+        return pole;
+    }
+//fin getter
+
+    //setter
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setStudies(Integer studies) {
+        this.studies = studies;
+    }
+    public void setTired(Integer tired) {
+        this.tired = tired;
+    }
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+    public void setLocation(Lieu location, String moment) {
+        if(moment.equals("J")){
+            this.locationJ = location;
+        }else{this.locationN=location;}
+    }
+    public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des élèves, pas cette méthode.
+
+    public void Etude(int i){
+        studies+=i;
+        if(studies>20){
+            studies=20;
+        }
+        else if(studies<0){
+            studies=0;
+        }
+    }
+    public void Fatigue(int i){
+        tired+=i;
+        if (tired<0){
+            tired=0;
+        }
+    }
+    public void Cout(int i){
+        studies+=i;
+    }
+
+
+//fin setter
+
     public void AddRandomSkill(){
         this.skillsList.add(new SkillsSurLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
     }
 
-    public void silliker(Player liste){
-        liste.setArgent(liste.getArgent()+20);
-    }
 
-    public void studying(){
-        studies+=10;
-        studies=studies>100 ? 100 : studies;
-    }
 
-    public void soiree(Player Player){
-        tired+=10;
-        Player.setPopularite(Player.getPopularite()+10);
-    }
 
     @Override
     public String toString() {

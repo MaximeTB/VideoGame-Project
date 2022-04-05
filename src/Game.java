@@ -16,7 +16,6 @@ public class Game {
         this.player = new Player("BDMichelle","Michelle");
         //test console on fout de l'argent tour 1
         player.setArgent(100);
-        player.setPopularite(30);
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
         this.ListLieux = new ArrayList<Lieu>();
