@@ -1,6 +1,8 @@
 public class Bureau extends Pole{
     private Eleve prez, trez, secr;
 
+//le trésorier génère plus d'argent, le prez plus de pop/pv, le secrétaire + de cohesion
+    //créer une méthode pour chacun
 
     public Bureau(String name, String color1, Eleve prez){
         super(name, color1,true);
@@ -34,7 +36,7 @@ public class Bureau extends Pole{
         return trez;
     }
 
-    public Eleve findRole(String role){
+    public Eleve findEleve(String role){
         if(role.equals("Trésorier")){
             return trez;
         }
@@ -51,11 +53,29 @@ public class Bureau extends Pole{
 
     }
 
+    public String findRole(Eleve E){
+        if(E.equals(trez)){
+            return "Trésorier";
+        }
+        else if(E.equals(prez)){
+            return "Président";
+        }
+        else if(E.equals(secr)){
+            return "Secrétaire";
+        }
+        else{
+            System.out.println("cet élève n'est aps au bureau");
+            return null;
+        }
+    }
+
 
     public void addMember(Eleve E, String role) {
         this.addMember(E);
         //tester si jamais le role n a pas encore ete attribue
-        this.removeMember(this.findRole(role));
+        this.removeMember(this.findEleve(role));
         this.giveRole(role, E);
     }
+
+
 }

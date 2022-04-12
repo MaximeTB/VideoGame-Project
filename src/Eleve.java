@@ -142,7 +142,15 @@ public class Eleve implements Comparable {
         return  skill;
     }//a changer asbolument !!!!  dans tout les cas, la méthode doit renvoyer le skill qui a été donné
 
-
+    public String TestBureau(){
+        Pole P=this.getPole();
+        if(P.getClass()==Bureau.class){
+            return ((Bureau) P).findRole(this);
+        }
+        else{
+            return null;
+        }
+    }//si l'élève est dans le bureau renvois son role, sinon, renvois null
 
 
     @Override
