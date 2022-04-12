@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class SkillOnOthers extends SkillsOnLieu{
 
-    public SkillOnOthers(String type, String color, String name) {
-        super(type, color, name);
+    public SkillOnOthers(String type, String color, String name, ArrayList<Lieu> LieuCible, ArrayList<String> StatCible, ArrayList<Integer> ValueEffet) {
+        super(type, color, name,LieuCible,StatCible,ValueEffet);
     }
 
 

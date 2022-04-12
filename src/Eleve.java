@@ -10,12 +10,13 @@ public class Eleve implements Comparable {
     private Lieu locationJ,locationN;
     private Pole pole;
     private Boolean skipTurn=false;
+    private static PoolOfName Names=new PoolOfName("data/prenom.csv");
 
 
 //constreucteur
 
     public Eleve(){
-        name = "Pierre";
+        name = Names.RandomName();
         Random r1 = new Random();
         studies =  (int) (r1.nextGaussian()*1.2 + 6);   //on génère le niveau d'étude et le cout aléatoirement
         tired = 0;
@@ -157,5 +158,12 @@ public class Eleve implements Comparable {
     public int compareTo(Object o) {
         int compareCost = ((Eleve)o).getCost();
         return this.cost-compareCost;
+    }
+
+    public static void main(String[] arg){
+        int i;
+        for(i=0;i<15;i++){
+            System.out.println(new Eleve());
+        }
     }
 }

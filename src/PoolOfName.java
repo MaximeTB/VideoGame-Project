@@ -1,12 +1,15 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 //Source de la liste de nom : https://www.data.gouv.fr/fr/datasets/liste-de-prenoms-et-patronymes/
 
 public class PoolOfName {
     private ArrayList<String> list;
+    private Random rand=new Random();
+    private String name;
 
     public PoolOfName(String filename){
         this.list=new ArrayList<String>();
@@ -27,10 +30,24 @@ public class PoolOfName {
         }
     }
 
+    public String RandomName(){
+        name=this.getList().get(rand.nextInt(this.getList().size()));
+        this.getList().remove(name);
+        return name;
+    }
+
+    public ArrayList<String> getList() {
+        return list;
+    }
 
     public static void main (String[] args){
+        String name;
+        int i;
         PoolOfName names = new PoolOfName("data/prenom.csv");
-        System.out.println(names.list);
+        for (i=0;i<100;i++){
+            name = names.RandomName();
+            System.out.println(name);
+        }
     }
 }
 
