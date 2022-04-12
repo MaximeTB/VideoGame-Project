@@ -8,6 +8,7 @@ public class Game {
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
     private QGconsole QG;
+    private Evenement CurrentEvent;
     private ArrayList<Lieu> ListLieux;
 
     public Game() {
@@ -323,6 +324,7 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
+    public Evenement getCurrentEvent(){return CurrentEvent;}
 //
 
     public boolean FinTour(String entrée){

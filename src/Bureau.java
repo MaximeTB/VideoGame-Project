@@ -72,9 +72,11 @@ public class Bureau extends Pole{
 
     public void addMember(Eleve E, String role) {
         this.addMember(E);
-        //tester si jamais le role n a pas encore ete attribue
-        this.removeMember(this.findEleve(role));
+        if(findEleve(role)!=null){
+            this.removeMember(this.findEleve(role));
+        }
         this.giveRole(role, E);
+
     }
 
 

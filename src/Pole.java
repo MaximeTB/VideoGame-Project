@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Pole {
     private String name;
     ArrayList<Eleve> Member=new ArrayList<Eleve>();
-    private int XP=0;
+    private float XP=0;
     private int level=1;
     private boolean created; //true si le pole est déja crée, false sinon. toujour true pour le bureau
     private String color1, color2;
@@ -42,7 +42,7 @@ public class Pole {
         return 0;
     }
     public void removeMember(Eleve e){Member.remove(e);}
-    public void gainXP(int xp){
+    public void gainXP(float xp){
         this.XP+=xp;
         if(XP>=(this.level*2)*RequiredXp){
             this.level++;
@@ -52,17 +52,29 @@ public class Pole {
         this.created=true;
     }
 
-    public void meeting(){
-        int bonus=0;
+    public void meeting(Player list){
+        float bonusTot=0;
+        float multiplicateur=1;
         for (Eleve eleve : Member){
-            bonus++;
+            int bonusEleve=1;
             for (Skills skill : eleve.getSkillsList()){
                 if (skill.getColor().equals(color1) || skill.getColor().equals(color2)){
-                    bonus++;
+                    bonusEleve++;
                 }
+                multiplicateur*=((SkillOnPole)skill).ApplyEffectOnXP(this,list);
             }
+            bonusTot+=bonusEleve;
         }
-        this.gainXP(1+bonus);
+
+        Eleve E =((Bureau)list.getPoles().get(0)).findEleve("Secrétaire");
+        if(E !=null)
+            for (Skills S : E.getSkillsList()){
+                if(S.getName().equals("manageur"))
+                    multiplicateur*=1.1;
+            }//si le secrétaire est manageur, +10% à tout les pole
+
+        bonusTot*=multiplicateur;
+        this.gainXP(1+bonusTot);
     }//chaque élève rapporte 1Xp, doublé pour les élèves de la bonne couleur
 
 
