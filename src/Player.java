@@ -20,7 +20,7 @@ public class Player {
         cohesion=10;
         popularite=0;
         PV=0;
-        poles.add(new Pole("Bureau","gris",true));
+        poles.add(new Bureau("Bureau","gris", President));
         poles.add(new Pole("Pole soirée","noir",false));
         poles.add(new Pole("Pole animation","rouge","bleu",false));
         poles.add(new Pole("Pole communication","vert",false));

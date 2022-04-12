@@ -2,9 +2,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SkillsOnLieu extends Skills {
-    ArrayList<Lieu> LieuCible = new ArrayList<>(); //liste des lieux (event inclus)
-    ArrayList<String> StatCible = new ArrayList<>();
-    ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
+    private ArrayList<Lieu> LieuCible = new ArrayList<>(); //liste des lieux (event inclus)
+    private ArrayList<String> StatCible = new ArrayList<>();
+    private ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
 
 
     public SkillsOnLieu(String type,String color, String name,ArrayList<Lieu> LieuCible,ArrayList<String> StatCible,ArrayList<Integer> ValueEffet) {

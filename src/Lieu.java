@@ -3,21 +3,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Lieu {
-    private String name;
-    private String type;        //J pour les lieux du jour et N ceux de la nuit
-    private ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
-    private int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
-    private int Duree;
-    private Boolean available=true;
+    protected String name;
+    protected String type;        //J pour les lieux du jour et N ceux de la nuit
+    protected ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
+    protected int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
+    protected int Duree;
+    protected Boolean available=true;
 
-    private int EOP=0; //effect on pop
-    private int EOM=0; //effect on money
-    private int EOT=0; //effect on tired
-    private int EOS=0; //effect on studies
-    private int EOA=0; //effect on admin
-    private int EOC=0; //effect on cohesion
-    private int EOPV=0; //effect on PV
-    private int isAMPH=0; //effet specifique a l'amphi
+    protected int EOP=0; //effect on pop
+    protected int EOM=0; //effect on money
+    protected int EOT=0; //effect on tired
+    protected int EOS=0; //effect on studies
+    protected int EOA=0; //effect on admin
+    protected int EOC=0; //effect on cohesion
+    protected int EOPV=0; //effect on PV
+    protected int isAMPH=0; //effet specifique a l'amphi
     private boolean isSoiree=false; //effet specifique aux soiree, notament la gueule de bois
 
     public Lieu(String name, Boolean available, String type){
@@ -121,12 +121,8 @@ public class Lieu {
             this.setAvailable(false);
             Duree=0;
         }
-
-
     }
-
     public void ChangeState(){this.available= !available;}
-
     public int placeStudent(Eleve e){
         if(available){
             if(this.ElevePresents.size()<capMax){
@@ -143,7 +139,7 @@ public class Lieu {
             return -2;
         }
         return 0;
-    }
+    }//renvois un int qui indique si l'élève a pu être placé ou pas
 
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
@@ -154,7 +150,6 @@ public class Lieu {
                         NbSpe++;
                     }
                 }*/
-                this.Hangover();
                 E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
                 E.setTired(E.getTired()+this.EOT);
                 list.setArgent(list.getArgent()+this.EOM);
@@ -169,21 +164,9 @@ public class Lieu {
         }
     }
 
-    public void Hangover(){
-        if(this.isSoiree()){
-            Random R = new Random();
-            for(Eleve E : this.getElevePresents()){
-                for(Skills S : E.getSkillsList()){
-                    if(S.getName().equals("Foie d'acier")){
-                        return;
-                    }
-                }
-                if(R.nextInt(100)<10+10*E.getTired()){ //plus l'eleve est fatigue, plus la gueule de bois est probable
-                    E.setSkipTurn(true);
-                }
-            }
-        }
-    }//les eleves en soiree ont une chance de passer leur prochain tour
+    public void ActiviteAssociative(){
+
+    }
 
     @Override
     public String toString() {

@@ -12,6 +12,8 @@ public class Eleve implements Comparable {
     private Boolean skipTurn=false;
     private static PoolOfName Names=new PoolOfName("data/prenom.csv");
 
+    private ArrayList<Skills> TEMPORAIREskills=new ArrayList<>();
+
 
 //constreucteur
 
@@ -127,15 +129,17 @@ public class Eleve implements Comparable {
         }
     }
     public void Cout(int i){
-        studies+=i;
+        cost+=i;
     }
 
 
 //fin setter
 
-    public void AddRandomSkill(){
+    public Skills AddRandomSkill(){
         //this.skillsList.add(new SkillsOnLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
-    }
+        SkillOnRecruit TEST = new SkillOnRecruit("lieu","bleu","test");
+        return (Skills) TEST;
+    }//a changer asbolument !!!!  dans tout les cas, la méthode doit renvoyer le skill qui a été donné
 
 
 
