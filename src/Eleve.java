@@ -17,7 +17,7 @@ public class Eleve implements Comparable {
 
 //constreucteur
 
-    public Eleve(){
+    public Eleve(PoolsOfSkills pool){
         name = Names.RandomName();
         Random r1 = new Random();
         studies =  (int) (r1.nextGaussian()*1.2 + 6);   //on génère le niveau d'étude et le cout aléatoirement
@@ -31,19 +31,19 @@ public class Eleve implements Comparable {
                 cost=0;
             }
         }
-        this.AddRandomSkill();                          //on donne plus de skills au eleves les plus cher
+        this.AddRandomSkill(pool);                          //on donne plus de skills au eleves les plus cher
         if (cost >1){
-            this.AddRandomSkill();
+            this.AddRandomSkill(pool);
         }
         if (cost >2){
-            this.AddRandomSkill();
+            this.AddRandomSkill(pool);
         }
     }
 
-    public  Eleve(String name){
+    /*  Eleve(String name){
         this();
         this.name=name;
-    }
+    }*/
 
 
     //getter
@@ -135,10 +135,11 @@ public class Eleve implements Comparable {
 
 //fin setter
 
-    public Skills AddRandomSkill(){
-        //this.skillsList.add(new SkillsOnLieu(new Random().nextInt(5), 1+new Random().nextInt(3)));
-        SkillOnRecruit TEST = new SkillOnRecruit("lieu","bleu","test");
-        return (Skills) TEST;
+    public Skills AddRandomSkill(PoolsOfSkills pool){
+        Skills skill;
+        skill= pool.RandomSkill();
+        this.getSkillsList().add(skill);
+        return  skill;
     }//a changer asbolument !!!!  dans tout les cas, la méthode doit renvoyer le skill qui a été donné
 
 
@@ -166,8 +167,9 @@ public class Eleve implements Comparable {
 
     public static void main(String[] arg){
         int i;
+        //PoolsOfSkills skills = new PoolsOfSkills()
         for(i=0;i<15;i++){
-            System.out.println(new Eleve());
+            //System.out.println(new Eleve());
         }
     }
 }
