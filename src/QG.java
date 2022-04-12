@@ -9,70 +9,59 @@ import javafx.stage.Stage;
 public class QG extends Scene implements EventHandler<ActionEvent> {
     int width;
     int height;
-    Player listeJoueurs;
+    Player player;
 
     private StaticThing background;
     private StaticThing money;
-    private Button buttonPoles;
-    private Button buttonList;
-    private Button buttonShop;
-    private Button buttonInventory;
-    private Button buttonExit;
+    private ImageButton buttonPoles;
+    private ImageButton buttonShop;
+    private ImageButton buttonInventory;
+    private ImageButton buttonExit;
 
     public Button getButtonShop(){
         return buttonShop;
     }
+    public Button getButtonInventory() { return buttonInventory; }
 
     public QG(Group parent, int width, int height){
         super(parent, width, height);
-        listeJoueurs = new Player(); // mal geré (revoir méthodo de Liste.java)
+        player = new Player(); // mal geré (revoir méthodo de Liste.java)
 
-        background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
+        //background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
 
-        buttonPoles = new Button();
-        buttonPoles.setLayoutX(360);
-        buttonPoles.setLayoutY(0);
-        buttonPoles.setText("Gestion des pôles");
+        background = new StaticThing(0, 600, 0, 400, 0, "QG.jpg");
 
-        buttonList = new Button();
-        buttonList.setLayoutX(360);
-        buttonList.setLayoutY(100);
-        buttonList.setText("Liste");
 
-        buttonShop = new Button();
-        buttonShop.setLayoutX(360);
-        buttonShop.setLayoutY(150);
-        buttonShop.setText("Magasin");
+        buttonPoles = new ImageButton();
+        buttonPoles.updateImages(player, "Poles", "polesIcon.jpg", "soldoutIcon.jpg");
+        buttonPoles.displayButton(1, 1, 120);
+        buttonPoles.hoverButton("  Gestion des pôles ", "    Gère ta bande de bras cassés    ", 0, "", "QG");
 
-        buttonInventory = new Button();
-        buttonInventory.setLayoutX(360);
-        buttonInventory.setLayoutY(200);
-        buttonInventory.setText("Inventaire");
+        buttonShop = new ImageButton();
+        buttonShop.updateImages(player, "Shop", "shopIcon.png", "soldoutIcon.jpg");
+        buttonShop.displayButton(2, 1, 120);
+        buttonShop.hoverButton("  Magasin ", "    L'argent c'est fait pour être dépensé    ", 0, "", "QG");
 
-        buttonExit = new Button();
-        buttonExit.setLayoutX(360);
-        buttonExit.setLayoutY(250);
-        buttonExit.setText("Quitter le QG");
+        buttonInventory = new ImageButton();
+        buttonInventory.updateImages(player, "Inventory", "bagIcon.png", "soldoutIcon.jpg");
+        buttonInventory.displayButton(3, 1, 120);
+        buttonInventory.hoverButton("  Inventaire ", "    Gère ta bande de bras cassés    ", 0, "", "QG");
 
-        buttonList.setOnAction(this);
-       // buttonShop.setOnAction(this);
+
+        buttonExit = new ImageButton();
+        buttonExit.setButtonExit(110);
+
         buttonExit.setOnAction(this);
-        buttonInventory.setOnAction(this);
         buttonPoles.setOnAction(this);
 
         parent.getChildren().add(background.getImg());
-        parent.getChildren().add(buttonList);
-        parent.getChildren().add(buttonShop);
-        parent.getChildren().add(buttonExit);
-        parent.getChildren().add(buttonPoles);
-        parent.getChildren().add(buttonInventory);
-
+        parent.getChildren().addAll(buttonShop, buttonPoles, buttonInventory, buttonExit);
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == buttonList) {
-            listeJoueurs.generateList(20);
+        if (actionEvent.getSource() == buttonPoles) {
+            player.generateList(20);
         }else if (actionEvent.getSource() == buttonShop){
             // image du magasin
         }else if (actionEvent.getSource() == buttonExit){
