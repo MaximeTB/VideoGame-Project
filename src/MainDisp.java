@@ -24,7 +24,7 @@ import java.util.ArrayList;
             for(int i=0 ; i<15; i++){
                 listeEleve.add(new Eleve("Pierre"));
             }
-            Map scene = new Map(root, 0, listeEleve);
+            Map scene = new Map(root, listeEleve);
 
 
 
