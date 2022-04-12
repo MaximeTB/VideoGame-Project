@@ -9,7 +9,7 @@ public class StaticThing {
 
 
     public StaticThing(double debutX,double finX,double debutY,double finY,double offset, String fileName){
-        Image background = new Image("file:"+fileName);   // ouverture du fichier image
+        Image background = new Image(fileName);   // ouverture du fichier image
         img = new ImageView(background);    // création de l'ImageView
         img.setViewport(new Rectangle2D(debutX,debutY,finX,finY));  // définition du rectangle à afficher
         img.setX(offset);           // affichage à l'offset choisi

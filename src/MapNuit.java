@@ -295,7 +295,7 @@ public class MapNuit extends Scene {
 
 
 
-        nuit = new StaticThing(0,5000,0,2000,0,"out/production/VideoGame-Project/mapNuit.JPG");
+        nuit = new StaticThing(0,5000,0,2000,0,"mapNuit.JPG");
         parent.getChildren().add(nuit.getImg());
 
         parent.getChildren().add(soiree);
