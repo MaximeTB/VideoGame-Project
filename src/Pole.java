@@ -59,11 +59,10 @@ public class Pole {
                 if (skill.getColor().equals(color1) || skill.getColor().equals(color2)){
                     bonus++;
                 }
-
             }
         }
         this.gainXP(1+bonus);
-    }
+    }//chaque élève rapporte 1Xp, doublé pour les élèves de la bonne couleur
 
 
 

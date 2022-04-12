@@ -77,6 +77,16 @@ public class Eleve implements Comparable {
         }
         return retour;
     }
+    public ArrayList<SkillOnRecruit> getSkillsOnRecruitList(){
+        ArrayList<SkillOnRecruit> retour = new ArrayList<>();
+        for(Skills S : skillsList){
+            if(S.getClass()==SkillOnRecruit.class){
+                retour.add((SkillOnRecruit) S);
+            }
+        }
+        return retour;
+    }
+
 //fin getter
 
     //setter

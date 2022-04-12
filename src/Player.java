@@ -41,8 +41,12 @@ public class Player {
         String answer = scan.nextLine();
         Integer intAnswer = Integer.parseInt(answer)-1;
         if(intAnswer<nb){
-            this.addEleve(choice.get(intAnswer));
-            this.setCohesion(this.getCohesion()-choice.get(intAnswer).getCost());
+            Eleve Recrut = choice.get(intAnswer);
+            this.addEleve(Recrut);
+            this.gainCohesion(Recrut.getCost());
+            for(SkillOnRecruit S : Recrut.getSkillsOnRecruitList()){
+                S.OnRecruit(Recrut,this);
+            } //applique tout les skills liée au recrutement de l'élève choisi
             System.out.println("vous avez recruté :" + choice.get(intAnswer));
         }
     }
