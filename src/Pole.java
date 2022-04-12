@@ -36,9 +36,10 @@ public class Pole {
     }
     public String getName(){return name;}
 
-    public void addMember(Eleve e){
+    public int addMember(Eleve e){
         Member.add(e);
         e.setPole(this);
+        return 0;
     }
     public void removeMember(Eleve e){Member.remove(e);}
     public void gainXP(int xp){
@@ -67,8 +68,8 @@ public class Pole {
 
 
 
-    public static void main(String[] args){
-        Bureau bureau = new Bureau("Bureau","Jaune");
+    /*public static void main(String[] args){
+        Bureau bureau = new Bureau("Bureau","Gris", );
 
         for(Integer i=0; i<10; i++ ){
             bureau.addMember(new Eleve());
@@ -91,7 +92,7 @@ public class Pole {
         System.out.println(bureau.getPrez());
         System.out.println(bureau.getTrez());
         System.out.println(bureau.getSecr());
-    }
+    }*/
 
     public void displayPole(){
         System.out.println(name+" (niveau "+level+")");
