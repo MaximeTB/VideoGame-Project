@@ -129,7 +129,7 @@ public class Eleve implements Comparable {
         }
     }
     public void Cout(int i){
-        studies+=i;
+        cost+=i;
     }
 
 
