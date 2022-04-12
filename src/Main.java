@@ -8,7 +8,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Main extends Application {
+
+
+//extend application pour le javafx
+/*
+ATTENTION !!
+
+pour ceux qui font du javafx faite attention quand vous changez le main a ce qu'on puisse toujours
+compiler le reste sans problème svp
+*/
+
+public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
