@@ -14,10 +14,12 @@ public class Eleve implements Comparable {
 
     private ArrayList<Skills> TEMPORAIREskills=new ArrayList<>();
 
+    private static PoolsOfSkills pool;
 
-//constreucteur
 
-    public Eleve(PoolsOfSkills pool){
+//constructeur
+
+    public Eleve(){
         name = Names.RandomName();
         Random r1 = new Random();
         studies =  (int) (r1.nextGaussian()*1.2 + 6);   //on génère le niveau d'étude et le cout aléatoirement
@@ -47,6 +49,9 @@ public class Eleve implements Comparable {
 
 
     //getter
+    public PoolsOfSkills getPool(){
+        return pool;
+    }
     public Integer getStudies() {
         return studies;
     }
