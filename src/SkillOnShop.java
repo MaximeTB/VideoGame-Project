@@ -1,12 +1,11 @@
 public class SkillOnShop extends Skills{
 
-    public SkillOnShop(String type, String color, String name) {
-        super(type, color, name);
+    public SkillOnShop( String color, String name) {
+        super( color, name);
     }
 
     @Override
     void ApplySkillEffect(Eleve E, Player list) {
-
     }
 
 

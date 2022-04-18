@@ -7,39 +7,45 @@ public class SkillsOnLieu extends Skills {
     private ArrayList<Integer> ValueEffet = new ArrayList<>(); //valeur du buff
 
 
-    public SkillsOnLieu(String type,String color, String name,ArrayList<Lieu> LieuCible,ArrayList<String> StatCible,ArrayList<Integer> ValueEffet) {
-        super(type,color,name);
+    public SkillsOnLieu(String color, String name,ArrayList<Lieu> LieuCible,ArrayList<String> StatCible,ArrayList<Integer> ValueEffet) {
+        super(color,name);
         this.LieuCible=LieuCible;
         this.StatCible=StatCible;
         this.ValueEffet=ValueEffet;
     }
 
     public void ApplySkillEffectOnLieu(Eleve E, Player list, String type) {
+        //Type pour Jour/Nuit
         int i;
-        for(i=0; i<LieuCible.size(); i++){
-            if(LieuCible.get(i).equals(E.getLocation(type))){
-                if(StatCible.get(i).equals("argent")){
+
+        for(i=0; i<this.getLieuCible().size(); i++){
+
+            if(this.getLieuCible().get(i).equals(E.getLocation(type))){
+
+                String stat = this.getStatCible().get(i);//Stat affectée par l'effect
+
+                if(stat.equals("Argent")){
                     list.gainArgent(ValueEffet.get(i)-E.getLocation(type).getEOM());
                 }
-                if(StatCible.get(i).equals("popularite")){
+                if(stat.equals("Popularite")){
                     list.gainPopularite(ValueEffet.get(i)-E.getLocation(type).getEOP());
                 }
-                if(StatCible.get(i).equals("admin")){
+                if(stat.equals("Admin")){
                     list.gainAdmin(ValueEffet.get(i)-E.getLocation(type).getEOA());
                 }
-                if(StatCible.get(i).equals("cohesion")){
+                if(stat.equals("Cohesion")){
                     list.gainCohesion(ValueEffet.get(i)-E.getLocation(type).getEOC());
                 }
-                if(StatCible.get(i).equals("PV")){
+                if(stat.equals("PV")){
                     list.gainPV(ValueEffet.get(i)-E.getLocation(type).getEOPV());
                 }
-                if(StatCible.get(i).equals("etude")){
+                if(stat.equals("Etude")){
                     E.Etude(ValueEffet.get(i)-E.getLocation(type).getEOS());
                 }
-                if(StatCible.get(i).equals("fatigue")){
+                if(stat.equals("Fatigue")){
                     E.Fatigue(ValueEffet.get(i)-E.getLocation(type).getEOT());
                 }
-                if(StatCible.get(i).equals("cout")){
+                if(stat.equals("Cout")){
                     E.Cout(ValueEffet.get(i)-E.getLocation(type).getEOC());
                 }
             }

@@ -1,13 +1,13 @@
 public abstract class Skills {
     String color;
     String name;
-    String type;
+    //String type; //Moment de la journée
 
 
-    public Skills(String type,String color, String name){
+    public Skills(/*String type,*/String color, String name){
        this.color=color;
        this.name=name;
-       this.type=type;
+       //this.type=type;
     }
 
     public void setRandomColor(int index) {
@@ -81,6 +81,9 @@ public abstract class Skills {
     public String getName(){
         return this.name;
     }
+    /*public String getType() {
+        return type;
+    }*/
 
     // fait correspondre l'effet au skill
     abstract void ApplySkillEffect(Eleve E, Player list);

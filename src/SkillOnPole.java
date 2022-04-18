@@ -6,8 +6,8 @@ public class SkillOnPole extends Skills{
     private String StatCible; //stat affecté
     private Integer ValueEffet; //valeur
 
-    public SkillOnPole(String type, String color, String name) {
-        super(type, color, name);
+    public SkillOnPole(String color, String name) {
+        super(color, name);
     }
 
     public void ApplyEffectOnPole(Pole P, Player list){
