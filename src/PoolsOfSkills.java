@@ -22,7 +22,7 @@ public class PoolsOfSkills {
     private ArrayList<Skills> BlueList; //Pole Animation
     private ArrayList<Skills> YellowList; //
     private ArrayList<Skills> RedList; //
-    private ArrayList<Skills> GreyList; //
+    private ArrayList<Skills> GreyList; // Ne peux s'obtenir qu'à la création de l'élève
     private ArrayList<Skills> GreenList; //
     private ArrayList<Skills> BlackList; //
 
