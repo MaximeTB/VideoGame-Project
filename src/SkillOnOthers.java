@@ -5,7 +5,6 @@ public class SkillOnOthers extends SkillsOnLieu{
 //Exemple un élève pédagogue permet aux autre élève présent dans l'Amphi d'apprendre plus
 
 
-    private int EffectOnOther;
 
     public SkillOnOthers(String color, String name, ArrayList<Lieu> LieuCible, ArrayList<String> StatCible, ArrayList<Integer> ValueEffet) {
         super(color, name,LieuCible,StatCible,ValueEffet);
