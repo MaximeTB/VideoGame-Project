@@ -56,11 +56,43 @@ public class Game {
 
         //effet de début de tours
 
+
+        //fin effet de début de tours
+
+        //initialisation des listes d'élèves dont l'action n'a pas été choisie
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+
+        while(!FinTour){
+            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
+            Entrée=clavier.nextInt();
+            if(Entrée==1){
+                this.Menu(DayNonAffectedList,clavier,"J");
+            }else if (Entrée==2){
+                this.Menu(NightNonAffectedList,clavier,"N");
+            }else if(Entrée==3){
+                this.MenuGQ(clavier);
+            } else if(Entrée==4){
+                FinTour=true;
+            }
+        }
+
+        this.NewTour(clavier);
+
+        System.out.println("Fin du Tour \n\n");
+    }
+
+    public void NewTour(Scanner clavier){
+        int Entrée;
+        this.NbTour+=1;
+        for(Lieu L : ListLieux){
+            L.ApplyLieuEffect(player);
+        }//applique les effets de tous les lieux
         for(Lieu L : ListLieux){
             L.ReductionDuree();
         }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
         if(getNbTour()>MaxTour){
-           DebutSemaineListe();
+            DebutSemaineListe();
         }//début de semaine de liste
         if(getNbTour()%2==0 || getNbTour()<MaxTour){
             for(Eleve e : player.getListeEleve()){
@@ -96,36 +128,6 @@ public class Game {
             ListLieux.get(4).ChangeState();
             NbSemaine++;
 
-        }
-        //fin effet de début de tours
-
-        //initialisation des listes d'élèves dont l'action n'a pas été choisie
-        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
-        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
-
-        while(!FinTour){
-            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
-            Entrée=clavier.nextInt();
-            if(Entrée==1){
-                this.Menu(DayNonAffectedList,clavier,"J");
-            }else if (Entrée==2){
-                this.Menu(NightNonAffectedList,clavier,"N");
-            }else if(Entrée==3){
-                this.MenuGQ(clavier);
-            } else if(Entrée==4){
-                FinTour=true;
-            }
-        }
-
-        this.NewTour();
-
-        System.out.println("Fin du Tour \n\n");
-    }
-
-    public void NewTour(){
-        this.NbTour+=1;
-        for(Lieu L : ListLieux){
-            L.ApplyLieuEffect(player);
         }
     }
 

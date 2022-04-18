@@ -11,7 +11,7 @@ public class BureauAssoce extends Lieu{
     public void GiveSkill(Eleve E, Player list){
         Random rand = new Random();
         if(rand.nextInt(100)>90){//environ 10% de chance de nouveau skill
-            Skills S = E.AddRandomSkill();
+            Skills S = E.AddRandomSkill(E.getPool());
             if(S.getClass()==SkillOnRecruit.class){
                 ((SkillOnRecruit) S).OnRecruit(E,list);
             }

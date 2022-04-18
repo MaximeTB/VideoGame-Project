@@ -10,7 +10,7 @@ public class Player {
     public Player(){} //test pour QG
 
     public Player(String nameList, String namePrez){
-        Eleve President = new Eleve(namePrez);
+        Eleve President = new Eleve();
 
         name=nameList;
         ListeEleve=new ArrayList<Eleve>();

@@ -5,60 +5,53 @@ import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import javafx.scene.text.Text;
 
-
-
 import java.util.ArrayList;
+import java.util.Random;
 
 
-public class Map extends Scene{
-
-
-    private StaticThing jour;
+public class MapNuit extends Scene {
+    private StaticThing nuit;
     private int numeroList;
-    private Button rue = new Button("rue");
-    private Button asso = new Button("asso");
-    private Button admin = new Button("admin");
-    private Button amphi = new Button("amphi");
-    private Button td = new Button("td");
-    private Button grasseMat = new Button("grasse mat");
+    private Button soiree = new Button("soirée");
+    private Button dodo = new Button("dodo");
+    private Button argent = new Button("argent");
+    private Button qg = new Button("QG");
+    private Button centreDoc = new Button("Centre doc");
     private ArrayList<Eleve> listedep = new ArrayList<Eleve>();
+
     private ArrayList<Text> listText = new ArrayList<Text>();
     private ArrayList<Button> listButton = new ArrayList<Button>();
-    private ArrayList<Eleve> listeRue = new ArrayList<Eleve>();
-    private ArrayList<Eleve> listeAsso = new ArrayList<Eleve>();
-    private ArrayList<Eleve> listeAdmin = new ArrayList<Eleve>();
-    private ArrayList<Eleve> listeAmphi = new ArrayList<Eleve>();
-    private ArrayList<Eleve> listeTd = new ArrayList<Eleve>();
-    private ArrayList<Eleve> listeGrasseMat = new ArrayList<Eleve>();
+
+    private ArrayList<Eleve> listeSoiree = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeDodo = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeArgent = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeQg = new ArrayList<Eleve>();
+    private ArrayList<Eleve> listeCentreDoc = new ArrayList<Eleve>();
 
 
 
-
-    public Map(Group parent, ArrayList<Eleve> listeEleve){
-        super(parent,1000,770);
+    public MapNuit(Group parent, ArrayList<Eleve> listeEleve) {
+        super(parent, 1000, 770);
 
         this.listedep=listeEleve;
 
+        Random alea = new Random();
+
         int i=0;
         for (Eleve eleve : listedep){
-            Text txt = new Text(30,30+20*i,eleve.getName());
-            txt.setScaleX(1.0);
-            txt.setScaleY(1.0);
+            Text txt = new Text(30,30+40*i,eleve.getName());
+            txt.setScaleX(2.0);
+            txt.setScaleY(2.0);
             listText.add(txt);
             i++;
 
         }
 
-
-        listButton.add(rue);
-        listButton.add(asso);
-        listButton.add(admin);
-        listButton.add(amphi);
-        listButton.add(td);
-        listButton.add(grasseMat);
-
-
-        System.out.println(listText);
+        listButton.add(soiree);
+        listButton.add(dodo);
+        listButton.add(argent);
+        listButton.add(qg);
+        listButton.add(centreDoc);
 
 
         for(Text txt : listText) {
@@ -80,6 +73,7 @@ public class Map extends Scene{
                 }
             });
         }
+
 
         for(Button button : listButton) {
             button.setOnDragOver(new EventHandler<DragEvent>() {
@@ -116,7 +110,6 @@ public class Map extends Scene{
             });
         }
 
-
         for(Button button : listButton) {
             button.setOnDragExited(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
@@ -140,32 +133,28 @@ public class Map extends Scene{
                     if (db.hasString()) {
 
                         switch (button.getText()) {
-                            case "rue":
+                            case "soirée":
                                 numeroList = 0;
                                 break;
 
-                            case "asso":
+                            case "dodo":
                                 numeroList = 1;
                                 break;
 
-                            case "admin":
+                            case "argent":
                                 numeroList = 2;
                                 break;
 
-                            case "amphi":
+                            case "QG":
                                 numeroList = 3;
                                 break;
 
-                            case "td":
+                            case "Centre doc":
                                 numeroList = 4;
                                 break;
 
-                            case "grasse mat":
-                                numeroList = 5;
-                                break;
-
                             default: numeroList=10;
-                            break;
+                                break;
 
                         }
 
@@ -181,7 +170,6 @@ public class Map extends Scene{
             });
         }
 
-
         for (Text txt : listText) {
             txt.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
@@ -194,30 +182,30 @@ public class Map extends Scene{
                     switch (numeroList){
                         case 0 :
                             if (listText.indexOf(txt)!=-1) {
-                                listeRue.add(listedep.get(listText.indexOf(txt)));
+                                listeSoiree.add(listedep.get(listText.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
-                                    txt.setX(rue.getLayoutX());
-                                    txt.setY(rue.getLayoutY() + 30+ 10 * listeRue.size());
+                                    txt.setX(soiree.getLayoutX());
+                                    txt.setY(soiree.getLayoutY() + 30 + 10 * listeSoiree.size());
                                     listedep.remove(listedep.get(listText.indexOf(txt)));
                                     listText.remove(txt);
 
                                 }
                             }
-                        numeroList=10;
-                        break;
+                            numeroList=10;
+                            break;
 
                         case 1 :
                             if (listText.indexOf(txt)!=-1) {
-                                listeAsso.add(listedep.get(listText.indexOf(txt)));
+                                listeDodo.add(listedep.get(listText.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
-                                    txt.setX(asso.getLayoutX());
-                                    txt.setY(asso.getLayoutY() + 30+ 10 * listeAsso.size());
+                                    txt.setX(dodo.getLayoutX());
+                                    txt.setY(dodo.getLayoutY() + 30 + 10 * listeDodo.size());
                                     listedep.remove(listedep.get(listText.indexOf(txt)));
                                     listText.remove(txt);
 
@@ -228,13 +216,13 @@ public class Map extends Scene{
 
                         case 2 :
                             if (listText.indexOf(txt)!=-1) {
-                                listeAdmin.add(listedep.get(listText.indexOf(txt)));
+                                listeArgent.add(listedep.get(listText.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
-                                    txt.setX(admin.getLayoutX());
-                                    txt.setY(admin.getLayoutY() + 30+10 * listeAdmin.size());
+                                    txt.setX(argent.getLayoutX());
+                                    txt.setY(argent.getLayoutY() + 30 + 10 * listeArgent.size());
                                     listedep.remove(listedep.get(listText.indexOf(txt)));
                                     listText.remove(txt);
 
@@ -245,13 +233,13 @@ public class Map extends Scene{
 
                         case 3 :
                             if (listText.indexOf(txt)!=-1) {
-                                listeAmphi.add(listedep.get(listText.indexOf(txt)));
+                                listeQg.add(listedep.get(listText.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
-                                    txt.setX(amphi.getLayoutX());
-                                    txt.setY(amphi.getLayoutY() + 30+ 10 * listeAmphi.size());
+                                    txt.setX(qg.getLayoutX());
+                                    txt.setY(qg.getLayoutY() + 30 + 10 * listeQg.size());
                                     listedep.remove(listedep.get(listText.indexOf(txt)));
                                     listText.remove(txt);
 
@@ -262,13 +250,13 @@ public class Map extends Scene{
 
                         case 4 :
                             if (listText.indexOf(txt)!=-1) {
-                                listeTd.add(listedep.get(listText.indexOf(txt)));
+                                listeCentreDoc.add(listedep.get(listText.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
-                                    txt.setX(td.getLayoutX());
-                                    txt.setY(td.getLayoutY() + 30+  10 * listeTd.size());
+                                    txt.setX(centreDoc.getLayoutX());
+                                    txt.setY(centreDoc.getLayoutY() + 30 + 10 * listeCentreDoc.size());
                                     listedep.remove(listedep.get(listText.indexOf(txt)));
                                     listText.remove(txt);
 
@@ -277,22 +265,6 @@ public class Map extends Scene{
                             numeroList=10;
                             break;
 
-                        case 5 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeGrasseMat.add(listedep.get(listText.indexOf(txt)));
-
-                                if (event.getTransferMode() == TransferMode.MOVE) {
-                                    txt.setScaleX(0.5);
-                                    txt.setScaleY(0.5);
-                                    txt.setX(grasseMat.getLayoutX());
-                                    txt.setY(grasseMat.getLayoutY() + 30+ 10 * listeGrasseMat.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
-
-                                }
-                            }
-                            numeroList=10;
-                            break;
 
                         default:
                             break;
@@ -305,12 +277,11 @@ public class Map extends Scene{
                     //listearr.add(listedep.get(listText.indexOf(txt)));
                     //listedep.remove(0);
 
-                    System.out.println("rue : "+listeRue);
-                    System.out.println("asso : "+listeAsso);
-                    System.out.println("admin : "+listeAdmin);
-                    System.out.println("amphi : "+listeAmphi);
-                    System.out.println("td : "+listeTd);
-                    System.out.println("gm : "+listeGrasseMat);
+                    System.out.println("soirée : "+listeSoiree);
+                    System.out.println("dodo : "+listeDodo);
+                    System.out.println("argent : "+listeArgent);
+                    System.out.println("QG : "+listeQg);
+                    System.out.println("Centre doc : "+listeCentreDoc);
 
 
                     event.consume();
@@ -322,44 +293,62 @@ public class Map extends Scene{
 
 
 
-                jour = new StaticThing(0,5000,0,2000,0,"out/production/VideoGame-Project/mapJour.JPG");
-                parent.getChildren().add(jour.getImg());
-                parent.getChildren().add(rue);
-                parent.getChildren().add(asso);
-                parent.getChildren().add(admin);
-                parent.getChildren().add(amphi);
-                parent.getChildren().add(td);
-                parent.getChildren().add(grasseMat);
-
-                for(Text txt : listText){
-                    parent.getChildren().add(txt);
-                }
 
 
-                rue.setLayoutX(350);
-                rue.setLayoutY(500);
-                rue.setStyle("-fx-background-color: #FF6060; ");
+        nuit = new StaticThing(0,5000,0,2000,0,"out/production/VideoGame-Project/mapNuit.JPG");
+        parent.getChildren().add(nuit.getImg());
 
-                asso.setLayoutX(700);
-                asso.setLayoutY(200);
-                asso.setStyle("-fx-background-color: #FF6060; ");
+        parent.getChildren().add(soiree);
+        parent.getChildren().add(dodo);
+        parent.getChildren().add(argent);
+        parent.getChildren().add(qg);
+        parent.getChildren().add(centreDoc);
 
-                admin.setLayoutX(150);
-                admin.setLayoutY(530);
-        admin.setStyle("-fx-background-color: #FF6060; ");
+        for(Text txt : listText){
+            parent.getChildren().add(txt);
+        }
 
-                amphi.setLayoutX(570);
-                amphi.setLayoutY(630);
-        amphi.setStyle("-fx-background-color: #FF6060; ");
+        soiree.setLayoutX(150+alea.nextInt(700));
+        soiree.setLayoutY(150+alea.nextInt(470));
+        soiree.setStyle("-fx-background-color: #FF6060; ");
 
-                td.setLayoutX(730);
-                td.setLayoutY(560);
-        td.setStyle("-fx-background-color: #FF6060; ");
+        dodo.setLayoutX(50);
+        dodo.setLayoutY(50);
+        dodo.setStyle("-fx-background-color: #FF6060; ");
 
-                grasseMat.setLayoutX(50);
-                grasseMat.setLayoutY(50);
-        grasseMat.setStyle("-fx-background-color: #FF6060; ");
+        argent.setLayoutX(700);
+        argent.setLayoutY(500);
+        argent.setStyle("-fx-background-color: #FF6060; ");
 
+        qg.setLayoutX(425);
+        qg.setLayoutY(325);
+        qg.setStyle("-fx-background-color: #FF6060; ");
+
+        centreDoc.setLayoutX(425);
+        centreDoc.setLayoutY(235);
+        centreDoc.setStyle("-fx-background-color: #FF6060; ");
 
     }
+
+
+    public ArrayList<Eleve> getListeCentreDoc() {
+        return listeCentreDoc;
+    }
+
+    public ArrayList<Eleve> getListeArgent() {
+        return listeArgent;
+    }
+
+    public ArrayList<Eleve> getListeDodo() {
+        return listeDodo;
+    }
+
+    public ArrayList<Eleve> getListeQg() {
+        return listeQg;
+    }
+
+    public ArrayList<Eleve> getListeSoiree() {
+        return listeSoiree;
+    }
+
 }
