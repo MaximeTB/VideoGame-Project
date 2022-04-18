@@ -17,9 +17,10 @@ public class SkillOnPole extends Skills{
     }
     public float ApplyEffectOnXP(Pole P, Player list){
         float multiplicateur=1;
-        if(StatCible.equals("XP"))
-        if(PoleCible.contains(P)){
-            multiplicateur=ValueEffet;
+        if(StatCible.equals("XP")){
+            if(PoleCible.contains(P)){
+                multiplicateur=ValueEffet;
+            }
         }
         return multiplicateur;
     }
