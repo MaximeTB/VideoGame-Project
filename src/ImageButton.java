@@ -20,6 +20,9 @@ public class ImageButton extends Button {
     private String effect;
     private String state;
     private ImageView iv; // image view
+    private Integer indexX;
+    private Integer indexY;
+    private Integer prefSize;
 
 
     public String getLabel(){
@@ -31,6 +34,10 @@ public class ImageButton extends Button {
     public PopupFollow getPopup(){
         return this.popup;
     }
+
+    public Integer getIndexX() { return this.indexX; }
+    public Integer getIndexY() { return this.indexY; }
+    public Integer getPrefSize() { return this.prefSize; }
 
     public void updateImages(final Player player, final String label, final String StringSelected, final String StringUnselected) {
         this.label = label;
@@ -54,14 +61,17 @@ public class ImageButton extends Button {
         super.setGraphic(iv);
     }
 
-    public void displayButton(int offsetX, int offsetY, int prefSize){
+    public void displayButton(int indexX, int indexY, int offsetX, int offsetY, int prefSize){
+        this.indexX = indexX;
+        this.indexY = indexY;
+        this.prefSize = prefSize;
         int stepX = (int) prefSize / 2;
         int stepY = (int) prefSize /4;
         this.setPrefSize(prefSize, prefSize);
-        this.iv.setFitHeight(prefSize);
-        this.iv.setFitWidth(prefSize);
-        this.setLayoutX(stepX*offsetX + prefSize*(offsetX-1));
-        this.setLayoutY(stepY*offsetY + prefSize*(offsetY-1));
+        //this.iv.setFitHeight(prefSize);
+        //this.iv.setFitWidth(prefSize);
+        this.setLayoutX(offsetX + stepX*indexX + prefSize*(indexX-1));
+        this.setLayoutY(offsetY + stepY*indexY + prefSize*(indexY-1));
 
     }
 
@@ -89,18 +99,19 @@ public class ImageButton extends Button {
         msg.append("\n");
         msg.append(description);
         msg.append("\n");
-        if(price!=0) msg.append(" Prix : " + price.toString() + "€ ");
-        msg.append("\n");
         switch(state){
             case "Shop" :
+                msg.append(" Prix : " + price.toString() + "€ ");
+                msg.append("\n");
                 msg.append("  Inventaire : " + player.getInventory().getAttribute(this.getLabel()));
                 break;
             case "Inventory" :
                 msg.append(effect);
                 msg.append("\n");
+                msg.append("  Inventaire : " + player.getInventory().getAttribute(this.getLabel()));
                 break;
         }
-
+        msg.append("\n");
         label.setText(msg.toString());
         label.setStyle(" -fx-background-color: white;");
 

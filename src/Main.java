@@ -28,18 +28,23 @@ public class Main extends Application{
         primaryStage.setTitle("ENSEA");
         Group rootQG = new Group();
         Group rootShop = new Group();
+        Group rootPoles = new Group();
         Group rootInventory = new Group();
         QG qg = new QG(rootQG, 600, 400);
-        Shop shop = new Shop(rootShop, 600, 400, game.getPlayer());
         Inventory inventory = new Inventory(rootInventory, 600, 400, game.getPlayer());
+        GestionPoles poles = new GestionPoles(rootPoles, 600, 400, game.getPlayer());
+        Shop shop = new Shop(rootShop, 600, 400, game.getPlayer(), inventory);
+
 
 
         primaryStage.setScene(qg);
         qg.getButtonShop().setOnAction((e -> primaryStage.setScene(shop)));
         qg.getButtonInventory().setOnAction((e -> primaryStage.setScene(inventory)));
+        qg.getButtonPoles().setOnAction((e -> primaryStage.setScene(poles)));
         shop.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
         inventory.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
-
+        poles.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
+        poles.updateButtons();
 
         primaryStage.show();
 
