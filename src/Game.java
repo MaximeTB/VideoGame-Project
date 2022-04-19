@@ -11,6 +11,8 @@ public class Game {
     private Evenement CurrentEvent;
     private ArrayList<Lieu> ListLieux;
 
+    private int NbCrepe=0;
+
     public Game() {
         //Initialisation du Jeu
         QG = new QGconsole();
@@ -310,6 +312,9 @@ public class Game {
 
     }//lance la semaine de liste
 
+    public void TourSemaineListe(){
+
+    }
 
 
 //Getter

@@ -12,7 +12,6 @@ public class Player {
 
     public Player(String nameList, String namePrez){
         Eleve President = new Eleve();
-
         name=nameList;
         inventory = new PlayerInventory();
         ListeEleve=new ArrayList<Eleve>();
@@ -22,13 +21,13 @@ public class Player {
         cohesion=10;
         popularite=0;
         PV=0;
-        poles.add(new Bureau("Bureau","gris", President));
+        poles.add(new Bureau("Bureau","gris"));
         poles.add(new Pole("Pole soirée","noir",false));
         poles.add(new Pole("Pole animation","rouge","bleu",false));
         poles.add(new Pole("Pole communication","vert",false));
         poles.add(new Pole("Pole partenariat","gris", false));
         poles.add(new Pole("Pole bouffe","orange",false));
-        poles.get(0).addMember(President);
+        ((Bureau)poles.get(0)).addMember(President, "prez");
     }
 
     public void recrute(int nb){  //propose nb choix d'élève, vous en choisissez 1 à recruter
