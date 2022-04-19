@@ -4,9 +4,8 @@ public class Bureau extends Pole{
 //le trésorier génère plus d'argent, le prez plus de pop/pv, le secrétaire + de cohesion
     //créer une méthode pour chacun
 
-    public Bureau(String name, String color1, Eleve prez){
+    public Bureau(String name, String color1){
         super(name, color1,true);
-        this.prez=prez;
     }
 
     public void giveRole(String role, Eleve eleve){

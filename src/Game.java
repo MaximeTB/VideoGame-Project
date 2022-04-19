@@ -11,16 +11,9 @@ public class Game {
     private Evenement CurrentEvent;
     private ArrayList<Lieu> ListLieux;
 
-    public Game() {
-        //Initialisation du Jeu
-        QG = new QGconsole();
-        this.player = new Player("BDMichelle","Michelle");
-        //test console on fout de l'argent tour 1
-        player.setArgent(100);
-        System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
-        this.NbTour=1;
-        this.ListLieux = new ArrayList<Lieu>();
+    private int NbCrepe=0;
 
+    public Game() {
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
 
@@ -40,6 +33,21 @@ public class Game {
         //initialisation des lieux
         PoolOfLocation poolOfLocation = new PoolOfLocation("data/ListesLieux.csv");
         this.ListLieux=poolOfLocation.getLocationList();
+
+
+        //Initialisation des Skills
+        //PoolsOfSkills poolsOfSkills= new PoolsOfSkills("data/SkillsOnPoles.csv","data/SkillsOnLieu.csv","data/SkillsOnOther.csv","data/SkillsOnRecruit.csv",poolOfLocation,Pole);
+
+        //Initialisation du Jeu
+        QG = new QGconsole();
+        this.player = new Player("BDMichelle","Michelle",poolOfLocation);
+        //test console on fout de l'argent tour 1
+        player.setArgent(100);
+        System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
+        this.NbTour=1;
+        this.ListLieux = new ArrayList<Lieu>();
+
+
 
     }
 
@@ -310,6 +318,9 @@ public class Game {
 
     }//lance la semaine de liste
 
+    public void TourSemaineListe(){
+
+    }
 
 
 //Getter

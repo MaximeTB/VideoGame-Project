@@ -7,35 +7,43 @@ public class Player {
     private ArrayList<Eleve> ListeEleve=null;
     private ArrayList<Pole> poles= new ArrayList<>();
     private Integer argent ,popularite,admin,PV,cohesion ;  //PV :points de victoires, utiles en fin de partie
+    private PoolsOfSkills pool;
 
     public Player(){} //test pour QG
 
-    public Player(String nameList, String namePrez){
-        Eleve President = new Eleve();
+    public Player(String nameList, String namePrez,PoolOfLocation Lieux){
+       ;
+
 
         name=nameList;
         inventory = new PlayerInventory();
         ListeEleve=new ArrayList<Eleve>();
-        ListeEleve.add(President);
+
         argent=0;
         admin=10;
         cohesion=10;
         popularite=0;
         PV=0;
-        poles.add(new Bureau("Bureau","gris", President));
+        poles.add(new Bureau("Bureau","gris"));
         poles.add(new Pole("Pole soirée","noir",false));
         poles.add(new Pole("Pole animation","rouge","bleu",false));
         poles.add(new Pole("Pole communication","vert",false));
         poles.add(new Pole("Pole partenariat","gris", false));
         poles.add(new Pole("Pole bouffe","orange",false));
+
+        this.pool=new PoolsOfSkills("data/SkillsOnPoles.csv","data/SkillsOnLieu.csv","data/SkillsOnOther.csv","data/SkillsOnRecruit.csv",Lieux.getLocationList(),poles);
+
+        Eleve President = new Eleve(pool);
+        ListeEleve.add(President);
         poles.get(0).addMember(President);
+        ((Bureau)poles.get(0)).addMember(President, "prez");
     }
 
     public void recrute(int nb){  //propose nb choix d'élève, vous en choisissez 1 à recruter
         Scanner scan=new Scanner(System.in);
         ArrayList<Eleve> choice=new ArrayList<>();
         for(int i=0;i<nb;i++){
-            Eleve e = new Eleve();
+            Eleve e = new Eleve(this.pool);
             choice.add(e);
             System.out.println(i+1+". "+e);
         }
@@ -186,7 +194,7 @@ public class Player {
     public void generateList(int upperBound){
         int temp2 = 1;
         for (int i = 0 ; i < upperBound; i++) {
-            Eleve test = new Eleve();
+            Eleve test = new Eleve(pool);
             //System.out.println("Studies = " + test.getStudies()); //ok
             //System.out.println("Loyalty = " + test.getLoyalty()); //ok
             int temp = 0;

@@ -19,8 +19,9 @@ public class Eleve implements Comparable {
 
 //constructeur
 
-    public Eleve(){
+    public Eleve(PoolsOfSkills pool){
         name = Names.RandomName();
+        this.pool=pool;
         Random r1 = new Random();
         studies =  (int) (r1.nextGaussian()*1.2 + 6);   //on génère le niveau d'étude et le cout aléatoirement
         tired = 0;
