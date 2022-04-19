@@ -32,56 +32,60 @@ public class Shop extends Scene {
     private ImageButton buttonExit;
     private Player player;
     private Text moneyDisplay;
+    private Inventory inventory;
 
     public ImageButton getButtonExit() {
         return buttonExit;
     }
 
+    public Inventory getInventory(){ return inventory;}
 
 
 
-    public Shop(Group parent, int width, int height, Player player) {
+    public Shop(Group parent, int width, int height, Player player, Inventory inventory) {
         super(parent, width, height);
         this.player = player;
+        this.inventory = inventory;
         background = new StaticThing(0, 600, 0, 400, 0, "3FCergyBG.jpg");
         money = new StaticThing(0, 256, 0, 256, 0, "walletIcon.png");
         money.getImg().setFitHeight(50);
         money.getImg().setFitWidth(50);
         money.getImg().setX(525);
         money.getImg().setY(325);
+
         buttonCoffee = new ImageButton();
         buttonCoffee.updateImages(player, "Coffee", "cofeeIcon.png", "soldoutIcon.jpg");
-        buttonCoffee.displayButton(1, 1, 110);
+        buttonCoffee.displayButton(1, 1, 0, 0, 110);
         buttonCoffee.hoverButton("  Cafetière", "    Bon pour le moral !    ", 25, "", "Shop");
         buyButton(buttonCoffee, buttonCoffee.getPrice());
 
         buttonPancakes = new ImageButton();
         buttonPancakes.updateImages(player, "Pancakes", "pancakesIcon.png", "soldoutIcon.jpg");
-        buttonPancakes.displayButton(2, 1, 110);
+        buttonPancakes.displayButton(2, 1, 0, 0, 110);
         buttonPancakes.hoverButton("  Crêpes", "    Bon pour le ventre !    ", 1, "", "Shop");
         buyButton(buttonPancakes, buttonPancakes.getPrice());
 
         buttonBalloons = new ImageButton();
         buttonBalloons.updateImages(player, "Balloons", "balloonsIcon.png", "balloonsIcon.png");
-        buttonBalloons.displayButton(3, 1, 110);
+        buttonBalloons.displayButton(3, 1, 0, 0, 110);
         buttonBalloons.hoverButton("  Jeux gonflables", "    Nous ne serons pas responsables d'éventuels bobos    ", 50, "", "Shop");
         buyButton(buttonBalloons, buttonBalloons.getPrice());
 
         buttonFireworks = new ImageButton();
         buttonFireworks.updateImages(player, "Balloons", "fireworksIcon.png", "fireworksIcon.png");
-        buttonFireworks.displayButton(1, 2, 110);
+        buttonFireworks.displayButton(1, 2, 0, 0, 110);
         buttonFireworks.hoverButton("  Feux d'artifice", "    Déconseillé en intérieur...    ",  30, "", "Shop");
         buyButton(buttonFireworks, buttonFireworks.getPrice());
 
         buttonBeer = new ImageButton();
         buttonBeer.updateImages(player, "Beer", "beerIcon.png", "beerIcon.png");
-        buttonBeer.displayButton(2, 2, 110);
+        buttonBeer.displayButton(2, 2, 0, 0, 110);
         buttonBeer.hoverButton("  Bière qui tue", "    Teneur : 80%. Réservé aux plus témeraires    ", 8, "", "Shop");
         buyButton(buttonBeer, buttonBeer.getPrice());
 
         buttonWeapon = new ImageButton();
         buttonWeapon.updateImages(player, "Weapon", "weaponIcon.png", "weaponIcon.png");
-        buttonWeapon.displayButton(3, 2, 110);
+        buttonWeapon.displayButton(3, 2, 0, 0, 110);
         buttonWeapon.hoverButton("  Euh...", "    N'achète pas ça frérot...    ", 200, "", "Shop");
         buyButton(buttonWeapon, buttonWeapon.getPrice());
 
@@ -111,7 +115,7 @@ public class Shop extends Scene {
     public void buyButton(ImageButton button, Integer price) {
         button.setOnAction((e -> {
             if (player.getArgent() >= price) {
-                player.setArgent(player.getArgent() - price); // mettre une fonction depense(int) dans la classe player
+                player.setArgent(player.getArgent() -  price); // mettre une fonction depense(int) dans la classe player
                 player.getInventory().setAttribute(button.getLabel(), player.getInventory().getAttribute(button.getLabel()) + 1);
                 System.out.println(player.getInventory().getAttribute(button.getLabel()));
                 System.out.println("Argent : " + player.getArgent());
@@ -121,6 +125,8 @@ public class Shop extends Scene {
             updateMoney();
             button.getPopup().hide();
             updatePopup();
+            this.getInventory().updatePopup();
+            // player.getList(). ... // Activates the bought up item's effect on the player's list.
         }));
     }
 
@@ -145,13 +151,13 @@ public class Shop extends Scene {
     }
     */
 
-    public Integer skillMETROon(){
+    public double skillMETROon(){
         for (Eleve e : player.getListeEleve()){
             for (Skills s : e.getSkillsList()){
-                if (s.getName() == "Carte Métro") return 1;
+                if (s.getName() == "Carte Métro") return 0.5;
             }
         }
-        return 0;
+        return 1;
     }
 
 }
