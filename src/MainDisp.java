@@ -1,4 +1,3 @@
-/*
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -23,9 +22,13 @@ import java.util.ArrayList;
             Group mapRoot = new Group();
             Group mapNuitRoot = new Group();
             ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
+            PoolOfLocation poolLieux = new PoolOfLocation("C:\\VideoGame-Project\\data\\ListesLieux.csv");
+            Player player = new Player("bde","moi",poolLieux);
+            System.out.println(player);
             for(int i=0 ; i<15; i++){
-                //listeEleve.add(new Eleve());
+                player.recrute(1);
             }
+            listeEleve= player.getListeEleve();
             Map map = new Map(mapRoot, listeEleve);
 
             ArrayList<Eleve> listeEleveNuit = (ArrayList<Eleve>)listeEleve.clone();
@@ -54,7 +57,6 @@ import java.util.ArrayList;
         }
 
     }
+     */
     }
 
-
- */
