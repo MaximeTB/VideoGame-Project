@@ -322,7 +322,7 @@ public class Map extends Scene{
 
 
 
-                jour = new StaticThing(0,5000,0,2000,0,"out/production/VideoGame-Project/mapJour.JPG");
+                jour = new StaticThing(0,5000,0,2000,0,"mapJour.JPG");
                 parent.getChildren().add(jour.getImg());
                 parent.getChildren().add(rue);
                 parent.getChildren().add(asso);
