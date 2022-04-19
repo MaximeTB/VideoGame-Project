@@ -23,7 +23,7 @@ import java.util.ArrayList;
             Group mapNuitRoot = new Group();
             ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
             for(int i=0 ; i<15; i++){
-                listeEleve.add(new Eleve("Pierre"));
+                listeEleve.add(new Eleve());
             }
             Map map = new Map(mapRoot, listeEleve);
 

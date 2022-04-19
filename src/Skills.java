@@ -1,20 +1,16 @@
-public class Skills {
-    int indexColor;
+public abstract class Skills {
     String color;
-    int indexName;
     String name;
-    int niveau;
-    int Exp;
+    //String type; //Moment de la journée
 
-    public Skills(int indexC, int indexN){
-        this.indexColor = indexC;
-        setColor(indexColor);
-        this.indexName = indexN;
-        setName(indexColor, indexName);
+
+    public Skills(/*String type,*/String color, String name){
+       this.color=color;
+       this.name=name;
+       //this.type=type;
     }
 
-
-    public void setColor(int index) {
+    public void setRandomColor(int index) {
         switch (index) {
             case 0 -> this.color = "Gris";
             case 1 -> this.color = "Bleu";
@@ -25,7 +21,7 @@ public class Skills {
         }
     }
 
-    public void setName(int color, int index){
+    /*public void setRandomName(int color, int index){
         switch(color){
             case 0 : //gris
                 switch(index){
@@ -76,22 +72,28 @@ public class Skills {
                 }
                 break;
         }
-    }
+    }*/
 
+
+    public String getColor() {
+        return color;
+    }
     public String getName(){
         return this.name;
     }
+    /*public String getType() {
+        return type;
+    }*/
 
     // fait correspondre l'effet au skill
-    public void getEffect(){
-    }
+    abstract void ApplySkillEffect(Eleve E, Player list);
+
+    abstract void OnRecruit(Eleve E, Player list);//a appeler lorsque l'élève est recruté dans la methode player.recrute()
+    
 
     @Override
     public String toString() {
         return  name  ;
     }
 
-    public String getColor() {
-        return color;
-    }
 }

@@ -3,66 +3,52 @@ import java.util.Scanner;
 
 public class Game {
     private int NbTour;
+    private int NbSemaine;
+    private final int MaxTour=45;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
     private QGconsole QG;
+    private Evenement CurrentEvent;
     private ArrayList<Lieu> ListLieux;
 
-    public Game() {
-        //Initialisation du Jeu
-        QG = new QGconsole();
-        this.player = new Player("BDMichelle","Michelle");
-        //test console on fout de l'argent tour 1
-        player.setArgent(100);
-        player.setPopularite(30);
-        System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
-        this.NbTour=1;
-        this.ListLieux = new ArrayList<Lieu>();
+    private int NbCrepe=0;
 
+    public Game() {
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
 
         PoolOfEvent DayEvent= new PoolOfEvent();
         for (Evenement e : pool.getEventList()){
-            if (e.getPeriode().equals("J")) {
+            if (e.getType().equals("J")) {
                 DayEvent.add(e);
             }
         }
-
         PoolOfEvent NightEvent= new PoolOfEvent();
         for (Evenement e : pool.getEventList()){
-            if (e.getPeriode().equals("N")) {
+            if (e.getType().equals("N")) {
                 NightEvent.add(e);
             }
         }
 
-        //initialisation temporaire des lieux
-        //jour
-        //Lieu Assoce = new Lieu("activité associative", true, "J",3);
-        //ListLieux.add(Assoce);
-        //Lieu Rue = new Lieu("La Rue", true, "J");
-        //ListLieux.add(Rue);Rue.setEOP(2);
-        //Lieu Amphi = new Lieu("Amphi", true, "J");
-        //ListLieux.add(Amphi);Amphi.setEOS(2);Amphi.setIsAMPH(1);
-        //Lieu TP = new Lieu("Salle de TP", false, "J");
-        //ListLieux.add(TP);TP.setEOS(1);
-        //Lieu Admin = new Lieu("Bureau de l'administration",true,"J",1);
-        //ListLieux.add(Admin);Admin.setEOA(1);
-        //Lieu GrassMat = new Lieu("Grasse matiné", true, "J");
-        //ListLieux.add(GrassMat);GrassMat.setEOT(-1);
-        //nuit
-        //Lieu Soiree = new Lieu("Soirée", true, "N");
-        //ListLieux.add(Soiree);Soiree.setEOT(1);Soiree.setEOP(5);
-        //Lieu Argent1 = new Lieu("Petit boulot", true, "N");
-        //ListLieux.add(Argent1);Argent1.setEOM(10);Argent1.setEOT(1);
-        //Lieu Argent2 = new Lieu("Petit boulot moins légal", false, "N");
-        //ListLieux.add(Argent2);Argent2.setEOM(50);Argent2.setEOT(1);Argent1.setEOA(-1);
-        //Lieu Argent3 = new Lieu("Vente de cookies", false, "N");
-        //ListLieux.add(Argent3);Argent3.setEOM(25);Argent3.setEOT(1);
-        //Lieu Revision = new Lieu("Centre doc", true, "N");
-        //ListLieux.add(Revision);Revision.setEOS(1);Revision.setEOT(-1);
-        //Lieu Repos = new Lieu("Repos", true, "N");
-        //ListLieux.add(Repos);Repos.setEOT(-1);
+        //initialisation des lieux
+        PoolOfLocation poolOfLocation = new PoolOfLocation("data/ListesLieux.csv");
+        this.ListLieux=poolOfLocation.getLocationList();
+
+
+        //Initialisation des Skills
+        //PoolsOfSkills poolsOfSkills= new PoolsOfSkills("data/SkillsOnPoles.csv","data/SkillsOnLieu.csv","data/SkillsOnOther.csv","data/SkillsOnRecruit.csv",poolOfLocation,Pole);
+
+        //Initialisation du Jeu
+        QG = new QGconsole();
+        this.player = new Player("BDMichelle","Michelle",poolOfLocation);
+        //test console on fout de l'argent tour 1
+        player.setArgent(100);
+        System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
+        this.NbTour=1;
+        this.ListLieux = new ArrayList<Lieu>();
+
+
+
     }
 
     public void Tour(Scanner clavier){
@@ -77,16 +63,54 @@ public class Game {
                 +"\nPV :"+this.getPlayer().getPV().toString());
         System.out.println("Début du Tours :");
 
-        if(this.getNbTour()%2==0){
+        //effet de début de tours
+
+
+        //fin effet de début de tours
+
+        //initialisation des listes d'élèves dont l'action n'a pas été choisie
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
+
+        while(!FinTour){
+            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
+            Entrée=clavier.nextInt();
+            if(Entrée==1){
+                this.Menu(DayNonAffectedList,clavier,"J");
+            }else if (Entrée==2){
+                this.Menu(NightNonAffectedList,clavier,"N");
+            }else if(Entrée==3){
+                this.MenuGQ(clavier);
+            } else if(Entrée==4){
+                FinTour=true;
+            }
+        }
+
+        this.NewTour(clavier);
+
+        System.out.println("Fin du Tour \n\n");
+    }
+
+    public void NewTour(Scanner clavier){
+        int Entrée;
+        this.NbTour+=1;
+        for(Lieu L : ListLieux){
+            L.ApplyLieuEffect(player);
+        }//applique les effets de tous les lieux
+        for(Lieu L : ListLieux){
+            L.ReductionDuree();
+        }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
+        if(getNbTour()>MaxTour){
+            DebutSemaineListe();
+        }//début de semaine de liste
+        if(getNbTour()%2==0 || getNbTour()<MaxTour){
             for(Eleve e : player.getListeEleve()){
                 e.setStudies(e.getStudies()<=0 ? 0:e.getStudies()-1);
             }
         }//perte de niveau d'étude tout les 2 tours
-
-        if(this.getNbTour()%3==0) {
+        if(getNbTour()%3==0) {
             System.out.println("event");
         }//gestion des events
-
         if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
             Entrée = clavier.nextInt();
@@ -111,35 +135,8 @@ public class Game {
             ListLieux.get(2).ChangeState();
             ListLieux.get(3).ChangeState();
             ListLieux.get(4).ChangeState();
+            NbSemaine++;
 
-        }
-
-        ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
-        ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
-
-        while(!FinTour){
-            System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
-            Entrée=clavier.nextInt();
-            if(Entrée==1){
-                this.Menu(DayNonAffectedList,clavier,"J");
-            }else if (Entrée==2){
-                this.Menu(NightNonAffectedList,clavier,"N");
-            }else if(Entrée==3){
-                this.MenuGQ(clavier);
-            } else if(Entrée==4){
-                FinTour=true;
-            }
-        }
-
-        this.NewTour();
-
-        System.out.println("Fin du Tour \n\n");
-    }
-
-    public void NewTour(){
-        this.NbTour+=1;
-        for(Lieu L : ListLieux){
-            L.ApplyLieuEffect(player);
         }
     }
 
@@ -288,7 +285,44 @@ public class Game {
 
     }
 
+    //Partie semaine de liste
 
+    public void DebutSemaineListe(){
+        //1 : le Cs
+        int NbRatrapage=0;
+        int NbBonEleves=0;
+        for (Eleve e : getPlayer().getListeEleve()){
+            if(e.getStudies()<10){
+                NbRatrapage++;
+            }
+            else if(e.getStudies()>15){
+                NbBonEleves++;
+            }
+        }
+        this.getPlayer().setAdmin(getPlayer().getAdmin()-NbRatrapage%2+NbBonEleves%2);
+        if(getPlayer().getAdmin()<0){
+            System.out.println("Dans la mesure ou trop d'élève n'ont pas leur année, l'administration a jugé que vous ne devriez peut être pas devenir BDE...");
+            //défaite
+        }
+        //2 : fin des études, désactivation des lieux et créer les nouveau
+        for(Lieu L : getListLieux()){
+            if(L.getEOM()!=0 || L.getEOS()!=0){
+                L.setAvailable(false);
+            }
+        }
+        getListLieux().add(new Lieu("Faire des crêpes",true,"J", 5));
+
+        for(Lieu L:getListLieux()){
+            if(L.getClass()==Animation.class){
+                L.setAvailable(true);
+            }
+        }
+
+    }//lance la semaine de liste
+
+    public void TourSemaineListe(){
+
+    }
 
 
 //Getter
@@ -310,6 +344,7 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
+    public Evenement getCurrentEvent(){return CurrentEvent;}
 //
 
     public boolean FinTour(String entrée){
