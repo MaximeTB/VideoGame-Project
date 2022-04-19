@@ -152,7 +152,7 @@ public class Lieu {
                         NbSpe++;
                     }
                 }*/
-                E.setStudies(E.getStudies()+(this.EOS - Math.min(E.getTired()*isAMPH,2))); //les bonus d'amphi sont réduit par la fatigue, capé a 2
+                E.Etude(this.EOS - Math.min(E.getTired()*isAMPH,2)); //les bonus d'amphi sont réduit par la fatigue, capé a 2
                 E.setTired(E.getTired()+this.EOT);
                 list.setArgent(list.getArgent()+this.EOM);
                 list.setPopularite(list.getPopularite()+this.EOP);
