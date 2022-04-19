@@ -1,7 +1,6 @@
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Button;
 
 
 public class StaticThing {
@@ -19,10 +18,5 @@ public class StaticThing {
 
     public ImageView getImg() {
         return img;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("hello world");
-
     }
 }

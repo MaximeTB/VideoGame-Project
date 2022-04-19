@@ -22,30 +22,30 @@ public class QG extends Scene implements EventHandler<ActionEvent> {
         return buttonShop;
     }
     public Button getButtonInventory() { return buttonInventory; }
+    public Button getButtonPoles() {
+        return buttonPoles;
+    }
 
     public QG(Group parent, int width, int height){
         super(parent, width, height);
-        player = new Player(); // mal geré (revoir méthodo de Liste.java)
-
-        //background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
+        player = new Player();
 
         background = new StaticThing(0, 600, 0, 400, 0, "QG.jpg");
 
-
         buttonPoles = new ImageButton();
         buttonPoles.updateImages(player, "Poles", "polesIcon.jpg", "soldoutIcon.jpg");
-        buttonPoles.displayButton(1, 1, 120);
+        buttonPoles.displayButton(1, 1, 0, 0,120);
         buttonPoles.hoverButton("  Gestion des pôles ", "    Gère ta bande de bras cassés    ", 0, "", "QG");
 
         buttonShop = new ImageButton();
         buttonShop.updateImages(player, "Shop", "shopIcon.png", "soldoutIcon.jpg");
-        buttonShop.displayButton(2, 1, 120);
+        buttonShop.displayButton(2, 1, 0,0, 120);
         buttonShop.hoverButton("  Magasin ", "    L'argent c'est fait pour être dépensé    ", 0, "", "QG");
 
         buttonInventory = new ImageButton();
         buttonInventory.updateImages(player, "Inventory", "bagIcon.png", "soldoutIcon.jpg");
-        buttonInventory.displayButton(3, 1, 120);
-        buttonInventory.hoverButton("  Inventaire ", "    Gère ta bande de bras cassés    ", 0, "", "QG");
+        buttonInventory.displayButton(3, 1,0,0, 120);
+        buttonInventory.hoverButton("  Inventaire ", "    Consulte tes effets personnels    ", 0, "", "QG");
 
 
         buttonExit = new ImageButton();

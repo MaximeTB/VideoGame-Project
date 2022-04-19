@@ -1,17 +1,21 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
     private int NbTour;
+    private int NbtourList;
     private int NbSemaine;
     private final int MaxTour=45;
+    private final int MaxTourList=7;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
     private QGconsole QG;
     private Evenement CurrentEvent;
     private ArrayList<Lieu> ListLieux;
+    Random crep = new Random();
+    private int NBC = 0; //nombre de crêpe
 
-    private int NbCrepe=0;
 
     public Game() {
         //Listes des Events
@@ -303,26 +307,37 @@ public class Game {
             //défaite
         }
         //2 : fin des études, désactivation des lieux et créer les nouveau
-        for(Lieu L : getListLieux()){
-            if(L.getEOM()!=0 || L.getEOS()!=0){
+        for(Lieu L : ListLieux){
+            if(L.getEOM()!=0 || L.getEOS()!=0)
                 L.setAvailable(false);
-            }
-        }
-        getListLieux().add(new Lieu("Faire des crêpes",true,"J", 5));
 
-        for(Lieu L:getListLieux()){
-            if(L.getClass()==Animation.class){
+            else if(L.getname().equals("Crepes J")||L.getname().equals("Crepes N"))
                 L.setAvailable(true);
-            }
+
+            else if(L.getClass()==Animation.class)
+                L.setAvailable(true);
         }
+
+
+        NBC=crep.nextInt(20)+20; //premère commande de crep
 
     }//lance la semaine de liste
 
-    public void TourSemaineListe(){
+    public void NewTourSemaineListe(){
+        if(NbtourList>MaxTourList) EndGame();
 
+        //gestions des crepes
+        int diff = player.getNbCrepe()-NBC;
+        if(diff>=0) player.gainPV(20+2*diff);
+        else player.gainPV(20*diff-30);
+        NBC=crep.nextInt(20)+15;
+
+        //afficher le nombre de crêpes à donner !!
     }
 
-
+public void EndGame(){
+    System.out.println("fin");
+}
 //Getter
     public int getNbTour() {
         return NbTour;
