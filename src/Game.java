@@ -57,6 +57,8 @@ public class Game {
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
+        ArrayList<Eleve> DayNonAffectedList = new ArrayList<Eleve>();
+        ArrayList<Eleve> NightNonAffectedList = new ArrayList<Eleve>();
         int Entrée;
         System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()

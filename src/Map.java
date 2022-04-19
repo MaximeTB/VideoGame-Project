@@ -1,3 +1,4 @@
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,15 +15,15 @@ public class Map extends Scene{
 
 
     private StaticThing jour;
-    private int numeroList;
+    private int numeroList=10;
     private Button rue = new Button("rue");
     private Button asso = new Button("asso");
     private Button admin = new Button("admin");
     private Button amphi = new Button("amphi");
     private Button td = new Button("td");
     private Button grasseMat = new Button("grasse mat");
-    private ArrayList<Eleve> listedep = new ArrayList<Eleve>();
-    private ArrayList<Text> listText = new ArrayList<Text>();
+    private ArrayList<Eleve> listedepJour = new ArrayList<Eleve>();
+    private ArrayList<Text> listTextJour = new ArrayList<Text>();
     private ArrayList<Button> listButton = new ArrayList<Button>();
     private ArrayList<Eleve> listeRue = new ArrayList<Eleve>();
     private ArrayList<Eleve> listeAsso = new ArrayList<Eleve>();
@@ -31,20 +32,23 @@ public class Map extends Scene{
     private ArrayList<Eleve> listeTd = new ArrayList<Eleve>();
     private ArrayList<Eleve> listeGrasseMat = new ArrayList<Eleve>();
 
+    private Button buttonNuit = new Button("nuit");
+
 
 
 
     public Map(Group parent, ArrayList<Eleve> listeEleve){
         super(parent,1000,770);
 
-        this.listedep=listeEleve;
+        this.listedepJour=listeEleve;
 
         int i=0;
-        for (Eleve eleve : listedep){
+        for (Eleve eleve : listedepJour){
             Text txt = new Text(30,30+20*i,eleve.getName());
             txt.setScaleX(1.0);
             txt.setScaleY(1.0);
-            listText.add(txt);
+
+            listTextJour.add(txt);
             i++;
 
         }
@@ -58,15 +62,15 @@ public class Map extends Scene{
         listButton.add(grasseMat);
 
 
-        System.out.println(listText);
+        System.out.println("taille"+listTextJour.size());
 
 
-        for(Text txt : listText) {
+        for(Text txt : listTextJour) {
             txt.setOnDragDetected(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
                     /* drag was detected, start drag-and-drop gesture*/
                     System.out.println("onDragDetected");
-                    System.out.println("Txt "+txt +"\n" + listText );
+                    System.out.println("Txt "+txt +"\n" + listTextJour.size() );
 
                     /* allow any transfer mode */
                     Dragboard db = txt.startDragAndDrop(TransferMode.ANY);
@@ -182,27 +186,27 @@ public class Map extends Scene{
         }
 
 
-        for (Text txt : listText) {
+        for (Text txt : listTextJour) {
             txt.setOnDragDone(new EventHandler<DragEvent>() {
                 public void handle(DragEvent event) {
                     /* the drag-and-drop gesture ended */
                     System.out.println("onDragDone");
-                    System.out.println(listText.indexOf(txt));
+                    System.out.println(listTextJour.indexOf(txt));
 
-                    System.out.println(numeroList);
+                    System.out.println("no " + numeroList);
 
                     switch (numeroList){
                         case 0 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeRue.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeRue.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(rue.getLayoutX());
                                     txt.setY(rue.getLayoutY() + 30+ 10 * listeRue.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -210,16 +214,16 @@ public class Map extends Scene{
                         break;
 
                         case 1 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeAsso.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeAsso.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(asso.getLayoutX());
                                     txt.setY(asso.getLayoutY() + 30+ 10 * listeAsso.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -227,16 +231,16 @@ public class Map extends Scene{
                             break;
 
                         case 2 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeAdmin.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeAdmin.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(admin.getLayoutX());
                                     txt.setY(admin.getLayoutY() + 30+10 * listeAdmin.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -244,16 +248,16 @@ public class Map extends Scene{
                             break;
 
                         case 3 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeAmphi.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeAmphi.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(amphi.getLayoutX());
                                     txt.setY(amphi.getLayoutY() + 30+ 10 * listeAmphi.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -261,16 +265,16 @@ public class Map extends Scene{
                             break;
 
                         case 4 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeTd.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeTd.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(td.getLayoutX());
                                     txt.setY(td.getLayoutY() + 30+  10 * listeTd.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -278,16 +282,16 @@ public class Map extends Scene{
                             break;
 
                         case 5 :
-                            if (listText.indexOf(txt)!=-1) {
-                                listeGrasseMat.add(listedep.get(listText.indexOf(txt)));
+                            if (listTextJour.indexOf(txt)!=-1) {
+                                listeGrasseMat.add(listedepJour.get(listTextJour.indexOf(txt)));
 
                                 if (event.getTransferMode() == TransferMode.MOVE) {
                                     txt.setScaleX(0.5);
                                     txt.setScaleY(0.5);
                                     txt.setX(grasseMat.getLayoutX());
                                     txt.setY(grasseMat.getLayoutY() + 30+ 10 * listeGrasseMat.size());
-                                    listedep.remove(listedep.get(listText.indexOf(txt)));
-                                    listText.remove(txt);
+                                    listedepJour.remove(listedepJour.get(listTextJour.indexOf(txt)));
+                                    listTextJour.remove(txt);
 
                                 }
                             }
@@ -300,10 +304,8 @@ public class Map extends Scene{
 
                     }
 
-                    System.out.println("txt" + listText);
+                    System.out.println("txt" + listTextJour.size());
 
-                    //listearr.add(listedep.get(listText.indexOf(txt)));
-                    //listedep.remove(0);
 
                     System.out.println("rue : "+listeRue);
                     System.out.println("asso : "+listeAsso);
@@ -331,7 +333,9 @@ public class Map extends Scene{
                 parent.getChildren().add(td);
                 parent.getChildren().add(grasseMat);
 
-                for(Text txt : listText){
+                parent.getChildren().add(buttonNuit);
+
+                for(Text txt : listTextJour){
                     parent.getChildren().add(txt);
                 }
 
@@ -356,10 +360,20 @@ public class Map extends Scene{
                 td.setLayoutY(560);
         td.setStyle("-fx-background-color: #FF6060; ");
 
-                grasseMat.setLayoutX(50);
-                grasseMat.setLayoutY(50);
+                grasseMat.setLayoutX(900);
+                grasseMat.setLayoutY(600);
         grasseMat.setStyle("-fx-background-color: #FF6060; ");
 
 
+        buttonNuit.setLayoutX(965);
+
+
+
+
+    }
+
+
+    public Button getButtonNuit() {
+        return buttonNuit;
     }
 }
