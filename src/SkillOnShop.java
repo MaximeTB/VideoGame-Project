@@ -9,5 +9,10 @@ public class SkillOnShop extends Skills{
 
     }
 
+    @Override
+    void OnRecruit(Eleve E, Player list) {
+
+    }
+
 
 }
