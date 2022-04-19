@@ -18,7 +18,8 @@ public class Lieu {
     protected int EOC=0; //effect on cohesion
     protected int EOPV=0; //effect on PV
     protected int isAMPH=0; //effet specifique a l'amphi
-    private boolean isSoiree=false; //effet specifique aux soiree, notament la gueule de bois
+
+    private boolean isMeeting=false; //effet specifique aux reunions de poles
 
     private static int nbLieu =0;
 
@@ -79,9 +80,6 @@ public class Lieu {
     public int getEOPV() {
         return EOPV;
     }
-    public boolean isSoiree() {
-        return isSoiree;
-    }
 
     public int getNbLieu(){return nbLieu;}
     //Setters
@@ -114,7 +112,6 @@ public class Lieu {
         this.EOPV = EOPV;
     }
     public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
-    public void setIsSoiree(boolean isSoiree){this.isSoiree = isSoiree;}
     public void setAvailable(Boolean available) {
         this.available = available;
     }

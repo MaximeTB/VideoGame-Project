@@ -1,6 +1,6 @@
 public class Achetable {
     public String name;
-    public Integer number;
+    public Integer number; //nombre de fois ou vous avez acheté l'objet
     public Integer price;
     public String type; //animation, instant
 
@@ -58,8 +58,13 @@ public class Achetable {
 
 
     public void Achat(Game G){
+        G.getPlayer().getInventory().getInventory().add(this);
         if(type.equals("animation")){
             G.getListLieux().add(new Animation(this.name, false, JN, capMax, EOPV));
+        }
+
+        if(type.equals("instant")){
+
         }
     }
 }

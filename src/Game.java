@@ -99,6 +99,9 @@ public class Game {
         for(Lieu L : ListLieux){
             L.ApplyLieuEffect(player);
         }//applique les effets de tous les lieux
+        for(Pole L : player.getPoles()){
+
+        }
         for(Lieu L : ListLieux){
             L.ReductionDuree();
         }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
