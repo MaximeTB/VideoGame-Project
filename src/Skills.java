@@ -87,6 +87,8 @@ public abstract class Skills {
 
     // fait correspondre l'effet au skill
     abstract void ApplySkillEffect(Eleve E, Player list);
+
+    abstract void OnRecruit(Eleve E, Player list);//a appeler lorsque l'élève est recruté dans la methode player.recrute()
     
 
     @Override

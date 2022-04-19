@@ -34,4 +34,9 @@ public class SkillOnPole extends Skills{
     void ApplySkillEffect(Eleve E, Player list) {
 
     }
+
+    @Override
+    void OnRecruit(Eleve E, Player list) {
+
+    }
 }

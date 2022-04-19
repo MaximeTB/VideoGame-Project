@@ -58,6 +58,8 @@ public class SkillsOnLieu extends Skills {
         System.out.println("mauvaise fonction");
     }
 
+    public void OnRecruit(Eleve E, Player list){}
+
 //Getter
     public ArrayList<Lieu> getLieuCible() {
         return LieuCible;

@@ -20,12 +20,15 @@ public class Lieu {
     protected int isAMPH=0; //effet specifique a l'amphi
     private boolean isSoiree=false; //effet specifique aux soiree, notament la gueule de bois
 
+    private static int nbLieu =0;
+
     public Lieu(String name, Boolean available, String type){
         this.name = name;
         this.available = available;
         this.type = type;
         this.capMax = 100;
         this.Duree = 100;
+        nbLieu++;
     }
 
     public Lieu(String name, Boolean available, String type, int capMax){
@@ -79,6 +82,8 @@ public class Lieu {
     public boolean isSoiree() {
         return isSoiree;
     }
+
+    public int getNbLieu(){return nbLieu;}
     //Setters
 
     public void setName(String name) {
