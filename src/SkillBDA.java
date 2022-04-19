@@ -4,7 +4,7 @@ public class SkillBDA extends SkillsOnLieu{
     public ArrayList<Integer> index;//list des index des lieux ciblé dans le super effectOnLieu
     private int ValueBonus; //modificateur par autres eleves
     public SkillBDA(String type, String color, String name, ArrayList<Lieu> LieuCible, ArrayList<String> StatCible, ArrayList<Integer> ValueEffet) {
-        super(type, color, name,LieuCible,StatCible,ValueEffet);
+        super(color, name,LieuCible,StatCible,ValueEffet);
     }
 
 
