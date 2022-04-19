@@ -13,15 +13,22 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        Game game = new Game();
+
         primaryStage.setTitle("ENSEA");
         Group rootQG = new Group();
         Group rootShop = new Group();
+        Group rootInventory = new Group();
         QG qg = new QG(rootQG, 600, 400);
-        Shop shop = new Shop(rootShop, 600, 400);
+        Shop shop = new Shop(rootShop, 600, 400, game.getPlayer());
+        Inventory inventory = new Inventory(rootInventory, 600, 400, game.getPlayer());
 
 
         primaryStage.setScene(qg);
         qg.getButtonShop().setOnAction((e -> primaryStage.setScene(shop)));
+        qg.getButtonInventory().setOnAction((e -> primaryStage.setScene(inventory)));
+        shop.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
+        inventory.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
 
 
         primaryStage.show();
