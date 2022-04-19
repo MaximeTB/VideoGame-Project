@@ -19,16 +19,24 @@ import java.util.ArrayList;
         public void start(Stage primaryStage) throws Exception{
 
             primaryStage.setTitle("ENSEA");
-            Group root = new Group();
+            Group mapRoot = new Group();
+            Group mapNuitRoot = new Group();
             ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
             for(int i=0 ; i<15; i++){
                 listeEleve.add(new Eleve("Pierre"));
             }
-            Map scene = new Map(root, listeEleve);
+            Map map = new Map(mapRoot, listeEleve);
+
+            ArrayList<Eleve> listeEleveNuit = (ArrayList<Eleve>)listeEleve.clone();
+            MapNuit mapNuit = new MapNuit(mapNuitRoot, listeEleveNuit);
 
 
 
-            primaryStage.setScene(scene);
+            primaryStage.setScene(map);
+            map.getButtonNuit().setOnAction((e -> primaryStage.setScene(mapNuit)));
+            mapNuit.getButtonJour().setOnAction((e -> primaryStage.setScene(map)));
+
+
             primaryStage.show();
 
         }
