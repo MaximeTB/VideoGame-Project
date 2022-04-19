@@ -7,6 +7,7 @@ public class Player {
     private ArrayList<Eleve> ListeEleve=null;
     private ArrayList<Pole> poles= new ArrayList<>();
     private Integer argent ,popularite,admin,PV,cohesion ;  //PV :points de victoires, utiles en fin de partie
+    private int NbCrepe=0;
 
     public Player(){} //test pour QG
 
@@ -87,6 +88,11 @@ public class Player {
         }
         return PoleDisp;
     }
+
+    public int getNbCrepe() {
+        return NbCrepe;
+    }
+
     //Fin Getters
 
 //Les Setters
@@ -126,6 +132,10 @@ public class Player {
 
     public void addEleve(Eleve e){
         ListeEleve.add(e);
+    }
+
+    public void gainCrep(int nb){
+        this.NbCrepe+=nb;
     }
 
 
