@@ -11,6 +11,8 @@ public class PoolsOfSkills {
 
     private ArrayList<Skills> AllSkills;
 
+    private ArrayList<Skills> SkillOnRecruit;
+
     private ArrayList<Skills> SkillOnLieu;
     private ArrayList<Skills> SkillBDA;
 
@@ -32,6 +34,8 @@ public class PoolsOfSkills {
     public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux,ArrayList<Pole>  Poles){
         //Initialisation de toutes les listes
         AllSkills = new ArrayList<Skills>();
+
+        SkillOnRecruit = new ArrayList<Skills>();
 
         SkillOnLieu = new ArrayList<Skills>();
         SkillBDA = new ArrayList<Skills>();
@@ -62,9 +66,12 @@ public class PoolsOfSkills {
         //Pour SkillsOnPole
         ArrayList<Pole> ListePole = new ArrayList<Pole>();
 
+        //Pour les SkillsOnRecruit
+        int EOM,EOC,EOA;
+
         String name;
 
-        //Creation des skills on Lieu
+        //Creation des SkillOnLieu
         try{
             BufferedReader buf = new BufferedReader(new FileReader(SkillsOnLieu));
             buf.readLine();
@@ -111,7 +118,7 @@ public class PoolsOfSkills {
         }
 
 
-
+        //Creation des SkillOnOthers
         try{
             BufferedReader buf = new BufferedReader(new FileReader(SkillsOnOthers));
             buf.readLine();
@@ -156,7 +163,7 @@ public class PoolsOfSkills {
         }
 
 
-        //Pour SkillOnPole
+        //Creation SkillOnPole
         try{
             BufferedReader buf = new BufferedReader(new FileReader(SkillsOnPole));
             buf.readLine();
@@ -193,6 +200,39 @@ public class PoolsOfSkills {
             System.out.println("Maybe the file isn't there ?");
             e.printStackTrace();
         }
+
+        //Creation de Skill
+        try{
+            BufferedReader buf = new BufferedReader(new FileReader(SkillsOnRecruit));
+            buf.readLine();
+            String s = buf.readLine();
+            while(s!=null){
+                s.replaceAll("\"", "");
+                String fields[] = s.split(";");
+                EOM= Integer.parseInt(fields[2]);
+                EOC=Integer.parseInt(fields[3]);
+                EOA=Integer.parseInt(fields[4]);
+
+                skill=new SkillOnRecruit(fields[1],fields[0],EOM,EOC,EOA);
+                AllSkills.add(skill);
+                SkillOnRecruit.add(skill);
+                switch(skill.getColor()){
+                    case "Blue" : BlueList.add(skill);
+                    case "Yellow" : YellowList.add(skill);
+                    case "Green" : GreenList.add(skill);
+                    case "Grey" : GreyList.add(skill);
+                    case "Red" : RedList.add(skill);
+                    case "Black" : BlackList.add(skill);
+                    default : break;
+                }
+            }
+            buf.close();
+        }
+        catch(Exception e){
+            System.out.println("Maybe the file isn't there ?");
+            e.printStackTrace();
+        }
+
     }
 
 
