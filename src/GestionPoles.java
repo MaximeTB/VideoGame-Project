@@ -71,7 +71,7 @@ public class GestionPoles extends Scene {
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
 
-        poleDisplay = new Text(300, 30, currentPole.getName());
+        poleDisplay = new Text(120, 30, currentPole.getName() + "   niv." + currentPole.getLevel() + "  XP : " + currentPole.getXP() + "/" + currentPole.getRequiredXP());
         poleDisplay.setTextAlignment(TextAlignment.CENTER);
         poleDisplay.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         poleDisplay.setFill(Color.ORANGE);
@@ -98,16 +98,10 @@ public class GestionPoles extends Scene {
     }
 
     public void updateEleves(){
-        Iterator<ImageButton> bI = buttonPlayers.iterator();
-        while (bI.hasNext()) {
-            parent.getChildren().remove(bI.next());
-            bI.remove();
-            indexEleve = 0;
-        }
         for (Eleve e : player.getPoles().get(indexPole).getMember()){
             ImageButton tempButton = new ImageButton();
             tempButton.updateImages(player,"Eleve", "msnIcon.png", "msnIcon.png");
-            tempButton.displayButton(1, 1+indexEleve,200,50,40);
+            tempButton.displayButton(1 + indexEleve%5, 1+indexEleve/5,200,50,40);
 
             buttonPlayers.add(tempButton);
             indexEleve = indexEleve + 1;
@@ -118,7 +112,7 @@ public class GestionPoles extends Scene {
     }
 
     public void updatePoleDisplay(){
-        poleDisplay.setText(currentPole.getName());
+        poleDisplay.setText(currentPole.getName() + "   niv." + currentPole.getLevel() + "  XP : " + currentPole.getXP() + "/" + currentPole.getRequiredXP());
     }
 
     public void updateButtons(){
