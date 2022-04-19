@@ -8,8 +8,8 @@ public class SkillOnRecruit extends Skills{
     //pour l'instant ce sont les seuls modificateur que l'on utilise, mais on pourrait en rajouter pour toutes les stats
     //de la liste ou des élèves si besoin.
 
-    public SkillOnRecruit(String type, String color, String name) {
-        super(type, color, name);
+    public SkillOnRecruit(String color, String name) {
+        super(color, name);
     }
 
 
@@ -22,6 +22,7 @@ public class SkillOnRecruit extends Skills{
         list.gainAdmin(EOA);
     }
 
+    @Override
     void ApplySkillEffect(Eleve E, Player list) {
 
     }

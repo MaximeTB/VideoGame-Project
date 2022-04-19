@@ -46,6 +46,7 @@ public class PoolOfLocation {
                 this.Nb+=1;
                 s=buf.readLine();
             }
+            buf.close();
         }
         catch(Exception e){
             System.out.println("Maybe the file isn't there ?");

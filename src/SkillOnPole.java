@@ -1,13 +1,17 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SkillOnPole extends Skills{
 
-    private ArrayList<Pole> PoleCible = new ArrayList<>(); //pole affecté par l'effet
+    private ArrayList<Pole> PoleCible; //pole affecté par l'effet
     private String StatCible; //stat affecté
     private Integer ValueEffet; //valeur
 
-    public SkillOnPole(String type, String color, String name) {
-        super(type, color, name);
+    public SkillOnPole(String color, String name, ArrayList<Pole> PoleCible,String StatCible,Integer ValueEffet) {
+        super(color, name);
+        this.PoleCible=PoleCible;
+        this.StatCible=StatCible;
+        this.ValueEffet=ValueEffet;
     }
 
     public void ApplyEffectOnPole(Pole P, Player list){
@@ -17,9 +21,10 @@ public class SkillOnPole extends Skills{
     }
     public float ApplyEffectOnXP(Pole P, Player list){
         float multiplicateur=1;
-        if(StatCible.equals("XP"))
-        if(PoleCible.contains(P)){
-            multiplicateur=ValueEffet;
+        if(StatCible.equals("XP")){
+            if(PoleCible.contains(P)){
+                multiplicateur=ValueEffet;
+            }
         }
         return multiplicateur;
     }

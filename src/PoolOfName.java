@@ -23,6 +23,7 @@ public class PoolOfName {
                 this.list.add(fields[0]);
                 s=buf.readLine();
             }
+            buf.close();
         }
         catch(Exception e){
             System.out.println("Maybe the file isn't there ?");
