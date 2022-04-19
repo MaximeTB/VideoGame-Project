@@ -85,14 +85,15 @@ public class PoolsOfSkills {
 
 
                 for(int i=0 ;i<(fields.length - 2)/3;i++){
-                    name = fields[i+2];
+                    name = fields[3*i+2];
                     for(Lieu l : Lieux){
                         if(l.getname().equals(name)){
                             ListeLieu.add(l);
+                            break;
                         }
                     }
-                    StatCible.add(fields[i+3]);
-                    ValueCible.add(Integer.parseInt(fields[i+4]));
+                    StatCible.add(fields[3*i+3]);
+                    ValueCible.add(Integer.parseInt(fields[3*i+4]));
 
 
                 }
