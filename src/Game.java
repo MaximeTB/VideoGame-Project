@@ -302,6 +302,12 @@ public class Game {
         }
         getListLieux().add(new Lieu("Faire des crêpes",true,"J", 5));
 
+        for(Lieu L:getListLieux()){
+            if(L.getClass()==Animation.class){
+                L.setAvailable(true);
+            }
+        }
+
     }//lance la semaine de liste
 
 
