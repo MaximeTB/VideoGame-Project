@@ -30,7 +30,6 @@ public class Game {
                 DayEvent.add(e);
             }
         }
-
         PoolOfEvent NightEvent= new PoolOfEvent();
         for (Evenement e : pool.getEventList()){
             if (e.getType().equals("N")) {

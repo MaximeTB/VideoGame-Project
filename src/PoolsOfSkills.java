@@ -29,7 +29,7 @@ public class PoolsOfSkills {
 
     private SkillColor Colors = new SkillColor();
 
-    public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux){
+    public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux,ArrayList<Pole>  Poles){
         //Initialisation de toutes les listes
         AllSkills = new ArrayList<Skills>();
 
@@ -51,9 +51,16 @@ public class PoolsOfSkills {
 
 
         Skills skill;
+
+        //Pour SkillsOnLieu et SkillsOnOther
         ArrayList<Lieu> ListeLieu= new ArrayList<Lieu>();
         ArrayList<String> StatCible= new ArrayList<String>();
         ArrayList<Integer> ValueCible= new ArrayList<Integer>();
+        String Stat;
+        int ValueEffect;
+
+        //Pour SkillsOnPole
+        ArrayList<Pole> ListePole = new ArrayList<Pole>();
 
         String name;
 
@@ -93,21 +100,107 @@ public class PoolsOfSkills {
                     case "Grey" : GreyList.add(skill);
                     case "Red" : RedList.add(skill);
                     case "Black" : BlackList.add(skill);
+                    default : break;
                 }
             }
+            buf.close();
         }
         catch(Exception e){
             System.out.println("Maybe the file isn't there ?");
             e.printStackTrace();
         }
+
+
+
+        try{
+            BufferedReader buf = new BufferedReader(new FileReader(SkillsOnOthers));
+            buf.readLine();
+            String s = buf.readLine();
+            while(s!=null){
+                ListeLieu.clear();
+                StatCible.clear();
+                ValueCible.clear();
+                s.replaceAll("\"", "");
+                String fields[] = s.split(";");
+
+
+                for(int i=0 ;i<(fields.length - 2)/3;i++){
+                    name = fields[i+2];
+                    for(Lieu l : Lieux){
+                        if(l.getname().equals(name)){
+                            ListeLieu.add(l);
+                        }
+                    }
+                    StatCible.add(fields[i+3]);
+                    ValueCible.add(Integer.parseInt(fields[i+4]));
+                }
+                skill=new SkillOnOthers(fields[1],fields[0],ListeLieu,StatCible,ValueCible);
+                SkillOnOther.add(skill);
+                AllSkills.add(skill);
+
+                switch(skill.getColor()){
+                    case "Blue" : BlueList.add(skill);
+                    case "Yellow" : YellowList.add(skill);
+                    case "Green" : GreenList.add(skill);
+                    case "Grey" : GreyList.add(skill);
+                    case "Red" : RedList.add(skill);
+                    case "Black" : BlackList.add(skill);
+                    default : break;
+                }
+            }
+            buf.close();
+        }
+        catch(Exception e){
+            System.out.println("Maybe the file isn't there ?");
+            e.printStackTrace();
+        }
+
+
+        //Pour SkillOnPole
+        try{
+            BufferedReader buf = new BufferedReader(new FileReader(SkillsOnPole));
+            buf.readLine();
+            String s = buf.readLine();
+            while(s!=null) {
+                ListePole.clear();
+                s.replaceAll("\"", "");
+                String fields[] = s.split(";");
+
+                name=fields[4];
+                for(Pole p : Poles){
+                    if(p.getName().equals(name)){
+                        ListePole.add(p);
+                    }
+                }
+                ValueEffect= Integer.parseInt(fields[3]);
+
+                skill= new SkillOnPole(fields[1],fields[0],ListePole,fields[2],ValueEffect);
+                AllSkills.add(skill);
+                SkillOnPole.add(skill);
+                switch(skill.getColor()){
+                    case "Blue" : BlueList.add(skill);
+                    case "Yellow" : YellowList.add(skill);
+                    case "Green" : GreenList.add(skill);
+                    case "Grey" : GreyList.add(skill);
+                    case "Red" : RedList.add(skill);
+                    case "Black" : BlackList.add(skill);
+                    default : break;
+                }
+            }
+            buf.close();
+        }
+        catch(Exception e) {
+            System.out.println("Maybe the file isn't there ?");
+            e.printStackTrace();
+        }
     }
+
 
     public Skills RandomSkill(){
         Skills skill;
         skill=this.getAllSkills().get(rand.nextInt(this.getAllSkills().size()));
         return skill;
     }
-
     public Skills RandomSkillOnLieu(){
         Skills skill;
         skill=this.getSkillOnLieu().get(rand.nextInt(this.getSkillOnLieu().size()));

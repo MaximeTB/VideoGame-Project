@@ -29,6 +29,7 @@ public class PoolOfEvent {
                 this.NbEvent+=1;
                 s=buf.readLine();
             }
+            buf.close();
         }
         catch(Exception e){
             System.out.println("Maybe the file isn't there ?");
