@@ -35,6 +35,12 @@ public class Pole {
         return created;
     }
     public String getName(){return name;}
+    public float getXP(){
+        return XP;
+    }
+    public float getRequiredXP(){
+        return (this.level*2)*RequiredXp;
+    }
 
     public int addMember(Eleve e){
         Member.add(e);
