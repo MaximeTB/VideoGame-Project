@@ -8,8 +8,11 @@ public class SkillOnRecruit extends Skills{
     //pour l'instant ce sont les seuls modificateur que l'on utilise, mais on pourrait en rajouter pour toutes les stats
     //de la liste ou des élèves si besoin.
 
-    public SkillOnRecruit(String color, String name) {
+    public SkillOnRecruit(String color, String name,int EOM,int EOC,int EOA ) {
         super(color, name);
+        this.EOM=EOM;
+        this.EOC=EOC;
+        this.EOA=EOA;
     }
 
 
