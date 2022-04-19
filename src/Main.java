@@ -18,25 +18,42 @@ pour ceux qui font du javafx faite attention quand vous changez le main a ce qu'
 compiler le reste sans problème svp
 */
 
-public class Main {
-/*
+public class Main extends Application{
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        Game game = new Game();
+
         primaryStage.setTitle("ENSEA");
-        Group root = new Group();
-        QG scene = new QG(root, 600, 400);
+        Group rootQG = new Group();
+        Group rootShop = new Group();
+        Group rootPoles = new Group();
+        Group rootInventory = new Group();
+        QG qg = new QG(rootQG, 600, 400);
+        Inventory inventory = new Inventory(rootInventory, 600, 400, game.getPlayer());
+        GestionPoles poles = new GestionPoles(rootPoles, 600, 400, game.getPlayer());
+        Shop shop = new Shop(rootShop, 600, 400, game.getPlayer(), inventory);
 
 
-        primaryStage.setScene(scene);
+
+        primaryStage.setScene(qg);
+        qg.getButtonShop().setOnAction((e -> primaryStage.setScene(shop)));
+        qg.getButtonInventory().setOnAction((e -> primaryStage.setScene(inventory)));
+        qg.getButtonPoles().setOnAction((e -> primaryStage.setScene(poles)));
+        shop.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
+        inventory.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
+        poles.getButtonExit().setOnAction((e -> primaryStage.setScene(qg)));
+        poles.updateButtons();
+
         primaryStage.show();
 
-    }*/
+    }
 
-    //static ArrayList<Eleve> Test= new ArrayList();
+    static ArrayList<Eleve> Test= new ArrayList();
 
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
 
         Scanner clavier =new Scanner(System.in);
         Game game = new Game();

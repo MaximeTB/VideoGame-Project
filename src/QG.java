@@ -1,67 +1,78 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class QG extends Scene implements EventHandler<ActionEvent> {
     int width;
     int height;
-    Player listeJoueurs;
+    Player player;
 
     private StaticThing background;
     private StaticThing money;
-    private Button buttonList;
-    private Button buttonShop;
-    private Button buttonExit;
+    private ImageButton buttonPoles;
+    private ImageButton buttonShop;
+    private ImageButton buttonInventory;
+    private ImageButton buttonExit;
+
+    public Button getButtonShop(){
+        return buttonShop;
+    }
+    public Button getButtonInventory() { return buttonInventory; }
+    public Button getButtonPoles() {
+        return buttonPoles;
+    }
 
     public QG(Group parent, int width, int height){
         super(parent, width, height);
-        listeJoueurs = new Player(); // mal geré (revoir méthodo de Liste.java)
+        player = new Player();
 
-        background = new StaticThing(0,353,0,345, 0, "C:\\Users\\rotci\\IdeaProjects\\VideoGame-Project\\src\\mapQg.png");
-        buttonList = new Button();
-        buttonList.setLayoutX(360);
-        buttonList.setLayoutY(0);
-        buttonList.setText("Liste");
+        background = new StaticThing(0, 600, 0, 400, 0, "QG.jpg");
 
-        buttonShop = new Button();
-        buttonShop.setLayoutX(360);
-        buttonShop.setLayoutY(100);
-        buttonShop.setText("Magasin");
+        buttonPoles = new ImageButton();
+        buttonPoles.updateImages(player, "Poles", "polesIcon.jpg", "soldoutIcon.jpg");
+        buttonPoles.displayButton(1, 1, 0, 0,120);
+        buttonPoles.hoverButton("  Gestion des pôles ", "    Gère ta bande de bras cassés    ", 0, "", "QG");
 
-        buttonExit = new Button();
-        buttonExit.setLayoutX(360);
-        buttonExit.setLayoutY(200);
-        buttonExit.setText("Quitter le QG");
+        buttonShop = new ImageButton();
+        buttonShop.updateImages(player, "Shop", "shopIcon.png", "soldoutIcon.jpg");
+        buttonShop.displayButton(2, 1, 0,0, 120);
+        buttonShop.hoverButton("  Magasin ", "    L'argent c'est fait pour être dépensé    ", 0, "", "QG");
 
-        buttonList.setOnAction(this);
-        buttonShop.setOnAction(this);
+        buttonInventory = new ImageButton();
+        buttonInventory.updateImages(player, "Inventory", "bagIcon.png", "soldoutIcon.jpg");
+        buttonInventory.displayButton(3, 1,0,0, 120);
+        buttonInventory.hoverButton("  Inventaire ", "    Consulte tes effets personnels    ", 0, "", "QG");
+
+
+        buttonExit = new ImageButton();
+        buttonExit.setButtonExit(110);
+
         buttonExit.setOnAction(this);
+        buttonPoles.setOnAction(this);
 
         parent.getChildren().add(background.getImg());
-        parent.getChildren().add(buttonList);
-        parent.getChildren().add(buttonShop);
-        parent.getChildren().add(buttonExit);
-
+        parent.getChildren().addAll(buttonShop, buttonPoles, buttonInventory, buttonExit);
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == buttonList) {
-            listeJoueurs.generateList(20);
+        if (actionEvent.getSource() == buttonPoles) {
+            player.generateList(20);
         }else if (actionEvent.getSource() == buttonShop){
             // image du magasin
+        }else if (actionEvent.getSource() == buttonExit){
+            handleCloseButtonAction(actionEvent);
         }
     }
 
-    void liste(){
-
+    @FXML
+    public void handleCloseButtonAction(ActionEvent event) {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
 
-    void magasin(){
-        System.out.println("Que veux-tu acheter poto ?");
-        System.out.println("1. Cafetière 2. Cuisine 3. Jeux gonflables 4. Louer une salle 5. Feux d'artifice 6. Inviter une célebrité");
-    }
 
 }

@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
+    private PlayerInventory inventory;
     private ArrayList<Eleve> ListeEleve=null;
     private ArrayList<Pole> poles= new ArrayList<>();
     private Integer argent ,popularite,admin,PV,cohesion ;  //PV :points de victoires, utiles en fin de partie
@@ -13,6 +14,7 @@ public class Player {
         Eleve President = new Eleve(namePrez);
 
         name=nameList;
+        inventory = new PlayerInventory();
         ListeEleve=new ArrayList<Eleve>();
         ListeEleve.add(President);
         argent=0;
@@ -35,7 +37,7 @@ public class Player {
         for(int i=0;i<nb;i++){
             Eleve e = new Eleve();
             choice.add(e);
-            System.out.println(i+1+". "+e);
+            System.out.println(e);
         }
         System.out.println("Choisissez un élève");
         String answer = scan.nextLine();
@@ -81,6 +83,7 @@ public class Player {
         }
         return PoleDisp;
     }
+    public PlayerInventory getInventory(){return inventory;}
     //Fin Getters
 
 //Les Setters

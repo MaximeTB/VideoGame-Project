@@ -1,15 +1,15 @@
 import javafx.application.Application;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 // TO DO : base de prénoms pour la liste d'élèves.
 
@@ -19,11 +19,24 @@ import javafx.stage.Stage;
         public void start(Stage primaryStage) throws Exception{
 
             primaryStage.setTitle("ENSEA");
-            Group root = new Group();
-            QG scene = new QG(root, 600, 400);
+            Group mapRoot = new Group();
+            Group mapNuitRoot = new Group();
+            ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
+            for(int i=0 ; i<15; i++){
+                listeEleve.add(new Eleve("Pierre"));
+            }
+            Map map = new Map(mapRoot, listeEleve);
+
+            ArrayList<Eleve> listeEleveNuit = (ArrayList<Eleve>)listeEleve.clone();
+            MapNuit mapNuit = new MapNuit(mapNuitRoot, listeEleveNuit);
 
 
-            primaryStage.setScene(scene);
+
+            primaryStage.setScene(map);
+            map.getButtonNuit().setOnAction((e -> primaryStage.setScene(mapNuit)));
+            mapNuit.getButtonJour().setOnAction((e -> primaryStage.setScene(map)));
+
+
             primaryStage.show();
 
         }
