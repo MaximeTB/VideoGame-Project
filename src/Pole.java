@@ -43,7 +43,9 @@ public class Pole {
     }
 
     public int addMember(Eleve e){
+        if(e.getPole()!=null){
         e.getPole().removeMember(e);
+        }
         Member.add(e);
         e.setPole(this);
         return 0;
