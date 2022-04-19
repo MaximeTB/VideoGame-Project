@@ -307,22 +307,17 @@ public class Game {
             //défaite
         }
         //2 : fin des études, désactivation des lieux et créer les nouveau
-        for(Lieu L : getListLieux()){
-            if(L.getEOM()!=0 || L.getEOS()!=0){
+        for(Lieu L : ListLieux){
+            if(L.getEOM()!=0 || L.getEOS()!=0)
                 L.setAvailable(false);
-            }
-        }
 
-
-        for(Lieu L : ListLieux)
-            if(L.getname().equals("Crepes J")||L.getname().equals("Crepes N"))
+            else if(L.getname().equals("Crepes J")||L.getname().equals("Crepes N"))
                 L.setAvailable(true);
 
-        for(Lieu L:getListLieux()){
-            if(L.getClass()==Animation.class){
+            else if(L.getClass()==Animation.class)
                 L.setAvailable(true);
-            }
         }
+
 
         NBC=crep.nextInt(20)+20; //premère commande de crep
 
