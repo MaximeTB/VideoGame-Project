@@ -11,11 +11,28 @@ public class Achetable {
 
     //serts pour les instants
 
-
+//getter
     public Integer getAttribute(){
         return this.number;
     }
-
+    public String getName() {
+        return name;
+    }
+    public Integer getPrice() {
+        return price;
+    }
+    public String getType() {
+        return type;
+    }
+    public String getJN() {
+        return JN;
+    }
+    public Integer getEOPV() {
+        return EOPV;
+    }
+    public Integer getCapMax() {
+        return capMax;
+    }
 
     public void Achat(Game G){
         if(type.equals("animation")){
