@@ -86,12 +86,12 @@ public class GestionPoles extends Scene {
             if (b==buttonLeft){
                 indexPole = (indexPole + player.getPoles().size() - 1)%player.getPoles().size();
                 currentPole = player.getPoles().get(indexPole);
-                updateEleves();
+                //updateEleves();
 
             }else{
                 indexPole = (indexPole + 1)%player.getPoles().size();
                 currentPole = player.getPoles().get(indexPole);
-                updateEleves();
+                //updateEleves();
             }
             updatePoleDisplay();
         }));
@@ -119,7 +119,7 @@ public class GestionPoles extends Scene {
         for (ImageButton b : buttonPlayers){
             b.setOnMouseClicked((event) -> {
                 Group root = new Group();
-                Scene scene = new Scene(root, 400, 200);
+                PopupEleve scene = new PopupEleve(root, 400, 200, player, player.getPoles().get(indexPole).getMember().get(indexEleve));
                 Stage stage = new Stage();
                 stage.setTitle("New Window");
                 stage.setScene(scene);

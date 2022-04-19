@@ -53,7 +53,6 @@ public class Main extends Application{
     static ArrayList<Eleve> Test= new ArrayList();
 
 
-    /*
     public static void main(String[] args) {
         launch(args);
 
@@ -65,6 +64,6 @@ public class Main extends Application{
 
         }
         System.out.println("Fin de la partie");
-    }*/
+    }
 
 }

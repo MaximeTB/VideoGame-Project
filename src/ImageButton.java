@@ -1,3 +1,4 @@
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.fxml.FXML;
 
 public class ImageButton extends Button {
 
@@ -84,6 +86,12 @@ public class ImageButton extends Button {
         this.setLayoutY(400-step-50);
     }
 
+    public void quitWindow(){
+        this.setOnAction((e -> {
+            handleCloseButtonAction(e);
+        }));
+    }
+
     public void hoverButton(String title, String description, Integer price, String effect, String state){
         this.shadow = new DropShadow();
         this.popup = new PopupFollow();
@@ -133,6 +141,11 @@ public class ImageButton extends Button {
     // updateHovering - calls again hoverButton to update the inventory display in shop
     public void updateHovering(){
         hoverButton(this.title, this.description, this.price, this.effect, this.state);
+    }
+
+    @FXML
+    public void handleCloseButtonAction(ActionEvent event) {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
 
 }
