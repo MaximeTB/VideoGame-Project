@@ -1,4 +1,3 @@
-/*
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -20,16 +19,28 @@ import java.util.ArrayList;
         public void start(Stage primaryStage) throws Exception{
 
             primaryStage.setTitle("ENSEA");
-            Group root = new Group();
+            Group mapRoot = new Group();
+            Group mapNuitRoot = new Group();
             ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
+            PoolOfLocation poolLieux = new PoolOfLocation("C:\\VideoGame-Project\\data\\ListesLieux.csv");
+            Player player = new Player("bde","moi",poolLieux);
+            System.out.println(player);
             for(int i=0 ; i<15; i++){
-                listeEleve.add(new Eleve());
+                player.recrute(1);
             }
-            Map scene = new Map(root, listeEleve);
+            listeEleve= player.getListeEleve();
+            Map map = new Map(mapRoot, listeEleve);
+
+            ArrayList<Eleve> listeEleveNuit = (ArrayList<Eleve>)listeEleve.clone();
+            MapNuit mapNuit = new MapNuit(mapNuitRoot, listeEleveNuit);
 
 
 
-            primaryStage.setScene(scene);
+            primaryStage.setScene(map);
+            map.getButtonNuit().setOnAction((e -> primaryStage.setScene(mapNuit)));
+            mapNuit.getButtonJour().setOnAction((e -> primaryStage.setScene(map)));
+
+
             primaryStage.show();
 
         }
@@ -46,7 +57,6 @@ import java.util.ArrayList;
         }
 
     }
+     */
     }
 
-
- */

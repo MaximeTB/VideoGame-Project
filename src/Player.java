@@ -31,6 +31,7 @@ public class Player {
         poles.add(new Pole("Pole communication","vert",false));
         poles.add(new Pole("Pole partenariat","gris", false));
         poles.add(new Pole("Pole bouffe","orange",false));
+        poles.add(new Pole("Sans Pole","gris",true));
 
         this.pool=new PoolsOfSkills("data/SkillsOnPoles.csv","data/SkillsOnLieu.csv","data/SkillsOnOther.csv","data/SkillsOnRecruit.csv",Lieux.getLocationList(),poles);
 
@@ -46,6 +47,7 @@ public class Player {
         for(int i=0;i<nb;i++){
             Eleve e = new Eleve(this.pool);
             choice.add(e);
+            poles.get(6).addMember(e);
             System.out.println(i+1+". "+e);
         }
         System.out.println("Choisissez un élève");

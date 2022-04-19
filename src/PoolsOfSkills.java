@@ -85,14 +85,15 @@ public class PoolsOfSkills {
 
 
                 for(int i=0 ;i<(fields.length - 2)/3;i++){
-                    name = fields[i+2];
+                    name = fields[3*i+2];
                     for(Lieu l : Lieux){
                         if(l.getname().equals(name)){
                             ListeLieu.add(l);
+                            break;
                         }
                     }
-                    StatCible.add(fields[i+3]);
-                    ValueCible.add(Integer.parseInt(fields[i+4]));
+                    StatCible.add(fields[3*i+3]);
+                    ValueCible.add(Integer.parseInt(fields[3*i+4]));
 
 
                 }
@@ -100,15 +101,19 @@ public class PoolsOfSkills {
                 SkillOnLieu.add(skill);
                 AllSkills.add(skill);
 
-                switch(skill.getColor()){
-                    case "Blue" : BlueList.add(skill);
-                    case "Yellow" : YellowList.add(skill);
-                    case "Green" : GreenList.add(skill);
-                    case "Grey" : GreyList.add(skill);
-                    case "Red" : RedList.add(skill);
-                    case "Black" : BlackList.add(skill);
+                String c = skill.getColor();
+
+                switch(c){
+                    case "Blue" : BlueList.add(skill);break;
+                    case "Yellow" : YellowList.add(skill);break;
+                    case "Green" : GreenList.add(skill);break;
+                    case "Grey" : GreyList.add(skill);break;
+                    case "Red" : RedList.add(skill);break;
+                    case "Black" : BlackList.add(skill);break;
                     default : break;
                 }
+
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -154,6 +159,7 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -193,6 +199,8 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -201,7 +209,7 @@ public class PoolsOfSkills {
             e.printStackTrace();
         }
 
-        //Creation de Skill
+        //Creation de SkillOnRecruit
         try{
             BufferedReader buf = new BufferedReader(new FileReader(SkillsOnRecruit));
             buf.readLine();
@@ -225,6 +233,7 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -242,6 +251,7 @@ public class PoolsOfSkills {
 
     public Skills RandomSkill(){
         Skills skill;
+        rand = new Random();
         skill=this.getAllSkills().get(rand.nextInt(this.getAllSkills().size()));
         return skill;
     }

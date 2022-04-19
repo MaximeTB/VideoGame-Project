@@ -3,6 +3,6 @@ Travailleur Efficace;Green;Centre doc;Etude;1;;;;;;
 Passionné;Green;Centre doc;Fatigue;-1;Amphi;Fatigue;-1;Salle de TP;Fatigue;-1
 Gamer;Blue;Repos;Fatigue;1;;;;;;
 Musicien;Yellow;Soiree;Argent;10;;;;;;
-Panier Bio;Yellow;La Rue;Argent;10;;;;;;
+Panier Bio;Yellow;La Rue;Argent;10;La Rue ;Popularite;1;;;
 Couche-Tard;Black;Soiree;Fatigue;-1;;;;;;
-Baby Caveux;Black;Soiree;Argent;5;PV;5;Fatigue;1;;
+Baby Caveux;Black;Soiree;Argent;5;;;;;;
