@@ -251,6 +251,7 @@ public class PoolsOfSkills {
 
     public Skills RandomSkill(){
         Skills skill;
+        rand = new Random();
         skill=this.getAllSkills().get(rand.nextInt(this.getAllSkills().size()));
         return skill;
     }
