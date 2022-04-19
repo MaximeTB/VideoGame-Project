@@ -233,6 +233,10 @@ public class PoolsOfSkills {
             e.printStackTrace();
         }
 
+        Skills Metro=new SkillOnShop("Grey","Carte Metro");
+        AllSkills.add(Metro);
+        GreyList.add(Metro);
+
     }
 
 
