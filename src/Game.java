@@ -8,6 +8,7 @@ public class Game {
     private int NbSemaine;
     private final int MaxTour=45;
     private final int MaxTourList=7;
+    private Boolean EndGame = false;
     private PoolOfEvent pool, DayPool, NightPool;
     private Player player;
     private QGconsole QG;
@@ -57,6 +58,8 @@ public class Game {
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
+        //ArrayList<Eleve> DayNonAffectedList = new ArrayList<Eleve>();
+        //ArrayList<Eleve> NightNonAffectedList = new ArrayList<Eleve>();
         int Entrée;
         System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()
@@ -99,6 +102,9 @@ public class Game {
         for(Lieu L : ListLieux){
             L.ApplyLieuEffect(player);
         }//applique les effets de tous les lieux
+        for(Pole L : player.getPoles()){
+
+        }
         for(Lieu L : ListLieux){
             L.ReductionDuree();
         }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
@@ -337,6 +343,11 @@ public class Game {
 
 public void EndGame(){
     System.out.println("fin");
+    if(player.getPV()>3000){
+        System.out.println("c'est gagné !");
+    }
+    else System.out.println("perdu D:");
+    EndGame=true;
 }
 //Getter
     public int getNbTour() {

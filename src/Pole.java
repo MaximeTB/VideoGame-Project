@@ -43,6 +43,7 @@ public class Pole {
     }
 
     public int addMember(Eleve e){
+        e.getPole().removeMember(e);
         Member.add(e);
         e.setPole(this);
         return 0;
@@ -62,14 +63,16 @@ public class Pole {
         float bonusTot=0;
         float multiplicateur=1;
         for (Eleve eleve : Member){
-            int bonusEleve=1;
-            for (Skills skill : eleve.getSkillsList()){
-                if (skill.getColor().equals(color1) || skill.getColor().equals(color2)){
-                    bonusEleve++;
+            if(eleve.getLocation("N").getname().equals("meeting de pole")) {
+                int bonusEleve = 1;
+                for (Skills skill : eleve.getSkillsList()) {
+                    if (skill.getColor().equals(color1) || skill.getColor().equals(color2)) {
+                        bonusEleve++;
+                    }
+                    multiplicateur *= ((SkillOnPole) skill).ApplyEffectOnXP(this, list);
                 }
-                multiplicateur*=((SkillOnPole)skill).ApplyEffectOnXP(this,list);
+                bonusTot += bonusEleve;
             }
-            bonusTot+=bonusEleve;
         }
 
         Eleve E =((Bureau)list.getPoles().get(0)).findEleve("Secrétaire");
@@ -82,8 +85,6 @@ public class Pole {
         bonusTot*=multiplicateur;
         this.gainXP(1+bonusTot);
     }//chaque élève rapporte 1Xp, doublé pour les élèves de la bonne couleur
-
-
 
 
     /*public static void main(String[] args){

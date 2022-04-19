@@ -1,6 +1,10 @@
 import javafx.scene.control.Button;
 
+import java.util.ArrayList;
+
 public class PlayerInventory {
+
+    private ArrayList<Achetable> Inventory= new ArrayList<Achetable>();
     private Integer coffee;
     private Integer pancakes;
     private Integer balloons;
@@ -65,5 +69,10 @@ public class PlayerInventory {
                 return weapon;
         }
         return 0;
+    }
+
+
+    public ArrayList<Achetable> getInventory() {
+        return Inventory;
     }
 }

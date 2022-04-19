@@ -1,8 +1,10 @@
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.Random;
 
 public class MapNuit extends Scene {
     private StaticThing nuit;
-    private int numeroList;
+    private int numeroList=10;
     private Button soiree = new Button("soirée");
     private Button dodo = new Button("dodo");
     private Button argent = new Button("argent");
@@ -28,6 +30,8 @@ public class MapNuit extends Scene {
     private ArrayList<Eleve> listeQg = new ArrayList<Eleve>();
     private ArrayList<Eleve> listeCentreDoc = new ArrayList<Eleve>();
 
+    private Button buttonJour = new Button("jour");
+
 
 
     public MapNuit(Group parent, ArrayList<Eleve> listeEleve) {
@@ -43,6 +47,7 @@ public class MapNuit extends Scene {
             txt.setScaleX(2.0);
             txt.setScaleY(2.0);
             listText.add(txt);
+            txt.setFill(Color.WHITE);
             i++;
 
         }
@@ -303,6 +308,8 @@ public class MapNuit extends Scene {
         parent.getChildren().add(argent);
         parent.getChildren().add(qg);
         parent.getChildren().add(centreDoc);
+        parent.getChildren().add(buttonJour);
+
 
         for(Text txt : listText){
             parent.getChildren().add(txt);
@@ -312,8 +319,8 @@ public class MapNuit extends Scene {
         soiree.setLayoutY(150+alea.nextInt(470));
         soiree.setStyle("-fx-background-color: #FF6060; ");
 
-        dodo.setLayoutX(50);
-        dodo.setLayoutY(50);
+        dodo.setLayoutX(900);
+        dodo.setLayoutY(600);
         dodo.setStyle("-fx-background-color: #FF6060; ");
 
         argent.setLayoutX(700);
@@ -328,7 +335,12 @@ public class MapNuit extends Scene {
         centreDoc.setLayoutY(235);
         centreDoc.setStyle("-fx-background-color: #FF6060; ");
 
+        buttonJour.setLayoutX(965);
+
+
+
     }
+
 
 
     public ArrayList<Eleve> getListeCentreDoc() {
@@ -351,4 +363,7 @@ public class MapNuit extends Scene {
         return listeSoiree;
     }
 
+    public Button getButtonJour() {
+        return buttonJour;
+    }
 }

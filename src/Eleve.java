@@ -148,6 +148,12 @@ public class Eleve implements Comparable {
         return  skill;
     }//a changer asbolument !!!!  dans tout les cas, la méthode doit renvoyer le skill qui a été donné
 
+    public Skills AddTestSkill(){
+        Skills skill = new SkillOnRecruit("gris","test", 0,0,0) ;
+        this.getSkillsList().add(skill);
+        return  skill;
+    }
+
     public String TestBureau(){
         Pole P=this.getPole();
         if(P.getClass()==Bureau.class){
