@@ -34,6 +34,29 @@ public class Achetable {
         return capMax;
     }
 
+//setter
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public void setJN(String JN) {
+        this.JN = JN;
+    }
+    public void setCapMax(Integer capMax) {
+        this.capMax = capMax;
+    }
+    public void setEOPV(Integer EOPV) {
+        this.EOPV = EOPV;
+    }
+
+
+
     public void Achat(Game G){
         if(type.equals("animation")){
             G.getListLieux().add(new Animation(this.name, false, JN, capMax, EOPV));
