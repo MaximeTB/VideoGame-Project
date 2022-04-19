@@ -100,15 +100,19 @@ public class PoolsOfSkills {
                 SkillOnLieu.add(skill);
                 AllSkills.add(skill);
 
-                switch(skill.getColor()){
-                    case "Blue" : BlueList.add(skill);
-                    case "Yellow" : YellowList.add(skill);
-                    case "Green" : GreenList.add(skill);
-                    case "Grey" : GreyList.add(skill);
-                    case "Red" : RedList.add(skill);
-                    case "Black" : BlackList.add(skill);
+                String c = skill.getColor();
+
+                switch(c){
+                    case "Blue" : BlueList.add(skill);break;
+                    case "Yellow" : YellowList.add(skill);break;
+                    case "Green" : GreenList.add(skill);break;
+                    case "Grey" : GreyList.add(skill);break;
+                    case "Red" : RedList.add(skill);break;
+                    case "Black" : BlackList.add(skill);break;
                     default : break;
                 }
+
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -154,6 +158,7 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -193,6 +198,8 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+
+                s = buf.readLine();
             }
             buf.close();
         }
@@ -201,7 +208,7 @@ public class PoolsOfSkills {
             e.printStackTrace();
         }
 
-        //Creation de Skill
+        //Creation de SkillOnRecruit
         try{
             BufferedReader buf = new BufferedReader(new FileReader(SkillsOnRecruit));
             buf.readLine();
@@ -225,6 +232,7 @@ public class PoolsOfSkills {
                     case "Black" : BlackList.add(skill);
                     default : break;
                 }
+                s = buf.readLine();
             }
             buf.close();
         }

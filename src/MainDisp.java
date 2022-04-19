@@ -22,7 +22,7 @@ import java.util.ArrayList;
             Group root = new Group();
             ArrayList<Eleve> listeEleve=new ArrayList<Eleve>();
             for(int i=0 ; i<15; i++){
-                listeEleve.add(new Eleve());
+                //listeEleve.add(new Eleve());
             }
             Map scene = new Map(root, listeEleve);
 
