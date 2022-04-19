@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.Array;
 import java.sql.SQLTransactionRollbackException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,7 +29,7 @@ public class PoolsOfSkills {
 
     private SkillColor Colors = new SkillColor();
 
-    public PoolsOfSkills(String filename){
+    public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux){
         //Initialisation de toutes les listes
         AllSkills = new ArrayList<Skills>();
 
@@ -49,20 +50,49 @@ public class PoolsOfSkills {
         //
 
 
-        //Skills skill;
+        Skills skill;
+        ArrayList<Lieu> ListeLieu= new ArrayList<Lieu>();
+        ArrayList<String> StatCible= new ArrayList<String>();
+        ArrayList<Integer> ValueCible= new ArrayList<Integer>();
 
+        String name;
 
+        //Creation des skills on Lieu
         try{
-            BufferedReader buf = new BufferedReader(new FileReader(filename));
+            BufferedReader buf = new BufferedReader(new FileReader(SkillsOnLieu));
             buf.readLine();
             String s = buf.readLine();
             while(s!=null){
+                ListeLieu.clear();
+                StatCible.clear();
+                ValueCible.clear();
                 s.replaceAll("\"", "");
                 String fields[] = s.split(";");
-                //skill= new Skills(fields[1],fields[0]);
 
-                switch(fields[1]){
-                    //case "Blue" ->  ;
+
+                for(int i=0 ;i<(fields.length - 2)/3;i++){
+                    name = fields[i+2];
+                    for(Lieu l : Lieux){
+                        if(l.getname().equals(name)){
+                            ListeLieu.add(l);
+                        }
+                    }
+                    StatCible.add(fields[i+3]);
+                    ValueCible.add(Integer.parseInt(fields[i+4]));
+
+
+                }
+                skill=new SkillsOnLieu(fields[1],fields[0],ListeLieu,StatCible,ValueCible);
+                SkillOnLieu.add(skill);
+                AllSkills.add(skill);
+
+                switch(skill.getColor()){
+                    case "Blue" : BlueList.add(skill);
+                    case "Yellow" : YellowList.add(skill);
+                    case "Green" : GreenList.add(skill);
+                    case "Grey" : GreyList.add(skill);
+                    case "Red" : RedList.add(skill);
+                    case "Black" : BlackList.add(skill);
                 }
             }
         }

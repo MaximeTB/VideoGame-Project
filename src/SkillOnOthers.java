@@ -19,7 +19,7 @@ public class SkillOnOthers extends SkillsOnLieu{
 
 
         for (int i=0;i< this.getLieuCible().size();i++){
-            if(LieuDeEleve.getname().equals(this.getLieuCible().get(i))){  //On vérifie que l'élève est dans un des lieux/le lieu affecté par le skills
+            if(LieuDeEleve.equals(this.getLieuCible().get(i))){  //On vérifie que l'élève est dans un des lieux/le lieu affecté par le skills
                 statCible = this.getStatCible().get(i);
                 valueEffect= this.getValueEffet().get(i);
                 for(Eleve e : LieuDeEleve.getElevePresents()){

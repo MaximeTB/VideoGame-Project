@@ -13,7 +13,7 @@ public class SkillOnRecruit extends Skills{
     }
 
 
-    public void OnRecruit(Eleve E, Player list){//a appeler lorsque l'élève est recruté dans la methode player.recrute()
+    public void OnRecruit(Eleve E, Player list){//à appeler lorsque l'élève est recruté dans la methode player.recrute()
         list.gainArgent(EOM);
         list.gainCohesion(EOC);
         list.gainAdmin(EOA);
