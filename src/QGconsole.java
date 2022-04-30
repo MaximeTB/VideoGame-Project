@@ -17,8 +17,8 @@ public class QGconsole {
         System.out.println("1. Cafetière 2. Cuisine 3. Jeux gonflables 4. Louer une salle");
         System.out.println("5. Feux d'artifice 6. Inviter une célebrité 7. Quitter");
     }
-    public void shopAction(int Entrée, Player player){
-        switch(Entrée){
+    public void shopAction(int Entree, Player player){
+        switch(Entree){
             case 1 :
                 System.out.println("Achat effectué !");
                 inventaire[index] = "Cafetière";

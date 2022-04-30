@@ -17,11 +17,9 @@ public class Game {
     Random crep = new Random();
     private int NBC = 0; //nombre de crêpe
 
-
     public Game() {
         //Listes des Events
         PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
-
         PoolOfEvent DayEvent= new PoolOfEvent();
         for (Evenement e : pool.getEventList()){
             if (e.getType().equals("J")) {
@@ -50,17 +48,53 @@ public class Game {
         player.setArgent(100);
         System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
         this.NbTour=1;
+    }
+
+    /**
+     *
+     * @param nb
+     */
+    public Game(int nb) {
+        //Listes des Events
+        /*PoolOfEvent pool = new PoolOfEvent("./data/ListeEvent.csv");
+        PoolOfEvent DayEvent= new PoolOfEvent();
+        for (Evenement e : pool.getEventList()){
+            if (e.getType().equals("J")) {
+                DayEvent.add(e);
+            }
+        }
+        PoolOfEvent NightEvent= new PoolOfEvent();
+        for (Evenement e : pool.getEventList()){
+            if (e.getType().equals("N")) {
+                NightEvent.add(e);
+            }
+        }*/
+
+        //initialisation des lieux
+        PoolOfLocation poolOfLocation = new PoolOfLocation("data/ListesLieux.csv");
+        this.ListLieux=poolOfLocation.getLocationList();
+
+
+        //Initialisation des Skills
+        //PoolsOfSkills poolsOfSkills= new PoolsOfSkills("data/SkillsOnPoles.csv","data/SkillsOnLieu.csv","data/SkillsOnOther.csv","data/SkillsOnRecruit.csv",poolOfLocation,Pole);
+
+        //Initialisation du Jeu
+        QG = new QGconsole();
+        this.player = new Player("BDMichelle","Michelle",poolOfLocation);
+        for(int i=0;i<nb;i++) player.addEleve(new Eleve(player.pool));
+        //test console on fout de l'argent tour 1
+        player.setArgent(100);
+        player.setPopularite(20);
+        System.out.println("Liste : " + player.getName() +"\n"+"Président/Présidente : "+ this.getPlayer().getListeEleve().get(0).getName());
+        this.NbTour=1;
         this.ListLieux = new ArrayList<Lieu>();
-
-
-
     }
 
     public void Tour(Scanner clavier){
         boolean FinTour= false,SortieMenu=false;
         //ArrayList<Eleve> DayNonAffectedList = new ArrayList<Eleve>();
         //ArrayList<Eleve> NightNonAffectedList = new ArrayList<Eleve>();
-        int Entrée;
+        int Entree;
         System.out.println("Tour " + this.getNbTour() + ":" +"\nArgent :"+this.getPlayer().getArgent().toString()
                 + "\nAdmin :"+this.getPlayer().getAdmin().toString()
                 + "\nPopularité :"+this.getPlayer().getPopularite().toString()
@@ -77,34 +111,34 @@ public class Game {
         ArrayList<Eleve> DayNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
         ArrayList<Eleve> NightNonAffectedList = new ArrayList<>(this.getPlayer().getListeEleve());
 
+        this.NewTour(clavier);
+
         while(!FinTour){
             System.out.println("Quel Menu veut-tu ouvrir ? \n1.Jour\n2.Nuit\n3.QG\n4.Fin du Tour");
-            Entrée=clavier.nextInt();
-            if(Entrée==1){
+            Entree=clavier.nextInt();
+            if(Entree==1){
                 this.Menu(DayNonAffectedList,clavier,"J");
-            }else if (Entrée==2){
+            }else if (Entree==2){
                 this.Menu(NightNonAffectedList,clavier,"N");
-            }else if(Entrée==3){
+            }else if(Entree==3){
                 this.MenuGQ(clavier);
-            } else if(Entrée==4){
+            } else if(Entree==4){
                 FinTour=true;
             }
         }
-
-        this.NewTour(clavier);
-
         System.out.println("Fin du Tour \n\n");
     }
 
     public void NewTour(Scanner clavier){
-        int Entrée;
+
+        //System.out.println("test");
+        int Entree;
         this.NbTour+=1;
         for(Lieu L : ListLieux){
             L.ApplyLieuEffect(player);
         }//applique les effets de tous les lieux
-        for(Pole L : player.getPoles()){
-
-        }
+        //for(Pole L : player.getPoles()){
+        //}
         for(Lieu L : ListLieux){
             L.ReductionDuree();
         }//réduit la duree de tout les lieux, permet de désactiver les lieux temporaire
@@ -119,10 +153,10 @@ public class Game {
         if(getNbTour()%3==0) {
             System.out.println("event");
         }//gestion des events
-        if(player.getPopularite()>=8*player.getListeEleve().size() && player.getListeEleve().size()<9) {
+        if(player.getPopularite()>=8*player.getListeEleve().size()) {
             System.out.println("voulez vous recruter ? 1.oui 2.non");
-            Entrée = clavier.nextInt();
-            if (Entrée == 1) {
+            Entree = clavier.nextInt();
+            if (Entree == 1) {
                 this.getPlayer().recrute(3);
             }
         }//recrutement
@@ -152,7 +186,7 @@ public class Game {
 
     public void Menu(ArrayList<Eleve> NonAffectedList,Scanner clavier, String moment){ //moment permet de savoir si c'est le menu jour ou nuit
         boolean SortieMenu=false;
-        int Entrée;
+        int Entree;
         Eleve EleveSelected;
         int k;
         while(!SortieMenu){
@@ -165,28 +199,28 @@ public class Game {
                 System.out.println((k+1)+"."+NonAffectedList.get(k).toString());
             }
             System.out.println(NonAffectedList.size()+1 + ".Annuler");
-            Entrée=clavier.nextInt();
+            Entree=clavier.nextInt();
 
-        if(Entrée>=NonAffectedList.size()+1){
+        if(Entree>=NonAffectedList.size()+1){
             SortieMenu = true;
         }
 
         if (!SortieMenu && NonAffectedList.size()!=0) {
-            EleveSelected=NonAffectedList.get(Entrée-1);
+            EleveSelected=NonAffectedList.get(Entree-1);
 
             System.out.println("Dans quel lieu veut-tu l'envoyer ?\n");
             int i=0;
             ArrayList<Lieu> LieuDisp=new ArrayList<>();
-            for(Lieu L : ListLieux) {
+            for(Lieu L : this.getListLieux()) {
                 if(L.getType().equals(moment)){
                     System.out.println(i+1 + "." + L.getname());
                     LieuDisp.add(L);
                     i++;
                 }
             }
-            Entrée=clavier.nextInt();
-            if(Entrée<=LieuDisp.size()){
-                int err = LieuDisp.get(Entrée-1).placeStudent(EleveSelected);
+            Entree=clavier.nextInt();
+            if(Entree<=LieuDisp.size()){
+                int err = LieuDisp.get(Entree-1).placeStudent(EleveSelected);
                 if(err==0){
                     NonAffectedList.remove(EleveSelected);
                     SortieMenu = true;
@@ -201,28 +235,28 @@ public class Game {
 
     public void MenuGQ(Scanner clavier){
         boolean SortieMenu=false;
-        int Entrée;
+        int Entree;
         while(!SortieMenu){
             System.out.println("Bienvenue au QG chacal , que veux-tu faire ?\n1. Liste\n2. Magasin\n3. Inventaire\n4. gestion des pôles\n5.Revenir au Menu Principal");
-            Entrée=clavier.nextInt();
-            if(Entrée==5){
+            Entree=clavier.nextInt();
+            if(Entree==5){
                 SortieMenu=true;
             }
-            else if(Entrée ==4){
+            else if(Entree ==4){
                 this.MenuPole(clavier);
-            }else if(Entrée == 3){ // inventaire
-                while(Entrée!=7) {
+            }else if(Entree == 3){ // inventaire
+                while(Entree!=7) {
                     QG.inventaire();
-                    Entrée = clavier.nextInt();
+                    Entree = clavier.nextInt();
                 }
-            }else if(Entrée == 2){ //shop
-                while(Entrée!=7) {
+            }else if(Entree == 2){ //shop
+                while(Entree!=7) {
                     QG.shop();
                     System.out.println("Argent disponible : " + player.getArgent());
-                    Entrée = clavier.nextInt();
-                    QG.shopAction(Entrée, player);
+                    Entree = clavier.nextInt();
+                    QG.shopAction(Entree, player);
                 }
-            }else if (Entrée == 1){ // liste
+            }else if (Entree == 1){ // liste
                 player.displayListEleve();
             }
         }
@@ -230,16 +264,16 @@ public class Game {
 
     public void MenuPole(Scanner clavier){
         boolean SortieMenu=false;
-        int Entrée;
+        int Entree;
 
         while(!SortieMenu) {
             int i=1;
             System.out.println("1. Voir les poles\n2. Créer un pole\n3. Gérer les poles\n4. Annuler");
-            Entrée = clavier.nextInt();
-            if (Entrée==1){
+            Entree = clavier.nextInt();
+            if (Entree==1){
                 this.getPlayer().displayPole();
             }//affichage pole
-            else if(Entrée==2){
+            else if(Entree==2){
                 System.out.println("Choisissez le pole à créer :");
                 ArrayList<Pole> ToCreat=new ArrayList<>();
                 for(Pole P:this.getPlayer().getPoles()) {
@@ -249,12 +283,12 @@ public class Game {
                         i++;
                     }
                 }
-                Entrée=clavier.nextInt();
-                if(Entrée<=ToCreat.size()){
-                    ToCreat.get(Entrée-1).enable();
+                Entree=clavier.nextInt();
+                if(Entree<=ToCreat.size()){
+                    ToCreat.get(Entree-1).enable();
                 }
             }//création de pole
-            else if (Entrée==3) {
+            else if (Entree==3) {
                 editPole(clavier);
             }
             else{
@@ -264,21 +298,21 @@ public class Game {
     }
 
     public void editPole(Scanner clavier){
-        int Entrée;
+        int Entree;
         int i =1;
         ArrayList<Eleve> EleveSansPole=new ArrayList<>();
         Eleve ToPlace;
         System.out.println("1. Placer un élève\n2. Changer un élève de pole\n3. Quitter");
-        Entrée=clavier.nextInt();
-        if(Entrée==1){
+        Entree=clavier.nextInt();
+        if(Entree==1){
             for(Eleve e : this.getPlayer().getListeEleve()){
                 if(e.getPole()==null){
                     System.out.println(i+". "+e);
                     EleveSansPole.add(e);
                 }
             }
-            Entrée=clavier.nextInt();
-            ToPlace=EleveSansPole.get(Entrée-1);
+            Entree=clavier.nextInt();
+            ToPlace=EleveSansPole.get(Entree-1);
             System.out.println("Ou voulez vous le placer ?");
             //this.getPlayer().displayPoleName();
             i=1;
@@ -286,9 +320,9 @@ public class Game {
                 System.out.println(i+". "+P.getName());
                 i++;
             }
-            Entrée=clavier.nextInt();
-            this.getPlayer().getPolesDisp().get(Entrée-1).addMember(ToPlace);
-            System.out.println(ToPlace.getName()+" a été placé dans "+this.getPlayer().getPolesDisp().get(Entrée-1).getName());
+            Entree=clavier.nextInt();
+            this.getPlayer().getPolesDisp().get(Entree-1).addMember(ToPlace);
+            System.out.println(ToPlace.getName()+" a été placé dans "+this.getPlayer().getPolesDisp().get(Entree-1).getName());
         }
 
     }
@@ -371,8 +405,8 @@ public void EndGame(){
     public Evenement getCurrentEvent(){return CurrentEvent;}
 //
 
-    public boolean FinTour(String entrée){
-        if(entrée.equals("fin")){
+    public boolean FinTour(String Entree){
+        if(Entree.equals("fin")){
             return true;
         }else{
             return false;

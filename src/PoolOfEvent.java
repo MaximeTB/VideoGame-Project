@@ -8,6 +8,10 @@ public class PoolOfEvent {
     private static int NbTot=0; //Nombre de pool existantes
     private int NbEvent=0; //Nb d'évènements dans la pool
 
+    /**
+     *
+     * @param fileName
+     */
     public PoolOfEvent(String fileName) {  //le constructeur extrait la liste d'event d'un fichier
         NbTot += 1;
         this.eventList= new ArrayList<Evenement>();

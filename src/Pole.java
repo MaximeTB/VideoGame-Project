@@ -88,8 +88,8 @@ public class Pole {
         this.gainXP(1+bonusTot);
     }//chaque élève rapporte 1Xp, doublé pour les élèves de la bonne couleur
 
-
-    /*public static void main(String[] args){
+/*
+    public static void main(String[] args){
         Bureau bureau = new Bureau("Bureau","Gris", );
 
         for(Integer i=0; i<10; i++ ){

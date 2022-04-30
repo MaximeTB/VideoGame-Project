@@ -2,7 +2,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ *
+ */
 public class Lieu {
+    /**
+     * @serialField
+     */
     protected String name;
     protected String type;        //J pour les lieux du jour et N ceux de la nuit
     protected ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
@@ -23,6 +29,11 @@ public class Lieu {
 
     private static int nbLieu =0;
 
+    /**
+     * @param name Nom du lieu
+     * @param available Indique si le lieu est disponible ou non
+     * @param type Indique si c'est un lieu de Journee "J" ou de Nuit "N"
+     */
     public Lieu(String name, Boolean available, String type){
         this.name = name;
         this.available = available;
@@ -39,13 +50,26 @@ public class Lieu {
 
     //Getters
 
-
+    /**
+     *
+     * @return
+     */
     public String getname() {
         return name;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getNameElevePresents() {
         ArrayList<String> EleveDansLieu = new ArrayList<String>();
         for (Eleve i : ElevePresents){
@@ -53,69 +77,165 @@ public class Lieu {
         }
         return EleveDansLieu;
     }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<Eleve> getElevePresents() {
         return ElevePresents;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getCapMax() {
         return capMax;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOM() {
         return EOM;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOS() {
         return EOS;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOP() {
         return EOP;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOT() {
         return EOT;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOA() {
         return EOA;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOC() {
         return EOC;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getEOPV() {
         return EOPV;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNbLieu(){return nbLieu;}
     //Setters
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     *
+     * @param capMax
+     */
     public void setCapMax(int capMax) {
         this.capMax = capMax;
     }
+    /**
+     * @param EOP
+     */
     public void setEOP(int EOP) {
         this.EOP = EOP;
     }
+
+    /**
+     * @param EOM
+     */
     public void setEOM(int EOM) {
         this.EOM = EOM;
     }
+
+    /**
+     * @param EOT
+     */
     public void setEOT(int EOT) {
         this.EOT = EOT;
     }
+
+    /**
+     * @param EOS
+     */
     public void setEOS(int EOS) {
         this.EOS = EOS;
     }
+
+    /**
+     * @param EOA
+     */
     public void setEOA(int EOA) {
         this.EOA = EOA;
     }
+
+    /**
+     * @param EOC
+     */
     public void setEOC(int EOC) {
         this.EOC = EOC;
     }
+
+    /**
+     * @param EOPV
+     */
     public void setEOPV(int EOPV) {
         this.EOPV = EOPV;
     }
+
+    /**
+     * @param isAMPH
+     */
     public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
+
+    /**
+     * @param available
+     */
     public void setAvailable(Boolean available) {
         this.available = available;
     }
 
+    /**
+     *
+     */
 //Methodes
     public void ReductionDuree(){
         this.Duree--;
@@ -124,7 +244,16 @@ public class Lieu {
             Duree=0;
         }
     }
+    /**
+     *
+     */
     public void ChangeState(){this.available= !available;}
+
+    /**
+     *
+     * @param e
+     * @return
+     */
     public int placeStudent(Eleve e){
         if(available){
             if(this.ElevePresents.size()<capMax){
@@ -143,6 +272,10 @@ public class Lieu {
         return 0;
     }//renvois un int qui indique si l'élève a pu être placé ou pas
 
+    /**
+     *
+     * @param list
+     */
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
         if (Nb!=0){         //bonus des lieux sur l'ensemble de la liste
@@ -166,10 +299,10 @@ public class Lieu {
         }
     }
 
-    public void ActiviteAssociative(){
-
-    }
-
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "\nNom: " +name+"\n"

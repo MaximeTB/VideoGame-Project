@@ -2,11 +2,27 @@ import javax.xml.stream.Location;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-
+/**
+ * Classe permettant la gestion des objets Lieu (code incomplet)
+ * Elle possede un attribut "principale" LocationList qui est une ArrayList
+ * regroupant tous les Lieux, puis des attributs sous-listes pour chaque sous-categories
+ * de Lieu (exemple : NightLocation pour tous les lieux de type nocturne)
+ * (nous n'avons pas eu le temps d'implementer les sous-listes)
+ */
 public class PoolOfLocation {
-    private ArrayList<Lieu> LocationList;
-    private int Nb=0 ; //Nb de lieu dedans
+    /**
+     * Liste de tout les lieux
+     */
+    private final ArrayList<Lieu> LocationList;
+    /**
+     * Nombre total de lieu
+     */
+    private int Nb=0 ;
 
+    /**
+     * Genere a partir d'un fichier csv tout les lieux du jeu et remplie l'attribut LocationList avec.
+     * @param filename Lien du fichier csv
+     */
     public PoolOfLocation(String filename){
         this.LocationList= new ArrayList<Lieu>();
 
@@ -18,7 +34,7 @@ public class PoolOfLocation {
             String s = buf.readLine();
             while(s!=null) {
                 s.replaceAll("\"", "");
-                String fields[] = s.split(";");
+                String[] fields = s.split(";");
                 if (fields.length == 11) {
                     if (fields[1].equals("true")) {
                         this.LocationList.add(new Lieu(fields[0], true, fields[2]));
@@ -27,9 +43,9 @@ public class PoolOfLocation {
                     }
                 } else if (fields.length == 12) {
                     if (fields[1].equals("true")) {
-                        this.LocationList.add(new Lieu(fields[0], true, fields[2], Integer.parseInt(fields[3])));
+                        this.LocationList.add(new Lieu(fields[0], true, fields[2], Integer.parseInt(fields[11])));
                     } else if (fields[1].equals("false")) {
-                        this.LocationList.add(new Lieu(fields[0], false, fields[2], Integer.parseInt(fields[3])));
+                        this.LocationList.add(new Lieu(fields[0], false, fields[2], Integer.parseInt(fields[11])));
                     }
                 }
                 lieu= this.LocationList.get(this.LocationList.size()-1);
@@ -54,7 +70,6 @@ public class PoolOfLocation {
         }
     }
 
-
     public ArrayList<Lieu> getLocationList() {
         return LocationList;
     }
@@ -67,11 +82,13 @@ public class PoolOfLocation {
                 '}';
     }
 
-
+/*
     public static void main (String[] args){
         PoolOfLocation pool = new PoolOfLocation("data/ListesLieux.csv");
-        //System.out.println(pool.LocationList.get(0));
+        for(Lieu l : pool.LocationList) {
+            System.out.println(l);
+        }
         System.out.println(pool.getClass());
     }
-
+*/
 }

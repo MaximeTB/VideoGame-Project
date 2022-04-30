@@ -7,7 +7,7 @@ public class Player {
     private ArrayList<Eleve> ListeEleve=null;
     private ArrayList<Pole> poles= new ArrayList<>();
     private Integer argent ,popularite,admin,PV,cohesion ;  //PV :points de victoires, utiles en fin de partie
-    private PoolsOfSkills pool;
+    public PoolsOfSkills pool;
     private int NbCrepe=0;
 
     public Player(){} //test pour QG
@@ -47,7 +47,6 @@ public class Player {
         for(int i=0;i<nb;i++){
             Eleve e = new Eleve(this.pool);
             choice.add(e);
-            poles.get(6).addMember(e);
             System.out.println(i+1+". "+e);
         }
         System.out.println("Choisissez un élève");
@@ -56,6 +55,7 @@ public class Player {
         if(intAnswer<nb){
             Eleve Recrut = choice.get(intAnswer);
             this.addEleve(Recrut);
+            poles.get(6).addMember(Recrut);
             this.gainCohesion(Recrut.getCost());
             for(SkillOnRecruit S : Recrut.getSkillsOnRecruitList()){
                 S.OnRecruit(Recrut,this);

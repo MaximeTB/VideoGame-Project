@@ -23,7 +23,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Game game = new Game();
+        Game game = new Game(10);
 
         primaryStage.setTitle("ENSEA");
         Group rootQG = new Group();
@@ -47,8 +47,10 @@ public class Main extends Application{
         poles.updateButtons();
 
         primaryStage.show();
-
     }
+
+
+        //System.out.println("Fin de la partie");
 
     static ArrayList<Eleve> Test= new ArrayList();
 
@@ -61,6 +63,7 @@ public class Main extends Application{
         int k;
         for(k=1;k<=10;k++){
             game.Tour(clavier);
+            game.NewTour(clavier);
 
         }
         System.out.println("Fin de la partie");
