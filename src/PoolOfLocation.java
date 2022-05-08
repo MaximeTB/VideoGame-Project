@@ -21,12 +21,19 @@ public class PoolOfLocation {
 
     /**
      * Genere a partir d'un fichier csv tout les lieux du jeu et remplie l'attribut LocationList avec.
+     * Mise en forme des donnees avant execution du code :
+     * Nous remplissons dans un premier temps un tableur Excel, ou chaque ligne correspond a un Lieu et ses attributs.
+     * Nous convertissons le fichier en csv, chaque ligne a alors le format :
+     * NomDuLieu;Available;Type;isAmphi;EOP;EOM;EOT;EOS;EOA;EOC;EOPV;CapMax .
+     * Pendant l'execution du code :
+     * Les lignes du csv sont une par une converties en un string,
+     * puis ce string est converti en une list de string que l'on rempli en fonction des ";".
+     * On utilise enfin le constructeur de la classe Lieu pour creer un Lieu avec les attributs initialement rentres dans le csv
+     * (en convertissant les Strings en Int ou autre quand c'est necessaire).
      * @param filename Lien du fichier csv
      */
     public PoolOfLocation(String filename){
         this.LocationList= new ArrayList<Lieu>();
-
-
         try{
             Lieu lieu;
             BufferedReader buf = new BufferedReader(new FileReader(filename));
@@ -70,10 +77,18 @@ public class PoolOfLocation {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Lieu> getLocationList() {
         return LocationList;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "PoolOfEvent{" +

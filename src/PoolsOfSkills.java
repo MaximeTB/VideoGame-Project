@@ -29,7 +29,6 @@ public class PoolsOfSkills {
     private ArrayList<Skills> GreenList; //
     private ArrayList<Skills> BlackList; //
 
-    private SkillColor Colors = new SkillColor();
 
     public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux,ArrayList<Pole>  Poles){
         //Initialisation de toutes les listes
@@ -354,9 +353,7 @@ public class PoolsOfSkills {
     public ArrayList<Skills> getBlackList() {
         return BlackList;
     }
-    public SkillColor getColors() {
-        return Colors;
-    }
+
 //
 
 //Setter
@@ -395,9 +392,6 @@ public class PoolsOfSkills {
     }
     public void setBlackList(ArrayList<Skills> blackList) {
         BlackList = blackList;
-    }
-    public void setColors(SkillColor colors) {
-        Colors = colors;
     }
 //
 }

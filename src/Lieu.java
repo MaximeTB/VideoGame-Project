@@ -2,37 +2,75 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- */
 public class Lieu {
     /**
-     * @serialField
+     *Nom du Lieu
      */
     protected String name;
-    protected String type;        //J pour les lieux du jour et N ceux de la nuit
+    /**
+     * Type du Lieu : "J" pour Lieu de Jour, "N" pour lieu de Nuit
+     */
+    protected String type;
+    /**
+     * Liste des Eleves presents dans ce lieu
+     */
     protected ArrayList<Eleve> ElevePresents = new ArrayList<Eleve>();
-    protected int capMax;     //capacité max en élève. les lieux sans limite sont placé de base a 100.
+    /**
+     * Nombre maximum d'Eleve que peut contenir ce Lieu. Fixe par defaut a 99.
+     */
+    protected int capMax;     //capacite max en elève. les lieux sans limite sont place de base a 100.
+    /**
+     * Pour les lieux temporaires lies a des Event, defini le temps  qu'il reste avant que l'Event soit fini et donc que le lieu ne soit plus disponible.
+     */
     protected int Duree;
+    /**
+     * Defini si le lieu est disponible ou non
+     */
     protected Boolean available=true;
-
-    protected int EOP=0; //effect on pop
-    protected int EOM=0; //effect on money
-    protected int EOT=0; //effect on tired
-    protected int EOS=0; //effect on studies
-    protected int EOA=0; //effect on admin
-    protected int EOC=0; //effect on cohesion
+    /**
+     * Effet sur les Points de Popularite de la liste
+     */
+    protected int EOP=0;
+    /**
+     * Effet sur la Monnaie de la liste
+     */
+    protected int EOM=0;
+    /**
+     * Effet sur la Fatigue des Eleves presents dans le Lieu
+     */
+    protected int EOT=0;
+    /**
+     * Effet sur le niveau d'Etude des Eleves presents dans le Lieu
+     */
+    protected int EOS=0;
+    /**
+     * Effet sur les points d'Administration de la Liste
+     */
+    protected int EOA=0;
+    /**
+     * Effet sur les points de cohesion de la Liste
+     */
+    protected int EOC=0;
+    /**
+     * Effet sur les Points de Victoire de la Liste
+     */
     protected int EOPV=0; //effect on PV
-    protected int isAMPH=0; //effet specifique a l'amphi
-
-    private boolean isMeeting=false; //effet specifique aux reunions de poles
+    /**
+     * Indique si le Lieu est l'Amphi ou non (facilite l'utilisation d'une methode d'une autre classe)
+     */
+    protected int isAMPH=0;
+    /**
+     * Indique si le Lieu est une reunion de Pole ou non (facilite l'utilisation d'une methode d'une autre classe)
+     */
+    private boolean isMeeting=false;
 
     private static int nbLieu =0;
 
     /**
+     * Constructeur pour un Lieu sans capacite maximum (fixee alors par defaut a 99)
      * @param name Nom du lieu
-     * @param available Indique si le lieu est disponible ou non
-     * @param type Indique si c'est un lieu de Journee "J" ou de Nuit "N"
+     * @param available Disponibilite du Lieu
+     * @param type Type du Lieu : "J" Jour, "N" Nuit
      */
     public Lieu(String name, Boolean available, String type){
         this.name = name;
@@ -43,6 +81,13 @@ public class Lieu {
         nbLieu++;
     }
 
+    /**
+     * Constructeur pour un Lieu avec une capacite maximale definie
+     * @param name Nom du lieu
+     * @param available Disponibilite du Lieu
+     * @param type Type du Lieu : "J" Jour, "N" Nuit
+     * @param capMax Capacite maximum du lieu
+     */
     public Lieu(String name, Boolean available, String type, int capMax){
         this(name, available, type);
         this.capMax=capMax;
@@ -50,25 +95,22 @@ public class Lieu {
 
     //Getters
 
+
     /**
-     *
-     * @return
+     * @return Nom du Lieu
      */
     public String getname() {
         return name;
     }
-
     /**
-     *
-     * @return
+     * @return Type du lieu : "J" Jour, "N" Nuit
      */
     public String getType() {
         return type;
     }
 
     /**
-     *
-     * @return
+     * @return Liste des noms des Eleves presents dans le Lieu
      */
     public ArrayList<String> getNameElevePresents() {
         ArrayList<String> EleveDansLieu = new ArrayList<String>();
@@ -79,94 +121,50 @@ public class Lieu {
     }
 
     /**
-     *
-     * @return
+     * @return Liste des Eleves present dans le Lieu
      */
     public ArrayList<Eleve> getElevePresents() {
         return ElevePresents;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public int getCapMax() {
         return capMax;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOM() {
         return EOM;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOS() {
         return EOS;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOP() {
         return EOP;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOT() {
         return EOT;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOA() {
         return EOA;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOC() {
         return EOC;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getEOPV() {
         return EOPV;
     }
-
-    /**
-     *
-     * @return
-     */
     public int getNbLieu(){return nbLieu;}
+
+
     //Setters
 
+
     /**
-     *
      * @param name
      */
     public void setName(String name) {
         this.name = name;
     }
-
     /**
-     *
      * @param capMax
      */
     public void setCapMax(int capMax) {
@@ -178,54 +176,46 @@ public class Lieu {
     public void setEOP(int EOP) {
         this.EOP = EOP;
     }
-
     /**
      * @param EOM
      */
     public void setEOM(int EOM) {
         this.EOM = EOM;
     }
-
     /**
      * @param EOT
      */
     public void setEOT(int EOT) {
         this.EOT = EOT;
     }
-
     /**
      * @param EOS
      */
     public void setEOS(int EOS) {
         this.EOS = EOS;
     }
-
     /**
      * @param EOA
      */
     public void setEOA(int EOA) {
         this.EOA = EOA;
     }
-
     /**
      * @param EOC
      */
     public void setEOC(int EOC) {
         this.EOC = EOC;
     }
-
     /**
      * @param EOPV
      */
     public void setEOPV(int EOPV) {
         this.EOPV = EOPV;
     }
-
     /**
      * @param isAMPH
      */
     public void setIsAMPH(int isAMPH){this.isAMPH = isAMPH;}
-
     /**
      * @param available
      */
@@ -233,10 +223,12 @@ public class Lieu {
         this.available = available;
     }
 
-    /**
-     *
-     */
+
 //Methodes
+
+    /**
+     * Reduit la Duree d'un lieu (pour les lieu lies a un Event) de 1 et desactive le lieu si cette derniere arrive a 0  (methode utilisee a chaque fin de tour)
+     */
     public void ReductionDuree(){
         this.Duree--;
         if(Duree<=0){
@@ -244,25 +236,26 @@ public class Lieu {
             Duree=0;
         }
     }
+
     /**
-     *
+     * Change la disponibilite du Lieu (Si disponible -> indisponible , Si indisponible -> disponible)
      */
     public void ChangeState(){this.available= !available;}
 
     /**
-     *
-     * @param e
-     * @return
+     *Verifie si il est possible de placer un Eleve dans le Lieu et le fait si c'est le cas.
+     * @param e Eleve que l'on souhaite placer dans le lieu.
+     * @return 0 si l'Eleve a bien ete place, sinon -1 si le Lieu est plein, -2 si le Lieu est indisponible.
      */
     public int placeStudent(Eleve e){
         if(available){
             if(this.ElevePresents.size()<capMax){
                 this.ElevePresents.add(e);
                 e.setLocation(this, this.type);
-                System.out.println(e.getName() + " placé dans " + this.name + " ("+ElevePresents.size()+"/" + capMax + ")");
+                System.out.println(e.getName() + " place dans " + this.name + " ("+ElevePresents.size()+"/" + capMax + ")");
             }
             else{
-                System.out.println("Cet endroit est déja plein !");
+                System.out.println("Cet endroit est deja plein !");
                 return -1;
             }
         }else{
@@ -270,11 +263,12 @@ public class Lieu {
             return -2;
         }
         return 0;
-    }//renvois un int qui indique si l'élève a pu être placé ou pas
+    }//renvois un int qui indique si l'elève a pu être place ou pas
+
 
     /**
-     *
-     * @param list
+     * En fin de tour applique a chaque Eleve present dans le Lieu et a la Liste (Player) le ou les effets du Lieu
+     * @param list L'entite Player (permet de modifier ses attribut Argent, Popularite etc...)
      */
     public void ApplyLieuEffect(Player list){
         int Nb=ElevePresents.size();
@@ -285,7 +279,7 @@ public class Lieu {
                         NbSpe++;
                     }
                 }*/
-                E.Etude(this.EOS - Math.min(E.getTired()*isAMPH,2)); //les bonus d'amphi sont réduit par la fatigue, capé a 2
+                E.Etude(this.EOS - Math.min(E.getTired()*isAMPH,2)); //les bonus d'amphi sont reduit par la fatigue, cape a 2
                 E.setTired(E.getTired()+this.EOT);
                 list.setArgent(list.getArgent()+this.EOM);
                 list.setPopularite(list.getPopularite()+this.EOP);
@@ -309,13 +303,13 @@ public class Lieu {
                 + "Type: " + this.type +"\n"
                 +"Disponible: "+this.available+"\n"
                 +"Amphi: " + this.isAMPH+"\n"
-                +"Capacité Maximum :" + this.capMax+"\n"
+                +"Capacite Maximum :" + this.capMax+"\n"
                 +"Effet sur la population: "+this.EOP+"\n"
                 +"Effet sur l'argent: "+this.EOM+"\n"
                 +"Effet sur la fatigue: " +this.EOT+"\n"
                 +"Effet sur les Etudes: "+ this.EOS+"\n"
                 +"Effet sur l'Administration: "+ this.EOA+"\n"
-                +"Effet sur la Cohésion: "+ this.EOC+"\n"
+                +"Effet sur la Cohesion: "+ this.EOC+"\n"
                 +"Effet sur les Points de Victoire: "+this.EOPV+"\n";
     }
 }

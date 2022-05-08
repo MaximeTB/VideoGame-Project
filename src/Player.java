@@ -151,7 +151,7 @@ public class Player {
 
 
 
-    public void ApplyEffect(Effect effet){
+    /*public void ApplyEffect(Effect effet){
         String stat= effet.getStat();
         int value = effet.getValue();
 
@@ -168,7 +168,7 @@ public class Player {
             this.setArgent(this.getArgent()+value);
         }
 
-    }
+    }*/
 
 
 

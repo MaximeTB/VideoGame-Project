@@ -1,57 +1,113 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ *
+ */
+
 public class Eleve implements Comparable {
-    private String name;
+    /**
+     * Nom de l'Eleve. Attribut fix.
+     */
+    private final String name;
+    /**
+     * Niveau d'Etude de l'elève. Evolue necessairement au court de la partie.
+     */
     private Integer studies;
+    /**
+     * Niveau de fatigue de l'eleve. Evolue necessairement au court de la partie.
+     */
     private Integer tired;
+    /**
+     * Cout de recrutement de l'eleve. A priori fix.
+     */
     private Integer cost;
+    /**
+     * Liste des Skills (attribut/capacites speciales) de l'Eleve. L'Eleve peut etre amene a gagner certain skills au court de la partie.
+     */
     private ArrayList<Skills> skillsList=new ArrayList<>(3);
-    private Lieu locationJ,locationN;
+    /**
+     * Lieu dans lequel se trouve l'Eleve le jour. Change à chaque tour/journee.
+     */
+    private Lieu locationJ;
+    /**
+     * Lieu dans lequel se trouve l'Eleve la nuit. Change à chaque tour/journee.
+     */
+    private Lieu locationN;
+    /**
+     * Pole auquel appartient l'Eleve.
+     */
     private Pole pole;
+    /**
+     * Fixe a True quand l'Eleve est indisponible pendant un tour (exemple : niveau de fatigue max atteint).
+     */
     private Boolean skipTurn=false;
+    /**
+     * Liste des noms dans laquelle on pioche aleatoirement a chaque creation d'Eleve. Elle est generee dans la classe Eleve.
+     */
     private static PoolOfName Names=new PoolOfName("data/prenom.csv");
+    /**
+     * Liste des Skills disponibles dans laquelle on pioche à chaque fois qu'on ajoute un Skill.
+     * Elle est generee a l'exterieur de la classe Eleve, c'est pourquoi Eleve possede deux constructeurs, un utilisee pour le premier Eleve cree prend en argument ce qui sera cette liste
+     * puis un deuxieme constructeur qui sera utilise pour tous les autre Eleves qui ne touche pas a la liste.
+     */
+    private static PoolsOfSkills Skills;
 
-    private ArrayList<Skills> TEMPORAIREskills=new ArrayList<>();
+    private static Random r = new Random();
+//Constructeurs
 
-    private static PoolsOfSkills pool;
-
-
-//constructeur
-
-    public Eleve(PoolsOfSkills pool){
+    /**
+     * Constructeur du premier Eleve cree.
+     * Lors de la creation, le nom de l'Eleve est pioche aleatoirement dans Names.
+     * Le niveau d'Etude est genere aleatoirement (compris entre 0 et 10),
+     * ensuite le cout est genere aleatoirement (entre 1 et 3).
+     * Puis en fonction du cout de l'Eleve on lui ajoute un ou plusieurs Skills. Pour un cout de 1 , un skills de depart, pour un cou de 2, 2 skills etc...
+     * Enfin on ajuste le cout en fonction du niveau d'Etude. Si le niveau d'Etude est superieur a 5 on augmente le cout de 1.
+     * @param Skills Liste des Skills qui initialise l'attribut static Skills et dans laquelle on piochera les skills
+     */
+    public Eleve(PoolsOfSkills Skills) {
         name = Names.RandomName();
-        this.pool=pool;
-        Random r1 = new Random();
-        studies =  (int) (r1.nextGaussian()*1.2 + 6);   //on génère le niveau d'étude et le cout aléatoirement
+        this.Skills = Skills;
+        studies = (int) (r.nextInt(10));   //on genère le niveau d'etude et le cout aleatoirement
         tired = 0;
-        cost = r1.nextInt(4);
-        if (cost<2 ){                                   //on ajuste le cout selon le niveau d'étude pour les cout 1 et 2
-            if(studies>5){
-                cost =1;
-            }
-            else{
-                cost=0;
-            }
+        cost = r.nextInt(3);
+        this.AddRandomSkill(Skills);                          //on donne plus de skills au eleves les plus cher
+        if (cost > 1) {
+            this.AddRandomSkill(Skills);
         }
-        this.AddRandomSkill(pool);                          //on donne plus de skills au eleves les plus cher
-        if (cost >1){
-            this.AddRandomSkill(pool);
+        if (cost > 2) {
+            this.AddRandomSkill(Skills);
         }
-        if (cost >2){
-            this.AddRandomSkill(pool);
+        if (studies > 5) {    //on ajuste le cout selon le niveau d'etude
+            cost += 1;
         }
     }
 
-    /*  Eleve(String name){
-        this();
-        this.name=name;
-    }*/
 
+
+    /**
+     * Meme constructeur que le premier mais ici la liste de Skills est déjà initialisee.
+     */
+    public Eleve() {
+        name = Names.RandomName();
+        studies = (int) (r.nextInt(10));   //on genère le niveau d'etude et le cout aleatoirement
+        tired = 0;
+        cost = r.nextInt(3);
+        this.AddRandomSkill(Skills);                          //on donne plus de skills au eleves les plus cher
+        if (cost > 1) {
+            this.AddRandomSkill(Skills);
+        }
+        if (cost > 2) {
+            this.AddRandomSkill(Skills);
+        }
+        if (studies > 5) {    //on ajuste le cout selon le niveau d'etude
+            cost += 1;
+        }
+    }
 
     //getter
-    public PoolsOfSkills getPool(){
-        return pool;
+    public PoolsOfSkills getSkills(){
+        return Skills;
     }
     public Integer getStudies() {
         return studies;
@@ -68,6 +124,12 @@ public class Eleve implements Comparable {
     public ArrayList<Skills> getSkillsList(){
         return skillsList;
     }
+
+    /**
+     *
+     * @param type "J" pour le locationJ, "N" pour locationN.
+     * @return locationJ ou locationN en fonction de l'entrée.
+     */
     public Lieu getLocation(String type){
         if(type.equals("J")) return locationJ;
         else if(type.equals("N"))return locationN;
@@ -99,9 +161,6 @@ public class Eleve implements Comparable {
 //fin getter
 
     //setter
-    public void setName(String name) {
-        this.name = name;
-    }
     public void setStudies(Integer studies) {
         this.studies = studies;
     }
@@ -111,14 +170,26 @@ public class Eleve implements Comparable {
     public void setCost(Integer cost) {
         this.cost = cost;
     }
+
+    /**
+     *
+     * @param location Lieu que le veut passer en attribut locationJ ou locationN.
+     * @param moment "J" pour modifier locationJ ,"N" pour modifier locationN.
+     */
     public void setLocation(Lieu location, String moment) {
         if(moment.equals("J")){
             this.locationJ = location;
         }else{this.locationN=location;}
     }
-    public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des élèves, pas cette méthode.
+    public void setPole(Pole P){this.pole=P;}//attention, utiliser pole.addMembre pour placer des elèves, pas cette methode.
     public void setSkipTurn(boolean skip){this.skipTurn=skip;}
 
+    /**
+     * Permet d'incrementer le niveau d'Etude d'un nombre positif ou negatif.
+     * Si le niveau d'Etude est incremente d'un nombre qui l'amene au dessus de 20, il sera fixe a 20,
+     * idem si il est diminué en dessous de 0.
+     * @param i nombre positif ou negatif que l'on ajoute au niveau d'Etude.
+     */
     public void Etude(int i){
         studies+=i;
         if(studies>20){
@@ -128,32 +199,49 @@ public class Eleve implements Comparable {
             studies=0;
         }
     }
+
+    /**
+     * Permet d'incrementer le niveau de Fatigue d'un nombre positif ou negatif.
+     * Si la fatigue est diminuee d'un nombre qui l'amene au dessous de 0 , elle sera fixee a 0.
+     * Si elle depasse 5, l'attribut Skipturn de l'Eleve est alors passe a true, et la fatigue sera repassee a 0 quand l'Eleve se sera repose
+     * @param i nombre positif ou negatif que l'on ajoute au niveau de Fatigue.
+     */
     public void Fatigue(int i){
         tired+=i;
         if (tired<0){
             tired=0;
         }
+        if (tired>5){
+            this.setSkipTurn(true);
+        }
     }
-    public void Cout(int i){
-        cost+=i;
-    }
+
 
 
 //fin setter
 
+    /**
+     * Ajoute à l'Eleve un Skill pioche aleatoirement dans une liste donnee en argument.
+     * @param pool Liste des Skills dans laquelle on pioche
+     * @return le Skill ajoute à l'Eleve.
+     */
     public Skills AddRandomSkill(PoolsOfSkills pool){
         Skills skill;
         skill= pool.RandomSkill();
         this.getSkillsList().add(skill);
         return  skill;
-    }//a changer asbolument !!!!  dans tout les cas, la méthode doit renvoyer le skill qui a été donné
-
+    }//a changer asbolument !!!!  dans tout les cas, la methode doit renvoyer le skill qui a ete donne
+/*
     public Skills AddTestSkill(){
         Skills skill = new SkillOnRecruit("gris","test", 0,0,0) ;
         this.getSkillsList().add(skill);
         return  skill;
-    }
+    }*/
 
+    /**
+     * Teste si l'Eleve fait parti du Bureau et si c'est le cas quel role il y tien.
+     * @return Le role de l'Eleve dans le Bureau si l'Eleve en fait partie, Null sinon.
+     */
     public String TestBureau(){
         Pole P=this.getPole();
         if(P.getClass()==Bureau.class){
@@ -162,7 +250,7 @@ public class Eleve implements Comparable {
         else{
             return null;
         }
-    }//si l'élève est dans le bureau renvois son role, sinon, renvois null
+    }//si l'elève est dans le bureau renvois son role, sinon, renvois null
 
 
     @Override
@@ -184,12 +272,12 @@ public class Eleve implements Comparable {
         int compareCost = ((Eleve)o).getCost();
         return this.cost-compareCost;
     }
-
+/*
     public static void main(String[] arg){
         int i;
-        //PoolsOfSkills skills = new PoolsOfSkills()
+        PoolsOfSkills skills = new PoolsOfSkills();
         for(i=0;i<15;i++){
-            //System.out.println(new Eleve());
+            System.out.println(new Eleve());
         }
-    }
+    }*/
 }
