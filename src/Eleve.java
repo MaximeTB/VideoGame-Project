@@ -216,6 +216,9 @@ public class Eleve implements Comparable {
         }
     }
 
+    public void Cout(int i){
+        cost+=i;
+    }
 
 
 //fin setter
