@@ -5,31 +5,85 @@ import java.sql.SQLTransactionRollbackException;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * Cette classe regroupe plusieurs attribut de type ArrayList qui repertorient et trient les Skills.
+ */
 public class PoolsOfSkills {
     private Random rand;
 
-
+    /**
+     * Regroupe tout les Skills sans distinction.
+     */
     private ArrayList<Skills> AllSkills;
 
+    /**
+     * Regroupe les Skills de type SkillOnRecruit.
+     */
     private ArrayList<Skills> SkillOnRecruit;
 
+    /**
+     * Regroupe les Skills de type SkillOnlieu.
+     */
     private ArrayList<Skills> SkillOnLieu;
+
+    /**
+     * Regroupe les Skills de type SkillBDA.
+     */
     private ArrayList<Skills> SkillBDA;
 
-
+    /**
+     * Regroupe les SKills de type SkillOnShop.
+     */
     private ArrayList<Skills> SkillOnShop;
 
+    /**
+     * Regroupe les Skills de type SkillOnOther.
+     */
     private ArrayList<Skills> SkillOnOther;
 
-    private ArrayList<Skills> SkillOnPole; //Toutes les couleurs suaf le gris
+    /**
+     * Regroupe les Skills de type SkillOnPole, excepte les Gris qui ne peuvent s'acquerir après la creation d'un Eleve.
+     */
+    private ArrayList<Skills> SkillOnPole;
+    /**
+     * Regroupe les Skills "Blue", impactant le Pole Animation.
+     */
     private ArrayList<Skills> BlueList; //Pole Animation
+    /**
+     * Regroupe les Skills "Yellow", qui impactent le Pole Bdls.
+     */
     private ArrayList<Skills> YellowList; //
+    /**
+     * Regroupe les Skills "Red", qui impactent le Pole BDS.
+     */
     private ArrayList<Skills> RedList; //
-    private ArrayList<Skills> GreyList; // Ne peux s'obtenir qu'à la création de l'élève
+    /**
+     * Regroupe les Skills "Grey", qui s'obtiennent a la creation d'un Eleve mais après.
+     */
+    private ArrayList<Skills> GreyList; // Ne peux s'obtenir qu'a la creation de l'elève
+    /**
+     * Regroupe les Skills "Green", qui impactent le Pole BDTech.
+     */
     private ArrayList<Skills> GreenList; //
+    /**
+     * Regroupe les Skills "Black", qui impactent le Pole Cave.
+     */
     private ArrayList<Skills> BlackList; //
 
-
+    /**
+     * Dans differents fichiers csv (un par Classe de Skill) ont ete repertories les differents Skills et leurs caracteristiques.<br/>
+     * Chacun de ces fichiers est lu ligne par ligne (1 ligne = 1 Skill),
+     * pour chaque ligne un String est genere puis convertie en un tableau de String en separant ce qui se trouve entre chaque ";", et enfin en utilisant le contenu de chacun de ces String dans l'ordre, le Skill est cree.
+     * @param SkillsOnPole Lien du fichier csv repertoriant les SkillsOnPole. Permet de remplir la liste attribut SkillOnPole.
+     * @param SkillsOnLieu Lien du fichier csv repertoriant les SkillsOnLieu. Permet de remplir la liste attribut SkillsOnPole.
+     * @param SkillsOnOthers Lien du fichier csv repertoriant les SkillsOnRecruit. Permet de remplir la liste attribut SkillOnOthers.
+     * @param SkillsOnRecruit Lien du fichier csv repertoriant les SkillsOnRecruit. Permet de remplir la liste attribut SkillsOnRecruit.
+     * @param Lieux Pour la creation des SkillsOnLieu et SkillsOnOthers, il est necessaire de disposer des Lieux crees au debut de partie (pour les LieuCible).<br/>
+     *              On entre donc la liste de ces Lieux. Cela impose donc que les Lieux soient generes avant les Skills.
+     * @param Poles Pour la creation des SkillsOnPole, il est necessaire de disposer des Poles crees au debut de partie.<br/>
+     *              On entre donc la liste de ces Poles. Cela impose donc que les Poles soient generes avant les Skills.
+     */
     public PoolsOfSkills(String SkillsOnPole, String SkillsOnLieu, String SkillsOnOthers, String SkillsOnRecruit, ArrayList<Lieu> Lieux,ArrayList<Pole>  Poles){
         //Initialisation de toutes les listes
         AllSkills = new ArrayList<Skills>();
@@ -37,6 +91,7 @@ public class PoolsOfSkills {
         SkillOnRecruit = new ArrayList<Skills>();
 
         SkillOnLieu = new ArrayList<Skills>();
+
         SkillBDA = new ArrayList<Skills>();
 
         SkillOnShop = new ArrayList<Skills>();
@@ -247,69 +302,121 @@ public class PoolsOfSkills {
 
     }
 
-
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkill(){
         Skills skill;
         rand = new Random();
         skill=this.getAllSkills().get(rand.nextInt(this.getAllSkills().size()));
         return skill;
     }
+
+    /**
+     * Pioche un Skill aleatoirement dans tous les SkillsOnLieu disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillOnLieu(){
         Skills skill;
         skill=this.getSkillOnLieu().get(rand.nextInt(this.getSkillOnLieu().size()));
         return skill;
     }
 
+    /**
+     * Pioche un Skill aleatoirement dans tous les SkillsBDA disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillBDA(){
         Skills skill;
         skill=this.getSkillBDA().get(rand.nextInt(this.getSkillBDA().size()));
         return skill;
     }
 
+    /**
+     * Pioche un Skill aleatoirement dans tous les SkillsOnShop disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillOnShop(){
         Skills skill;
         skill=this.getSkillOnShop().get(rand.nextInt(this.getSkillOnShop().size()));
         return skill;
     }
+
+    /**
+     * Pioche un Skill aleatoirement dans tous les SkillsOnOthers disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillOnOthers(){
         Skills skill;
         skill=this.getSkillOnOther().get(rand.nextInt(this.getSkillOnOther().size()));
         return skill;
     }
+
+    /**
+     * Pioche un Skill aleatoirement dans tous les SkillsOnPole disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillOnPole(){
         Skills skill;
         skill=this.getSkillOnPole().get(rand.nextInt(this.getSkillOnPole().size()));
         return skill;
     }
 
-    public Skills RandomSkillBleu(){
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Blue" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
+    public Skills RandomSkillBlue(){
         Skills skill;
         skill=this.getBlueList().get(rand.nextInt(this.getBlueList().size()));
         return skill;
     }
+
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Yellow" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillYellow(){
         Skills skill;
         skill=this.getYellowList().get(rand.nextInt(this.getYellowList().size()));
         return skill;
     }
 
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Red" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillRed(){
         Skills skill;
         skill=this.getRedList().get(rand.nextInt(this.getRedList().size()));
         return skill;
     }
+
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Grey" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillGrey(){
         Skills skill;
         skill=this.getGreyList().get(rand.nextInt(this.getGreyList().size()));
         return skill;
     }
 
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Green" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillGreen(){
         Skills skill;
         skill=this.getGreenList().get(rand.nextInt(this.getGreenList().size()));
         return skill;
     }
 
+    /**
+     * Pioche un Skill aleatoirement dans tous les Skills "Black" disponibles.
+     * @return Skill obtenu lors du tirage.
+     */
     public Skills RandomSkillBlack(){
         Skills skill;
         skill=this.getBlackList().get(rand.nextInt(this.getBlackList().size()));

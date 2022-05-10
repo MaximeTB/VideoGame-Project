@@ -3,17 +3,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+/**
+ * Cette classe permet grace a son constructeur de creer chacun des Lieux et de les stocker dans une liste a partir d'un fichier csv.
+ */
 public class PoolOfEvent {
+    /**
+     * Liste des Evenements.
+     */
     private ArrayList<Evenement> eventList;
-    private static int NbTot=0; //Nombre de pool existantes
+
     private int NbEvent=0; //Nb d'évènements dans la pool
 
     /**
-     *
-     * @param fileName
+     * Dans un fichier csv ont ete repertories les differents Evenements et leurs caracteristiques.<br/>
+     * Chacun de ces fichiers est lu ligne par ligne (1 ligne = 1 Evenement),
+     * pour chaque ligne un String est genere puis convertie en un tableau de String en separant ce qui se trouve entre chaque ";",
+     * et enfin en utilisant le contenu de chacun de ces Strings dans l'ordre, l'Evenement est cree.
+     * @param fileName Lien du fichier csv repertoriant tous les Evenements.
      */
     public PoolOfEvent(String fileName) {  //le constructeur extrait la liste d'event d'un fichier
-        NbTot += 1;
         this.eventList= new ArrayList<Evenement>();
 
         try {
@@ -41,11 +49,10 @@ public class PoolOfEvent {
         }
     }
 
-    public PoolOfEvent(){
-        NbTot+=1;
-        this.eventList= new ArrayList<Evenement>();
-    }
-
+    /**
+     * Permet d'ajouter un Evenement a la liste (sans passer par this.eventList).
+     * @param event Evenement que l'on veut ajouter.
+     */
     public void add(Evenement event){
         this.eventList.add(event);
         this.NbEvent+=1;

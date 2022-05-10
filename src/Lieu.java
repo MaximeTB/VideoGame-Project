@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Durant la partie le Joueur aura la possibilite de placer chaque Eleve dans un Lieu la nuit et dans un Lieu le jour.
- * Passer le jour/la nuit dans ce Lieu aura un impact sur l'Eleve et sur les statistiques de la Liste (le Joueur).
+ * Durant la partie le Joueur aura la possibilite de placer chaque Eleve dans un Lieu la nuit et dans un Lieu le jour.<br/>
+ * Passer le jour/la nuit dans ce Lieu aura un impact sur l'Eleve et sur les statistiques de la Liste (le Joueur).<br/>
  * Par Exemple : Lors du jour 3 le Joueur choisis de placer Jean-Kevin dans l'Amphi ,dans laquelle il gagnera 1 point d'Etude,
  * et choisis de le placer dans le Lieu Soiree la nuit, ce qui fera gagner 5 Points de Popularite et 5 Points de Victoire a la Liste, et 1 Point de Fatigue a Jean-Kevin.
  */
