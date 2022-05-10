@@ -1,6 +1,9 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * Ce Type de Skill fait effet lorsque l'Eleve fais partie d'un Pole en particulier
+ */
 public class SkillOnPole extends Skills{
 
     private ArrayList<Pole> PoleCible; //pole affecté par l'effet

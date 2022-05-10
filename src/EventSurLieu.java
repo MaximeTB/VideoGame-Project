@@ -1,5 +1,5 @@
 /**
- * Ce type d'Evenement cree un Lieu pour un duree limitee. Par exemple l'Evenement Soiree cree un Lieu de Nuit Soiree.
+ * Ce type d'Evenement cree un Lieu pour un duree limitee.Par exemple l'Evenement Soiree cree un Lieu de Nuit Soiree.
  */
 public class EventSurLieu extends Evenement{
     private int Duree;
