@@ -10,6 +10,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
+/**
+ * La classe ImageButton hérite de la classe Button figurant dans l’API JavaFX.
+ * </br>L’implémentation du QG ainsi que des menus sous-jacents nécessite pléthore de boutons personnalisés,
+ * d’où l’intérêt de formaliser et de faciliter la création de nouveaux composants avec les méthodes de la classe.</br>
+ *</br>
+ * Un bouton est associé à un objet ou un élève. Dans tous les cas, on la rattache au joueur et à ses attributs
+ * (player.ListeEleve, player.Inventory…).
+ * De plus, lorsque la souris passe sur un bouton, on doit pouvoir afficher un pop-up présentant une description plus ou moins détaillée sur l’effet de ce dernier
+ */
 public class ImageButton extends Button {
 
     private String label;                   // gives name of the item to buy
