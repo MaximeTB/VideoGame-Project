@@ -37,7 +37,13 @@ public class GestionPoles extends Scene {
         return buttonExit;
     }
 
-
+    /**
+     * Constructeur. Même principe que le menu Shop ou Inventory.
+     * @param parent Utilise en parametre du constructeur de la classe Scene.
+     * @param width Utilise en parametre du constructeur de la classe Scene.
+     * @param height Utilise en parametre du constructeur de la classe Scene.
+     * @param player Joueur de la partie en cour. Permet d'avoir acces a certain attributs.
+     */
     public GestionPoles(Group parent, int width, int height, Player player) {
         super(parent, width, height);
         this.parent = parent;
@@ -81,6 +87,10 @@ public class GestionPoles extends Scene {
 
     }
 
+    /**
+     * Déclenché par un appui sur un bouton (flèche gauche ou droite). Permet de changer de pôle affiché.
+     * @param b
+     */
     public void changePole(ImageButton b){
         b.setOnAction((e -> {
             if (b==buttonLeft){
@@ -97,6 +107,9 @@ public class GestionPoles extends Scene {
         }));
     }
 
+    /**
+     * Met a jour la liste d'eleves affichee a l'ecran.
+     */
     public void updateEleves(){
         for (Eleve e : player.getPoles().get(indexPole).getMember()){
             ImageButton tempButton = new ImageButton();
@@ -111,10 +124,18 @@ public class GestionPoles extends Scene {
         }
     }
 
+    /**
+     * Entête du menu. Doit figurer le nom du pôle affiché ainsi que son niveau et expérience
+     * Idee en vrac : Faire apparaitre une breve description du pole et des effets attribues
+     */
     public void updatePoleDisplay(){
         poleDisplay.setText(currentPole.getName() + "   niv." + currentPole.getLevel() + "  XP : " + currentPole.getXP() + "/" + currentPole.getRequiredXP());
     }
 
+    /**
+     * Attribue une action a chaque élève : Sur le menu, la liste d'eleves est representee par des boutons. L'appui sur un des boutons
+     * cree une nouvelle fenetre de type PopupEleve dans lequel on pourra manipuler les attributs d'un eleve de la liste.
+     */
     public void updateButtons(){
         for (ImageButton b : buttonPlayers){
             b.setOnMouseClicked((event) -> {

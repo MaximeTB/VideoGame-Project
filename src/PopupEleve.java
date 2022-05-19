@@ -16,6 +16,14 @@ public class PopupEleve extends Scene {
     private ImageButton buttonRight;
     private ImageButton buttonExit;
 
+    /**
+     * Cree une fenetre popup dependante d'un eleve du menu de gestion de poles.
+     * @param parent
+     * @param width
+     * @param height
+     * @param player
+     * @param eleve
+     */
     public PopupEleve(Group parent, int width, int height, Player player, Eleve eleve) {
         super(parent, width, height);
         parent = parent;
@@ -40,6 +48,13 @@ public class PopupEleve extends Scene {
 
     }
 
+    /**
+     * Actionné par l'appui d'un bouton (flèche gauche ou droite). Permet de changer le pôle d'appartenance
+     * d'un élève.
+     * @param b
+     * @param p
+     * @param eleve
+     */
     public void changePole(ImageButton b, Player p, Eleve eleve) {
 
         b.setOnAction((e -> {
@@ -58,6 +73,7 @@ public class PopupEleve extends Scene {
             updatePoleDisplay();
         }));
     }
+
 
     public void updatePoleDisplay() {
 

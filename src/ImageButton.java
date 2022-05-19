@@ -11,26 +11,41 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
 /**
- * La classe ImageButton hérite de la classe Button figurant dans l’API JavaFX.
- * </br>L’implémentation du QG ainsi que des menus sous-jacents nécessite pléthore de boutons personnalisés,
- * d’où l’intérêt de formaliser et de faciliter la création de nouveaux composants avec les méthodes de la classe.</br>
- *</br>
- * Un bouton est associé à un objet ou un élève. Dans tous les cas, on la rattache au joueur et à ses attributs
- * (player.ListeEleve, player.Inventory…).
- * De plus, lorsque la souris passe sur un bouton, on doit pouvoir afficher un pop-up présentant une description plus ou moins détaillée sur l’effet de ce dernier
+ * Version adaptee au projet de la classe Button. On y incorpore une etiquette et
+ * une image (la deuxième est optionnelle, elle ne fonctionne pas dans la version finale).
+ * Des Strings de description figurent parmi les attributs de la classe mais ils seront initialises
+ * a l'aide d'une autre fonction que le constructeur.
  */
 public class ImageButton extends Button {
+    /**
+     * Nom de l'objet a acheter
+     */
+    private String label;
+    /**
+     * Permet de "lier" le bouton au Joueur et ainsi d'avoir accès a certains attributs
+     */
+    private Player player;
 
-    private String label;                   // gives name of the item to buy
-    private Player player;                  // allows access to relevant attributes
     private DropShadow shadow;
     private PopupFollow popup;
+
     private String title;
     private String description;
+    /**
+     * Prix de l'item a acheter
+     */
     private Integer price;
     private String effect;
     private String state;
+
+    /**
+     *
+     */
     private ImageView iv; // image view
+
+    /**
+     *
+     */
     private Integer indexX;
     private Integer indexY;
     private Integer prefSize;
@@ -50,6 +65,13 @@ public class ImageButton extends Button {
     public Integer getIndexY() { return this.indexY; }
     public Integer getPrefSize() { return this.prefSize; }
 
+    /**
+     *
+     * @param player
+     * @param label
+     * @param StringSelected
+     * @param StringUnselected
+     */
     public void updateImages(final Player player, final String label, final String StringSelected, final String StringUnselected) {
         this.label = label;
         this.player = player;
@@ -72,6 +94,14 @@ public class ImageButton extends Button {
         super.setGraphic(iv);
     }
 
+    /**
+     *
+     * @param indexX dimension selon X (horizontale) de l'image.
+     * @param indexY dimension selon Y (verticale) de l'image.
+     * @param offsetX Coordonnee selon X (horizontale) du coin haut gauche de l'image sur l'ecran
+     * @param offsetY Coordonnee selon Y (verticale) du coin haut droit de l'image sur l'ecran
+     * @param prefSize
+     */
     public void displayButton(int indexX, int indexY, int offsetX, int offsetY, int prefSize){
         this.indexX = indexX;
         this.indexY = indexY;
@@ -86,6 +116,10 @@ public class ImageButton extends Button {
 
     }
 
+    /**
+     * Patron permettant d'automatiser la création du bouton de retour, présent dans chaque instance du menu.
+     * @param stepSize
+     */
     public void setButtonExit(int stepSize){
         this.updateImages(player, "Exit", "backIcon.png", "backIcon.png");
         this.hoverButton("Retour au bercail", "On se casse !", 0, "", "");
@@ -95,12 +129,23 @@ public class ImageButton extends Button {
         this.setLayoutY(400-step-50);
     }
 
+    /**
+     * Permet de fermer la fenêtre affichee a l'ecran.
+     */
     public void quitWindow(){
         this.setOnAction((e -> {
             handleCloseButtonAction(e);
         }));
     }
 
+    /**
+     * Initialise la description de l'entité associée au bouton.
+     * @param title
+     * @param description
+     * @param price
+     * @param effect
+     * @param state
+     */
     public void hoverButton(String title, String description, Integer price, String effect, String state){
         this.shadow = new DropShadow();
         this.popup = new PopupFollow();
@@ -148,6 +193,11 @@ public class ImageButton extends Button {
     }
 
     // updateHovering - calls again hoverButton to update the inventory display in shop
+
+    /**
+     * Rappelle la fonction hoverButton avec les mêmes arguments (ceci est possible grâce à la mise en attribut lors de l'appel
+     * initial de hoverButton) afin de mettre à jour la description sur la fenetre popup.
+     */
     public void updateHovering(){
         hoverButton(this.title, this.description, this.price, this.effect, this.state);
     }

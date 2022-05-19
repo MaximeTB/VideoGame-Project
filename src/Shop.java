@@ -41,7 +41,14 @@ public class Shop extends Scene {
     public Inventory getInventory(){ return inventory;}
 
 
-
+    /**
+     * Constructeur. Responsable de l'affichage du menu.
+     * @param parent Utilise en parametre du constructeur de la classe Scene.
+     * @param width Utilise en parametre du constructeur de la classe Scene.
+     * @param height Utilise en parametre du constructeur de la classe Scene.
+     * @param player Joueur de la partie en cour. Permet d'avoir acces a certain attributs.
+     * @param inventory Permet d'avoir acces a l'inventaire du Joueur.
+     */
     public Shop(Group parent, int width, int height, Player player, Inventory inventory) {
         super(parent, width, height);
         this.player = player;
@@ -56,7 +63,7 @@ public class Shop extends Scene {
         buttonCoffee = new ImageButton();
         buttonCoffee.updateImages(player, "Coffee", "cofeeIcon.png", "soldoutIcon.jpg");
         buttonCoffee.displayButton(1, 1, 0, 0, 110);
-        buttonCoffee.hoverButton("  Cafetière", "    Bon pour le moral !    ", 25, "", "Shop");
+        buttonCoffee.hoverButton("  Cafetiere", "    Bon pour le moral !    ", 25, "", "Shop");
         buyButton(buttonCoffee, buttonCoffee.getPrice());
 
         buttonPancakes = new ImageButton();
@@ -68,25 +75,25 @@ public class Shop extends Scene {
         buttonBalloons = new ImageButton();
         buttonBalloons.updateImages(player, "Balloons", "balloonsIcon.png", "balloonsIcon.png");
         buttonBalloons.displayButton(3, 1, 0, 0, 110);
-        buttonBalloons.hoverButton("  Jeux gonflables", "    Nous ne serons pas responsables d'éventuels bobos    ", 50, "", "Shop");
+        buttonBalloons.hoverButton("  Jeux gonflables", "    Nous ne serons pas responsables d'eventuels bobos    ", 50, "", "Shop");
         buyButton(buttonBalloons, buttonBalloons.getPrice());
 
         buttonFireworks = new ImageButton();
         buttonFireworks.updateImages(player, "Balloons", "fireworksIcon.png", "fireworksIcon.png");
         buttonFireworks.displayButton(1, 2, 0, 0, 110);
-        buttonFireworks.hoverButton("  Feux d'artifice", "    Déconseillé en intérieur...    ",  30, "", "Shop");
+        buttonFireworks.hoverButton("  Feux d'artifice", "    Deconseille en interieur...    ",  30, "", "Shop");
         buyButton(buttonFireworks, buttonFireworks.getPrice());
 
         buttonBeer = new ImageButton();
         buttonBeer.updateImages(player, "Beer", "beerIcon.png", "beerIcon.png");
         buttonBeer.displayButton(2, 2, 0, 0, 110);
-        buttonBeer.hoverButton("  Bière qui tue", "    Teneur : 80%. Réservé aux plus témeraires    ", 8, "", "Shop");
+        buttonBeer.hoverButton("  Biere qui tue", "    Teneur : 80%. Reserve aux plus temeraires    ", 8, "", "Shop");
         buyButton(buttonBeer, buttonBeer.getPrice());
 
         buttonWeapon = new ImageButton();
         buttonWeapon.updateImages(player, "Weapon", "weaponIcon.png", "weaponIcon.png");
         buttonWeapon.displayButton(3, 2, 0, 0, 110);
-        buttonWeapon.hoverButton("  Euh...", "    N'achète pas ça frérot...    ", 200, "", "Shop");
+        buttonWeapon.hoverButton("  Euh...", "    N'achete pas ça frerot...    ", 200, "", "Shop");
         buyButton(buttonWeapon, buttonWeapon.getPrice());
 
 
@@ -112,6 +119,11 @@ public class Shop extends Scene {
 
     }
 
+    /**
+     * Decremente le portefeuille du joueur lors d'un achat. Met egalement a jour l'inventaire courant.
+     * @param button Fait correspondre l'action a un bouton predefini.
+     * @param price Prix de l'objet en vente.
+     */
     public void buyButton(ImageButton button, Integer price) {
         button.setOnAction((e -> {
             if (player.getArgent() >= price) {
@@ -131,6 +143,10 @@ public class Shop extends Scene {
     }
 
     // Updates
+
+    /**
+     * Met a jour la fenêtre popup de description. Cette fonction est appelee lors d'un achat.
+     */
     public void updatePopup(){
         buttonCoffee.updateHovering();
         buttonPancakes.updateHovering();
@@ -140,6 +156,9 @@ public class Shop extends Scene {
         buttonWeapon.updateHovering();
     }
 
+    /**
+     * Met a jour l'affichage du portefeuille.
+     */
     public void updateMoney(){
         moneyDisplay.setText("Argent disponible :" + player.getArgent());
     }
@@ -151,10 +170,15 @@ public class Shop extends Scene {
     }
     */
 
+    /**
+     * Idee laissee a l'abandon. Initialement, des evenements tels que des soldes interviendraient,
+     * et auraient pour effet par exemple de modifier les prix du magasin.
+     * @return coefficient multiplicateur
+     */
     public double skillMETROon(){
         for (Eleve e : player.getListeEleve()){
             for (Skills s : e.getSkillsList()){
-                if (s.getName() == "Carte Métro") return 0.5;
+                if (s.getName() == "Carte Metro") return 0.5;
             }
         }
         return 1;
