@@ -6,6 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Menu QG.</br>
+ * De ce menu, on peut accéder à trois composantes essentielles du jeu : la gestion de pôles, le magasin et l'inventaire.
+ */
 public class QG extends Scene implements EventHandler<ActionEvent> {
     int width;
     int height;

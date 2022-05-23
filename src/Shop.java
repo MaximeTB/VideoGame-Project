@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
+/**
+ * Classe Shop : hérite de Scene. Il s'agit du menu magasin, auquel on accède via le menu QG.</br>
+ * On peut y acheter des objets divers et variés, certains accessibles uniquement en semaine de liste.
+ */
 public class Shop extends Scene {
 
     private StaticThing background;

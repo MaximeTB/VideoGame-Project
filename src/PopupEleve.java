@@ -7,6 +7,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
+/**
+ * Classe PopupEleve : hérite de la classe Scene. Utilisée dans le menu de Gestion de Pôles. Appelée grâce à un appui de bouton (type ImageButton). </br>
+ * Il s'agit d'une fenêtre personnalisée en fonction d'un élève et de ses attributs, en particulier son pôle d'appartenance.
+ */
 public class PopupEleve extends Scene {
     private Group parent;
     private Player player;

@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Menu GestionPoles. Hérite de Scene. Il s'agit du menu de gestion de pôles. On y trouve la liste des élèves enrôlés, triés par pôle d'appartenance. </br>
+ * Il est possible de modifier à sa guise ce dernier attribut, ou bien simplement consulter le niveau de nos effectifs.
+ */
 public class GestionPoles extends Scene {
     private Group parent;
     private StaticThing background;

@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
  * Version adaptee au projet de la classe Button. On y incorpore une etiquette et
  * une image (la deuxième est optionnelle, elle ne fonctionne pas dans la version finale).
  * Des Strings de description figurent parmi les attributs de la classe mais ils seront initialises
- * a l'aide d'une autre fonction que le constructeur.
+ * à l'aide d'une autre fonction que le constructeur.
  */
 public class ImageButton extends Button {
     /**
@@ -66,7 +66,10 @@ public class ImageButton extends Button {
     public Integer getPrefSize() { return this.prefSize; }
 
     /**
-     *
+     *Version adaptee au projet de la classe Button. On y incorpore une etiquette et
+     *une image (la deuxième est optionnelle, elle ne fonctionne pas dans la version finale).
+     *Des Strings de description figurent parmi les attributs de la classe mais ils seront initialises
+     *a l'aide d'une autre fonction que le constructeur.
      * @param player
      * @param label
      * @param StringSelected
